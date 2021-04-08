@@ -1,0 +1,11 @@
+.sidenav .sidenav-menu .nav .sidenav-menu-nested {
+  flex-direction: column;
+  margin-left: 1.4375rem;
+  border-left-style: solid;
+  border-left-width: thin;
+  padding-left: 0.5625rem;
+}
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+

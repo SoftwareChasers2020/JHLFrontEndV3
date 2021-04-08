@@ -1,0 +1,82 @@
+<h3 style="text-align: center;color: #4e73df">Liste des Gestionnaires de Depot</h3>
+<div class="example-header" fxLayout="row">
+  <div class="search-div">
+    <button mat-raised-button (click)="onCreate()" title="Ajouter">
+      <mat-icon>add</mat-icon>Ajouter
+    </button>
+    <mat-form-field class="search-form-field" floatLabel="never">
+      <input matInput [(ngModel)]="searchKey" placeholder="Rechercher" autocomplete="off" (keyup)="applyFilter()">
+      <button mat-button matSuffix mat-icon-button aria-label="Clear" *ngIf="searchKey"  (click)="onSearchClear()">
+        <mat-icon>close</mat-icon>
+      </button>
+    </mat-form-field>
+  </div>
+</div>
+
+
+<div class="example-container mat-elevation-z8">
+  <mat-table [dataSource]="dataSource" #myTable matSort>
+
+    <!-- ID Column -->
+    <ng-container matColumnDef="login">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Login </mat-header-cell>
+      <mat-cell *matCellDef="let row" data-label="Login"> {{row.login}} </mat-cell>
+    </ng-container>
+
+    <!-- Progress Column -->
+    <ng-container matColumnDef="nom">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Nom </mat-header-cell>
+      <mat-cell *matCellDef="let row" data-label="Nom"> {{row.nom}} </mat-cell>
+    </ng-container>
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="prenom">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Prenom </mat-header-cell>
+      <mat-cell *matCellDef="let row" data-label="Prénom"> {{row.prenom}} </mat-cell>
+      <mat-cell *matCellDef="let row" data-label="Prénom"> {{row.prenom}} </mat-cell>
+    </ng-container>
+
+    <!-- Color Column -->
+    <ng-container matColumnDef="tel">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Tel </mat-header-cell>
+      <mat-cell *matCellDef="let row" data-label="Téléphone" > {{row.tel}} </mat-cell>
+    </ng-container>
+
+    <!-- Progress Column -->
+    <ng-container matColumnDef="adresse.ville.gouvernorat.nom">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Gouvernorat </mat-header-cell>
+      <mat-cell *matCellDef="let row" data-label="Gouvernorat"> {{row.adresse.ville.gouvernorat.nom}} </mat-cell>
+    </ng-container>
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="adresse.ville.nom">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Ville </mat-header-cell>
+      <mat-cell *matCellDef="let row" data-label="Ville"> {{row.adresse.ville.nom}} </mat-cell>
+    </ng-container>
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="date_embauche">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Date Embauche </mat-header-cell>
+      <mat-cell *matCellDef="let row"data-label="Date d'embauche"> {{row.date_embauche  | date :'dd/MM/yyyy'}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="actions">
+      <mat-header-cell *matHeaderCellDef></mat-header-cell>
+      <mat-cell style="text-align: center" *matCellDef="let row">
+        <button mat-icon-button  (click)="getDetails(row)" title="Consulter"><mat-icon>visibility</mat-icon></button>
+        <button mat-icon-button color="primary" (click)="onEdit(row)" title="Modifier"><mat-icon>launch</mat-icon></button>
+        <button mat-icon-button color="warn" (click)="onDelete(row.idUtilisateur)" title="Supprimer"><mat-icon>delete_outline</mat-icon></button>
+      </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+
+    <!--  Row shown when there is no matching data.-->
+    <!--   <mat-row *matNoDataRow>
+       <mat-cell colspan="4">No data matching the filter </mat-cell>
+     </mat-row>-->
+  </mat-table>
+
+  <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+</div>

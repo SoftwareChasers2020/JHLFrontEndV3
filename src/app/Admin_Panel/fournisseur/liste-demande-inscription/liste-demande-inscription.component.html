@@ -1,0 +1,109 @@
+
+<h3><i class="fa fa-angle-right"></i> Demande d'inscription des Fournisseurs</h3>
+<div class="example-header" fxLayout="row">
+  <div class="search-div">
+
+    <mat-form-field class="search-form-field" floatLabel="never">
+      <input matInput [(ngModel)]="searchKey" placeholder="Rechercher" autocomplete="off" (keyup)="applyFilter()">
+      <button mat-button matSuffix mat-icon-button aria-label="Clear" *ngIf="searchKey"  (click)="onSearchClear()">
+        <mat-icon>close</mat-icon>
+      </button>
+    </mat-form-field>
+  </div>
+</div>
+<div class="example-container mat-elevation-z8">
+  <mat-table [dataSource]="dataSource" matSort>
+    <ng-container matColumnDef="tofProfile">
+      <mat-header-cell *matHeaderCellDef mat-sort-header></mat-header-cell>
+      <mat-cell *matCellDef="let row"  style="margin-top: 1%" > <img src="../../../../assets/avatar.png" alt="user" width="90" class="rounded-circle"></mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="nom">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Nom </mat-header-cell>
+      <mat-cell *matCellDef="let row" data-label="Nom"> {{row.nom}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="prenom">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Prenom </mat-header-cell>
+      <mat-cell *matCellDef="let row" data-label="Prénom"> {{row.prenom}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="NomCommercial">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Nom Commercial </mat-header-cell>
+      <mat-cell *matCellDef="let row" data-label="Nom Commercial"> {{row.nomcommercial}} </mat-cell>
+    </ng-container>
+    <ng-container  matColumnDef="etat">
+
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Etat Demande </mat-header-cell>
+        <mat-cell  style="text-align: center" *matCellDef="let row">
+          <div >
+            <div *ngIf="row.active===0">
+              <span class="badge badge-primary" style="font-size: large">En attente...</span>
+             <!-- <button mat-raised-button readonly  color="primary" value="En attente">En attente...</button>-->
+            </div>
+            <div *ngIf="row.active===2">
+              <span class="badge badge-danger" style="font-size: large;width: 100px">Refuser</span>
+<!--
+              <button mat-raised-button  color="warn" value=" Refuser ">Refuser</button>
+-->
+            </div>
+            <div *ngIf="row.active===1">
+              <span class="badge badge-success" style="font-size: large;width: 100px" >Accepter</span>
+<!--
+              <button mat-raised-button  class="btnAcc" color="primary" value="Accepter">Accepter</button>
+-->
+            </div>
+          </div>
+        </mat-cell>
+
+    </ng-container>
+
+
+    <ng-container matColumnDef="actions">
+      <mat-header-cell *matHeaderCellDef></mat-header-cell>
+      <mat-cell style="text-align: center" *matCellDef="let row">
+        <button style="margin-left: 18px" *ngIf="row.active===0" mat-icon-button  title="Consulter" [routerLink]="['/temp/DemandeFour', row.idUtilisateur]"><mat-icon>visibility</mat-icon></button>
+
+      </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+
+
+  </mat-table>
+
+  <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+</div>
+
+<!--
+<h3><i class="fa fa-angle-right"></i> Demande d'inscription des Fournisseurs</h3>
+<div class="card-body bg-light">
+
+  <table class="table table-striped">
+
+    <thead class="thead-inverse">
+    <tr>
+      <th></th>
+      <th>Nom</th>
+      <th>Prenom</th>
+      <th>Nom Commercial</th>
+      <th>action</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let f of listFournisseurs" >
+      <td><img src="../../../../assets/avatar.png" alt="user" width="90" class="rounded-circle"></td>
+      <td>{{f.nom}}</td>
+      <td>{{f.prenom}}</td>
+      <td>{{f.nomcommercial}}</td>
+      <td>
+        <button class="action-button btn-success" [routerLink]="['/temp/DemandeFour', f.idUtilisateur]"><mat-icon>remove_red_eye</mat-icon></button>
+
+      </td>
+
+
+    </tr>
+    </tbody>
+  </table>
+</div>-->

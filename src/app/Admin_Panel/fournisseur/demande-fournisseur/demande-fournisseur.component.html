@@ -1,0 +1,57 @@
+<div class="container" >
+
+
+
+
+  <div class="left">
+
+    <img src="../../../../assets/avatar.png" alt="user" width="130" class="rounded-circle">
+
+    <div class="top">
+      <button mat-flat-button  color="primary" style="background-color: #5cb85c"
+              (click)="AcceptDemande()">Accepter</button>
+      <button mat-flat-button  color="warn" style="margin-left: 10px;"
+              (click)="RefuserDemande()">Refuser</button>
+    </div></div>
+
+
+
+
+  <div class="right">
+    <h5> Demande d'inscription</h5>
+    <br>
+
+    <table class="table table-striped">
+
+      <tr>
+        <th> Nom </th>
+        <td> {{f.nom}} </td>
+      </tr>
+      <tr>
+        <th> Prenom </th>
+        <td> {{f.prenom}} </td>
+      </tr>
+      <tr>
+        <th> Nom Commercial </th>
+        <td> {{f.nomcommercial}} </td>
+      </tr>
+      <tr>
+        <th> Email </th>
+        <td> {{f.email}} </td>
+      </tr>
+      <tr>
+        <th> Tel </th>
+        <td> {{f.tel}} </td>
+      </tr>
+      <tr>
+        <th> Gouvernorat </th>
+        <td> {{f.adresse.ville.gouvernorat.nom}} </td>
+      </tr>
+      <tr>
+        <th> Ville </th>
+        <td> {{f.adresse.ville.nom}} </td>
+      </tr>
+    </table>
+
+  </div>
+</div>

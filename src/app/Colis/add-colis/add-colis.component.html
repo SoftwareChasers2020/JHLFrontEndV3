@@ -1,0 +1,136 @@
+<div class="card">
+  <div class="card-header">
+    <strong class="card-title">Nouveau Colis</strong>
+  </div>
+  <div class="card-body">
+    <!-- Credit Card -->
+    <div id="pay-invoice">
+      <div class="card-body">
+
+        <form (ngSubmit)="onSubmit()" [formGroup]="formGroup" >
+
+          <div class="form-group">
+            <label class="small mb-1" for="CodeBarre">Code à Barre </label>
+            <input class="form-control" id="CodeBarre" type="text"  formControlName="CodeBarre" readonly >
+          </div>
+          <div class="form-row">
+            <!-- Form Group (first name)-->
+            <div class="form-group col-md-6">
+              <label class="small mb-1" for="nom">Nom </label>
+              <input class="form-control" id="nom" type="text" placeholder="Saisir votre nom" formControlName="Nom" >
+            </div>
+            <!-- Form Group (last name)-->
+            <div class="form-group col-md-6">
+              <label class="small mb-1" for="prenom">Prenom </label>
+              <input class="form-control" id="prenom" type="text" placeholder="Saisir votre prenom" formControlName="Prenom" >
+            </div>
+          </div>
+          <div class="form-row " >
+
+            <div class="form-group col-md-6" >
+              <label for="Gouvernorat">Gouvernorat</label>
+              <select  formControlName="Gouvernorat" class="form-control" id="Gouvernorat" (change)="changevilleByGovNom(Gouvernorat.value)" >
+                <option *ngFor="let gov of listGouvernorat | async"  value="{{gov.nom}}"  >
+                  {{gov.nom}}
+                </option>
+              </select>
+            </div>
+
+            <div class="form-group col-md-6 " >
+              <label for="Ville">Ville</label>
+              <select  formControlName="Ville" class="form-control" id="Ville" >
+                <option *ngFor="let ville of listville | async" [value]="ville.nom" >
+                  {{ville.nom}}
+                </option>
+              </select>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="form-group col-md-6">
+              <label class="small mb-1" for="Tel1">Téléphone 1</label>
+              <input class="form-control" id="Tel1" type="tel" placeholder="Saisir le 1ere numéro de téléphone " formControlName="Tel1" >
+            </div>
+            <div class="form-group col-md-6">
+              <label class="small mb-1" for="Tel2">Téléphone 2</label>
+              <input class="form-control" id="Tel2" type="tel" placeholder="Saisir le 2eme numéro de téléphone " formControlName="Tel2" >
+            </div>
+          </div>
+          <div class="row">
+            <div class="form-group col-md-6">
+              <label class="small mb-1" for="Designation">Désignation</label>
+              <input class="form-control" id="Designation" type="text" placeholder="Saisir la désignation " formControlName="Designation" >
+            </div>
+            <div class="form-group col-md-6">
+              <label class="small mb-1" for="NbArticle">Nombre d'article</label>
+              <input class="form-control" id="NbArticle" type="text" placeholder="Saisir le nombre d'articles" formControlName="NbArticle" >
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="form-group col-md-6">
+              <label class="small mb-1" for="Prix">Prix</label>
+              <input class="form-control" id="Prix" type="tel" placeholder="Prix en DT : exemple 50.6" formControlName="Prix" >
+            </div>
+
+<!--            <div class="col-12 col-md-6" >
+              <div class="form-group" >
+                <label  class="control-label mb-1">Echange</label>
+                <input name="echange" id="echange_non" type="radio" onclick="verif_echange()" value="0" checked=""> Non&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <input name="echange" type="radio" id="echange_oui" onclick="verif_echange()" value="1"> Oui
+              </div>
+            </div>-->
+            <div class="col-12 col-md-6" >
+              <div class="form-group" style="margin-top: 25px; margin-left: 10px">
+                <label  class="control-label mb-1">Echange</label>
+            <mat-radio-group  formControlName="select"   >
+              <mat-radio-button  value="non"  checked="true" >Non</mat-radio-button>
+              <mat-radio-button  value="oui"  style="margin-left: 10px" >Oui</mat-radio-button>
+
+            </mat-radio-group>
+              </div>
+            </div>
+
+          </div>
+          <div class="row" *ngIf="this.select.value == 'oui' " >
+            <div class="col-12 col-md-6" >
+              <div class="form-group">
+                <label  class="control-label mb-1" for="DesignationEchange">Désignation des articles échange</label>
+                <input formControlName="DesignationEchange" id="DesignationEchange" type="text" class=" form-control">
+              </div>
+            </div>
+            <div class="col-12 col-md-6">
+              <div class="form-group">
+                <label class="control-label mb-1" for="nbArticleEchange">Nombre des articles échange</label>
+                <input formControlName="nbArticleEchange" id="nbArticleEchange" type="text" class=" form-control">
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="form-group col-md-6">
+                <label  class="control-label mb-1" for="AdressDispo">Adresse complète et disponibilité</label>
+                <textarea formControlName="AdressDispo" id="AdressDispo" class="form-control cc-number identified visa" ></textarea>
+
+              </div>
+
+            <div class="form-group col-md-6">
+
+                <label  class="control-label mb-1" for="Commentaire">Commentaire</label>
+                <textarea formControlName="Commentaire" id="Commentaire" class="form-control cc-number identified visa"></textarea>
+                <span class="help-block" data-valmsg-for="cc-number" data-valmsg-replace="true"></span>
+              </div>
+          </div>
+
+          <div style="margin-top: 30px">
+            <button id="payment-button" type="submit" class="btn btn-lg btn-info btn-block">
+              <i class="fa fa-lock fa-lg"></i>&nbsp;
+              <span id="payment-button-amount">Ajouter</span>
+
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+  </div>
+</div>

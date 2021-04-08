@@ -1,0 +1,72 @@
+<div class="col-xl-8" style="margin-left: auto; margin-right: auto">
+  <!-- Account details card-->
+  <div class="card mb-4">
+    <div class="card-header">Infos Personnelles</div>
+    <div class="card-body">
+      <form (ngSubmit)="onSubmit()" [formGroup]="formGroup">
+        <!-- Form Group (username)-->
+        <div class="form-group">
+          <label class="small mb-1" for="Login">Login </label>
+          <input class="form-control" id="Login" type="text"  formControlName="Login" readonly >
+        </div>
+        <!-- Form Row-->
+        <div class="form-row">
+          <!-- Form Group (first name)-->
+          <div class="form-group col-md-6">
+            <label class="small mb-1" for="nom">Nom </label>
+            <input class="form-control" id="nom" type="text" placeholder="Saisir votre nom" formControlName="Nom" >
+          </div>
+          <!-- Form Group (last name)-->
+          <div class="form-group col-md-6">
+            <label class="small mb-1" for="prenom">Prenom </label>
+            <input class="form-control" id="prenom" type="text" placeholder="Saisir votre prenom" formControlName="Prenom" >
+          </div>
+        </div>
+        <!-- Form Row        -->
+        <div class="form-row">
+          <!-- Form Group (organization name)-->
+          <div class="form-group col-md-6">
+            <label class="small mb-1" for="nomcommercial">Nom Commercial</label>
+            <input class="form-control" id="nomcommercial" type="text" placeholder="Saisir votre Nom Commercial" formControlName="NomCommercial" >
+          </div>
+          <!-- Form Group (location)-->
+          <div class="form-group col-md-6">
+            <label class="small mb-1" for="Tel">Téléphone</label>
+            <input class="form-control" id="Tel" type="tel" placeholder="Saisir votre numéro de téléphone" formControlName="Tel" >
+          </div>
+        </div>
+        <!-- Form Group (email address)-->
+        <div class="form-group">
+          <label class="small mb-1"  for="Email">Email address</label>
+          <input class="form-control" formControlName="Email" id="Email" type="email" placeholder="Saisir votre adresse email"  >
+        </div>
+
+        <div class="form-row " >
+        <div class="form-group col-md-6" >
+          <label for="Gouvernorat">Gouvernorat</label>
+          <select  formControlName="Gouvernorat" class="form-control" id="Gouvernorat" (change)="changevilleByGovNom(Gouvernorat.value)" >
+            <option *ngFor="let gov of listGouvernorat | async"  value="{{gov.nom}}"  >
+              {{gov.nom}}
+            </option>
+          </select>
+        </div>
+
+        <div class="form-group col-md-6 " >
+          <label for="Ville">Ville</label>
+          <select  formControlName="Ville" class="form-control" id="Ville" >
+            <option *ngFor="let ville of listville | async" [value]="ville.nom" >
+            {{ville.nom}}
+            </option>
+          </select>
+        </div>
+        </div>
+        <!-- Save changes button-->
+        <div class="text-center">
+        <button class="btn btn-primary" type="submit">Enregistrer</button>
+        <button class="btn btn-danger" type="button" (click)="retourAccueil()" style="margin-left: 15px">Retour</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+

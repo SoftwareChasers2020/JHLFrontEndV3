@@ -1,0 +1,60 @@
+<mat-dialog-content>
+
+  <div class="card"  color="primary" >
+    <div class="card-header bg-transparent" >
+      <h3 class="mb-0" >Details</h3>
+    </div>
+    <div class="card-body">
+      <div class="panel panel-primary">
+
+        <div class="panel-body">
+
+          <table class="table table-striped">
+            <tr>
+              <th> FournisseurId </th>
+              <td> {{row.idUtilisateur}} </td>
+            </tr>
+            <tr>
+              <th> Login </th>
+              <td> {{row.login}} </td>
+            </tr>
+         <!--   <tr>
+              <th> Password </th>
+              <td> {{row.password}} </td>
+            </tr>-->
+            <tr>
+              <th> NomCommerial </th>
+              <td> {{row.nomcommercial}} </td>
+            </tr>
+
+            <tr>
+              <th> Email </th>
+              <td> {{row.email}} </td>
+            </tr>
+            <tr>
+              <th> Nom </th>
+              <td> {{row.nom}} </td>
+            </tr>
+            <tr>
+              <th> Prénom </th>
+              <td> {{row.prenom}} </td>
+            </tr>
+            <tr>
+              <th> Numéro Télèphone </th>
+              <td> {{row.tel}} </td>
+            </tr>
+            <tr>
+              <th> Gouvenorat </th>
+              <td> {{row.adresse.ville.gouvernorat.nom}} </td>
+            </tr>
+            <tr>
+              <th> Ville </th>
+              <td> {{row.adresse.ville.nom}} </td>
+            </tr>
+
+          </table>
+        </div>   </div>   </div>   </div>
+</mat-dialog-content>
+<mat-dialog-actions  align="center">
+  <button class="mat-raised-button btn btn-danger" (click)="close()">Close</button>
+</mat-dialog-actions>

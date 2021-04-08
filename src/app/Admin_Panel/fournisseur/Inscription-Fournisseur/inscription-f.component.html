@@ -1,0 +1,103 @@
+<html >
+<head>
+
+  <title></title>
+</head>
+<body>
+<div class="container wid"  >
+  <div class="md-tabs md-card-tabs">
+    <!--image Logo-->
+    <div class="text-center">
+      <img src="../../../../assets/img/img.png" class="image" alt="logo Image">
+    </div>
+    <!--form-->
+    <form (ngSubmit)="onSubmit()" [formGroup]="formGroup" class="form-material">
+      <div class="auth-box card">
+        <div class="card-block">
+          <!-- Ligne 1 zone titre Inscription-->
+          <div class="row m-b-20">
+            <!-- Zone titre Inscription-->
+            <div class="col-md-12">
+              <h1 style="text-align: center">Inscription</h1>
+            </div>
+          </div>
+          <!-- Ligne 2 vide pour faire espace entre les champs-->
+          <div class="row m-b-20">
+            <div class="col-md-12>">
+
+            </div>
+          </div>
+          <!-- Ligne 3 champs formulaire -->
+          <div class="row">
+            <div class="col-md-6 tocenter">
+              <!-- Ligne 3 colone 1 saisir nom ............... -->
+
+              <mat-form-field>
+                <input formControlName="Nom" matInput placeholder="Saisir votre nom">
+                <mat-error>ce champ est obligatoire</mat-error>
+              </mat-form-field>
+              <mat-form-field>
+                <input formControlName="Prenom" matInput placeholder="Saisir votre prénom" >
+                <mat-error>ce champ est obligatoire</mat-error>
+              </mat-form-field>  <br>
+              <mat-form-field>
+                <input formControlName="NomCommercial" matInput placeholder="Saisir votre NomCommercial" >
+                <mat-error>ce champ est obligatoire</mat-error>
+              </mat-form-field>  <br>
+              <mat-form-field>
+                <input formControlName="Tel" matInput placeholder="Téléphone">
+                <mat-error *ngIf="Tel.hasError('pattern')">Numéro Téléphone est incorrecte</mat-error>
+                <mat-error *ngIf="Tel.hasError('required')">ce champ est obligatoire</mat-error>
+
+              </mat-form-field>
+
+              <mat-form-field>
+                <input formControlName="Email" matInput placeholder="Saisir votre adresse email" >
+                <mat-error>Verifier votre adresse email</mat-error>
+              </mat-form-field>
+              <!-- Ligne 3 colone 6 saisir gov ............... -->
+              <div class="form-row">
+                <div class="col-md-6">
+                  <mat-form-field>
+                    <mat-select [formControl]="Gouvernorat" (selectionChange)="changevilleByGovNom(Gouvernorat.value)" placeholder="Gouvernorat">
+                      <mat-option>None</mat-option>
+                      <ng-container *ngFor="let gov of listGouvernorat | async">
+                        <mat-option value="{{gov.nom}}" >{{gov.nom}}</mat-option>
+                      </ng-container>
+                    </mat-select>
+                    <mat-error>Selectionner une gouvernorat</mat-error>
+                  </mat-form-field>
+                </div>
+
+              <!-- Ligne 3 colone 7 saisir ville ............... -->
+
+                <div class="col-md-6">
+                  <mat-form-field>
+                  <mat-select [formControl]="Ville" [(ngModel)]="selectedValue" placeholder="Ville">
+                    <mat-option>None</mat-option>
+                    <ng-container *ngFor="let ville of listville | async"  >
+                      <mat-option value="{{ville.nom}}" [value]="ville">{{ville.nom}}</mat-option>
+                    </ng-container>
+                  </mat-select>
+                  <mat-error>Selectionner une ville</mat-error>
+                  </mat-form-field>
+                </div>
+
+              </div>
+            </div>
+
+          </div>
+          <!-- Ligne button  -->
+          <div class="button-row text-center">
+            <button mat-raised-button color="primary" type="submit" >Envoyer</button>
+            <button mat-raised-button color="warn" (click)="onClose()">Annuler</button>
+          </div>
+        </div>
+      </div>
+    </form>
+
+  </div>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,137 @@
+<div class="example-container">
+  <mat-toolbar class="example-toolbar">
+    <span><h1>Ajouter Livreur</h1></span>
+    <span class="fill-remaining-space"></span>
+    <button class="btn-dialog-close btnClose" mat-button color="warn" (click)="onClose()" tabIndex="-1"><mat-icon>clear</mat-icon></button>
+  </mat-toolbar>
+  <br>
+
+  <mat-accordion class="example-headers-align">
+    <mat-expansion-panel [expanded]="step === 0" (opened)="setStep(0)" hideToggle>
+      <mat-expansion-panel-header>
+
+        <mat-panel-title>
+          <mat-icon class="mat-icon">account_circle</mat-icon>
+          Information Générale
+        </mat-panel-title>
+
+      </mat-expansion-panel-header>
+      <form (ngSubmit)="onsubmit()" [formGroup]="LService.formGroup" >
+        <div class="row register-form" >
+          <div class="col-md-5">
+            <input type="hidden" formControlName="id">
+            <mat-form-field>
+              <input formControlName="Login" matInput placeholder="Login" [(ngModel)]="l.login">
+              <mat-error *ngIf="LService.Login&&LService.Login.hasError('required')"> Login est Obligatoire</mat-error>
+            </mat-form-field><br>
+            <mat-form-field>
+              <input formControlName="Nom" matInput placeholder="Nom" [(ngModel)]="l.nom">
+              <mat-error>ce champ est obligatoire</mat-error>
+            </mat-form-field>
+            <mat-form-field>
+              <input formControlName="Prenom" matInput placeholder="Prénom" [(ngModel)]="l.prenom">
+              <mat-error>ce champ est obligatoire</mat-error>
+            </mat-form-field>  <br>
+            <mat-form-field>
+              <input formControlName="Tel" matInput placeholder="Téléphone" [(ngModel)]="l.tel">
+              <mat-error *ngIf="LService.Tel.hasError('pattern')">Numéro Téléphone est incorrecte</mat-error>
+              <mat-error *ngIf="LService.Tel.hasError('required')">ce champ est obligatoire</mat-error>
+
+            </mat-form-field>
+
+            <mat-form-field>
+              <input formControlName="Email" matInput placeholder="Email" [(ngModel)]="l.email">
+              <mat-error>Verifier l'adresse email</mat-error>
+            </mat-form-field>
+
+            <mat-form-field>
+              <input matInput formControlName="NumUrgence" placeholder="Numéro D'urgence" [(ngModel)]="l.num_urgence">
+              <mat-error *ngIf="LService.NumUrgence.hasError('pattern')">Numéro Téléphone est incorrecte</mat-error>
+              <mat-error *ngIf="LService.NumUrgence.hasError('required')">ce champ est obligatoire</mat-error>
+            </mat-form-field>
+            <mat-form-field>
+              <input matInput [matDatepicker]="picker"  formControlName="dateEmbauche" placeholder="Date Embauche" [(ngModel)]="l.date_embauche">
+              <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+              <mat-datepicker #picker></mat-datepicker>
+              <mat-error>Verifier date d'embauche</mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+      </form>
+      <mat-action-row>
+        <button mat-button color="primary" (click)="nextStep()">Suivant</button>
+      </mat-action-row>
+    </mat-expansion-panel>
+    <mat-expansion-panel [expanded]="step === 1" (opened)="setStep(1)" hideToggle>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+
+          <mat-icon>account_box</mat-icon>
+          &nbsp;Accès
+        </mat-panel-title>
+        <mat-panel-description>
+
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+
+      <form (ngSubmit)="onsubmit()" [formGroup]="LService.formGroup" >
+        <div class="row register-form" >
+          <div class="col-md-5">
+
+            <mat-form-field>
+              <mat-select formControlName="Gouvernorat" (selectionChange)="changevilleByGovNom(LService.Gouvernorat.value)" placeholder="Gouvernorat">
+                <mat-option>None</mat-option>
+                <ng-container *ngFor="let gov of listGouvernorat | async">
+                  <mat-option value="{{gov.nom}}" >{{gov.nom}}</mat-option>
+                </ng-container>
+              </mat-select>
+              <mat-error>Selectionner une gouvernorat</mat-error>
+            </mat-form-field>
+
+
+            <mat-form-field>
+              <mat-select formControlName="Ville" [(ngModel)]="selectedValue" placeholder="Ville">
+                <mat-option>None</mat-option>
+                <ng-container *ngFor="let ville of listville | async"  >
+                  <mat-option value="{{ville.nom}}" [value]="ville">{{ville.nom}}</mat-option>
+                </ng-container>
+              </mat-select>
+              <mat-error>Selectionner une ville</mat-error>
+            </mat-form-field>
+
+            <mat-form-field>
+              <input  [type]="hide ? 'password' : 'text'" formControlName="Password" matInput placeholder="Mot de passe" [(ngModel)]="l.password">
+              <button type="button" mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+              </button>
+
+              <mat-error *ngIf="LService.Password&&LService.Password.hasError('required')">ce champ est obligatoire</mat-error>
+              <mat-error *ngIf="LService.Password&&LService.Password.hasError('minlength')">Mot de passe doit etre > 8 caractère</mat-error>
+              <mat-error *ngIf="LService.Password&&LService.Password.hasError('maxlength')">Mot de passe doit etre < 30 caractère</mat-error>
+            </mat-form-field>
+
+            <mat-form-field>
+              <input  [type]="hidec ? 'password' : 'text'" formControlName="ConfirmPassword" matInput placeholder="Confirmer Mot de passe" >
+              <button type="button" mat-icon-button matSuffix (click)="hidec = !hidec" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hidec">
+                <mat-icon>{{hidec ? 'visibility_off' : 'visibility'}}</mat-icon>
+              </button>
+              <mat-error *ngIf="LService.ConfirmPassword&&LService.ConfirmPassword.hasError('required')">ce champ est obligatoire</mat-error>
+              <mat-error  *ngIf="LService.ConfirmPassword&&LService.ConfirmPassword.hasError('passwordMismatch')">Mot de Passe Incorrect</mat-error>
+            </mat-form-field>
+
+          </div>
+        </div>
+
+
+
+
+        <div class="button-row">
+          <button mat-raised-button color="primary" type="submit" >Valider</button>
+          <button mat-raised-button color="warn" (click)="onClear()">Reset</button>
+        </div>
+      </form>
+    </mat-expansion-panel>
+  </mat-accordion>
+
+
+</div>
