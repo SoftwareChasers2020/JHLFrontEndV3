@@ -2,7 +2,7 @@ import {Gouvernorat} from './gouvernorat';
 
 export class Ville {
 
-  IdVille: number;
+  idVille: number;
   nom: string;
   gouvernorat: Gouvernorat;
 }

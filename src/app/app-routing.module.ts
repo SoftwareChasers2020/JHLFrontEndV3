@@ -18,6 +18,7 @@ import {AccueilLivreurComponent} from './UserPanel/accueil-livreur/accueil-livre
 import {EditProfilComponent} from './Admin_Panel/fournisseur/edit-profil/edit-profil.component';
 import {AddColisComponent} from './Colis/add-colis/add-colis.component';
 import {AuthGuard} from './guards/auth.guard';
+import {ListColisComponent} from './Colis/list-colis/list-colis.component';
 
 
 const routes: Routes = [
@@ -39,7 +40,8 @@ const routes: Routes = [
           {path: 'listDemandeFour', component: ListeDemandeInscriptionComponent},
           {path: 'editProfil/:id', component: EditProfilComponent},
           {path: 'coli', component: AddColisComponent},
-      {path: '', component: DashbordComponent},
+              {path: 'ListColis', component: ListColisComponent},
+          {path: '', component: DashbordComponent},
     ], canActivate: [AuthGuard]},
 
 

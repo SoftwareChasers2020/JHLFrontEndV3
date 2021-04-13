@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Ville} from '../Model/ville';
+import {map} from 'rxjs/operators';
+import {Observable} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -20,5 +22,10 @@ export class VilleService {
     return this.http.get<Ville>(this.urlpath + "/nom/" + nom);
 
   }
+
+  getvilleById(id){
+    return this.http.get<Ville>(this.urlpath + "/" + id);
+  }
+
 
 }

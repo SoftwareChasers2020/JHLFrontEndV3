@@ -35,11 +35,19 @@
                 </option>
               </select>
             </div>
-
+        <!--    <mat-form-field>
+              <mat-select [formControl]="Ville" placeholder="Ville">
+                <mat-option>None</mat-option>
+                <ng-container *ngFor="let ville of listville | async"  >
+                  <mat-option value="{{ville.nom}}" [value]="ville">{{ville.nom}}</mat-option>
+                </ng-container>
+              </mat-select>
+              <mat-error>Selectionner une ville</mat-error>
+            </mat-form-field>-->
             <div class="form-group col-md-6 " >
               <label for="Ville">Ville</label>
               <select  formControlName="Ville" class="form-control" id="Ville" >
-                <option *ngFor="let ville of listville | async" [value]="ville.nom" >
+                <option *ngFor="let ville of listville | async"   [ngValue]="ville">
                   {{ville.nom}}
                 </option>
               </select>
@@ -84,7 +92,7 @@
               <div class="form-group" style="margin-top: 25px; margin-left: 10px">
                 <label  class="control-label mb-1">Echange</label>
             <mat-radio-group  formControlName="select"   >
-              <mat-radio-button  value="non"  checked="true" >Non</mat-radio-button>
+              <mat-radio-button  value="non"  [checked]="true"  >Non</mat-radio-button>
               <mat-radio-button  value="oui"  style="margin-left: 10px" >Oui</mat-radio-button>
 
             </mat-radio-group>
@@ -102,7 +110,7 @@
             <div class="col-12 col-md-6">
               <div class="form-group">
                 <label class="control-label mb-1" for="nbArticleEchange">Nombre des articles échange</label>
-                <input formControlName="nbArticleEchange" id="nbArticleEchange" type="text" class=" form-control">
+                <input formControlName="NbArticleEchange" id="nbArticleEchange" type="text" class=" form-control">
               </div>
             </div>
           </div>

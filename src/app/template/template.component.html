@@ -69,10 +69,17 @@
         <span>Nouveau Colis</span>
       </a>
     </li>
-    <!-- Nav Item - Utilities Collapse Menu -->
+    <hr class="sidebar-divider">
+    <div class="sidebar-heading">
+      Addons
+    </div>
 
-
-
+    <li class="nav-item" *ngIf="this.tokenStorage.getRole()==='Fournisseur'">
+      <a class="nav-link" routerLink="/temp/ListColis" >
+        <i class="fas fa-user-circle"></i>
+        <span>Mes Colis</span>
+      </a>
+    </li>
     <!-- Divider -->
    <!-- <hr class="sidebar-divider">
     &lt;!&ndash; Heading &ndash;&gt;
@@ -111,7 +118,7 @@
         <span>Tables</span></a>
     </li>-->
     <!-- Divider -->
-    <hr class="sidebar-divider d-none d-md-block">
+<!--    <hr class="sidebar-divider d-none d-md-block">-->
     <!-- Sidebar Toggler (Sidebar) -->
     <div class="text-center d-none d-md-inline">
       <button class="rounded-circle border-0" id="sidebarToggle"></button>

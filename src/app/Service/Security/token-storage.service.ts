@@ -27,8 +27,8 @@ export class TokenStorageService {
     return localStorage.getItem(TOKEN_KEY);
   }
 
-  getId() {
-    return localStorage.getItem(USER_KEY);
+  getId(): number {
+    return Number(localStorage.getItem(USER_KEY));
   }
   getRole() {
     return localStorage.getItem(ROLE_KEY);
