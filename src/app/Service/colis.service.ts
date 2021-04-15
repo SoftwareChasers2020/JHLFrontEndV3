@@ -14,14 +14,7 @@ export class ColisService {
     this.urlpath = 'http://localhost:8081/colis/';
   }
 
-  getCompteur()
-  {
-    return this.http.get(this.urlpath + "compteur/1");
-  }
-  updateCompteur(c: Compteur)
-  {
-    return this.http.put("http://localhost:8081/colis/aa/", c);
-  }
+
 
   createColis(c: Colis){
 
@@ -35,6 +28,11 @@ export class ColisService {
   getColisById(id)
   {
     return this.http.get<Colis>(this.urlpath + id);
+  }
+
+  deleteColis(id)
+  {
+    return this.http.delete(this.urlpath + id);
   }
 
 }

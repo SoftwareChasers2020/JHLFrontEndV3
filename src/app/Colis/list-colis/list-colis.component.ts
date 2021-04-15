@@ -9,6 +9,7 @@ import {map} from 'rxjs/operators';
 import {VilleService} from '../../Service/ville.service';
 import {Ville} from '../../Model/ville';
 import {Observable, Subscription} from 'rxjs';
+import {NotificationService} from '../../Service/notification.service';
 
 @Component({
   selector: 'app-list-colis',
@@ -21,28 +22,30 @@ export class ListColisComponent implements OnInit {
   listcolis: Colis[];
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
+  @ViewChild('content') content: any;
   searchKey: any;
   ville: Ville;
-  villes: Ville[];
+  mdlSampleIsOpen = false;
 
   constructor(private colisService: ColisService,
-              private villeService: VilleService) { }
+              private villeService: VilleService,
+              private notificationService: NotificationService) {
+  }
 
   ngOnInit(): void {
-
 
 
     this.colisService.getAllColis().subscribe(
       res => {
 
-    this.listcolis = res;
-    this.dataSource = new MatTableDataSource(this.listcolis);
-    this.dataSource.data.map(value => this.villeService.getvilleById(value.idVille).subscribe(
-      value1 => {value.idVille = value1.nom;
-      }
-
-    ) );
-    this.dataSource.filterPredicate = (data, filter: string)  => {
+        this.listcolis = res;
+        this.dataSource = new MatTableDataSource(this.listcolis);
+        this.dataSource.data.map(value => this.villeService.getvilleById(value.idVille).subscribe(
+          value1 => {
+            value.idVille = value1.nom;
+          }
+        ));
+        this.dataSource.filterPredicate = (data, filter: string) => {
           const accumulator = (currentTerm, key) => {
             return this.nestedFilterCheck(currentTerm, data, key);
           };
@@ -52,24 +55,29 @@ export class ListColisComponent implements OnInit {
           return dataStr.indexOf(transformedFilter) !== -1;
         };
 
-    this.dataSource.sortingDataAccessor = (item, property) => {
+        this.dataSource.sortingDataAccessor = (item, property) => {
           switch (property) {
-            case 'Nom': return item.client.nom;
-            case 'Téléphone' : return item.client.tel1;
-            case 'Code' : return item.codeBarre;
-            case 'Prix': return item.prix;
-            case 'Adresse' : return item.idVille;
+            case 'Nom':
+              return item.client.nom;
+            case 'Téléphone' :
+              return item.client.tel1;
+            case 'Code' :
+              return item.codeBarre;
+            case 'Prix':
+              return item.prix;
+            case 'Adresse' :
+              return item.idVille;
 
 
-            default: return item[property];
+            default:
+              return item[property];
           }
         };
 
 
-
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
-    console.log(this.listcolis);
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
+        console.log(this.listcolis);
       },
       error => console.log(error)
     );
@@ -102,11 +110,51 @@ export class ListColisComponent implements OnInit {
   }
 
 
-  getvillebyId(id){
+  getvillebyId(id) {
 
-  return  this.villeService.getvilleById(id);
-
-
+    return this.villeService.getvilleById(id);
 
   }
+
+  onDelete(codeBarre: any) {
+
+    this.colisService.deleteColis(codeBarre).subscribe(
+      () => {
+        this.reloadData();
+        this.mdlSampleIsOpen = false;
+      }
+    );
+    this.notificationService.warn(' supprimé avec succées !');
+  }
+
+
+  hideModal() {
+    this.mdlSampleIsOpen = false;
+  }
+
+  onEdit(row) {
+  }
+
+  showModal() {
+    this.mdlSampleIsOpen = true;
+  }
+
+  reloadData() {
+    this.colisService.getAllColis().subscribe(
+      data => {
+        this.listcolis = data;
+        this.dataSource = new MatTableDataSource(this.listcolis);
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
+      });
+  }
+
+
+  print() {
+
+  }
+  printManifeste() {
+
+  }
+
 }

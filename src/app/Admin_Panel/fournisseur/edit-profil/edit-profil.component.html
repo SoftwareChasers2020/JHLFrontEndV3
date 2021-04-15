@@ -14,12 +14,28 @@
           <!-- Form Group (first name)-->
           <div class="form-group col-md-6">
             <label class="small mb-1" for="nom">Nom </label>
-            <input class="form-control" id="nom" type="text" placeholder="Saisir votre nom" formControlName="Nom" >
+            <input class="form-control"
+                   id="nom" type="text"
+                   placeholder="Saisir votre nom"
+                   formControlName="Nom"
+                   [ngClass]="{'is-invalid':Nom&&Nom.errors && Nom.touched}">
+            <div *ngIf="Nom&&Nom.hasError('required')"
+                 class="invalid-feedback">
+              Nom est Obligatoire
+            </div>
           </div>
           <!-- Form Group (last name)-->
           <div class="form-group col-md-6">
             <label class="small mb-1" for="prenom">Prenom </label>
-            <input class="form-control" id="prenom" type="text" placeholder="Saisir votre prenom" formControlName="Prenom" >
+            <input class="form-control"
+                   id="prenom" type="text"
+                   placeholder="Saisir votre prenom"
+                   formControlName="Prenom"
+                   [ngClass]="{'is-invalid':Prenom&&Prenom.errors && Prenom.touched}">
+            <div *ngIf="Nom&&Nom.hasError('required')"
+                 class="invalid-feedback">
+              Prenom est Obligatoire
+            </div>
           </div>
         </div>
         <!-- Form Row        -->
@@ -27,7 +43,10 @@
           <!-- Form Group (organization name)-->
           <div class="form-group col-md-6">
             <label class="small mb-1" for="nomcommercial">Nom Commercial</label>
-            <input class="form-control" id="nomcommercial" type="text" placeholder="Saisir votre Nom Commercial" formControlName="NomCommercial" >
+            <input class="form-control"
+                   id="nomcommercial" type="text"
+                   placeholder="Saisir votre Nom Commercial"
+                   formControlName="NomCommercial">
           </div>
           <!-- Form Group (location)-->
           <div class="form-group col-md-6">

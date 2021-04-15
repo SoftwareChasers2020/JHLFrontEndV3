@@ -2,7 +2,7 @@
 <h3 style="color: #0061f2"><i class="fa fa-angle-right" style="color: #0061f2"></i> Liste des colis en attente</h3>
 <div class="example-header" fxLayout="row">
   <div class="search-div">
-<!--    <button mat-raised-button (click)="onCreate()" title="Ajouter">
+<!--   <button mat-raised-button (click)="print()" title="Print">
       <mat-icon>add</mat-icon>Ajouter
     </button>-->
     <mat-form-field class="search-form-field" floatLabel="never">
@@ -11,10 +11,16 @@
         <mat-icon>close</mat-icon>
       </button>
     </mat-form-field>
+       <button mat-raised-button color="primary" (click)="print()" title="Imprimer manifeste">
+         <i class="fas fa-print"></i>    Imprimer manifeste
+    </button>
+      <button mat-raised-button color="warn" (click)="printManifeste()" title="Imprimer manifeste">
+    <i class="fas fa-print"></i>    Impression multiple Toutes les colis en attente
+  </button>
   </div>
 </div>
 <div class="example-container mat-elevation-z8">
-  <mat-table [dataSource]="dataSource" matSort >
+  <mat-table  [dataSource]="dataSource" matSort >
     <!-- ID Column -->
     <ng-container matColumnDef="Code">
       <mat-header-cell *matHeaderCellDef mat-sort-header> Code </mat-header-cell>
@@ -49,16 +55,33 @@
 
     <ng-container matColumnDef="Prix">
       <mat-header-cell *matHeaderCellDef mat-sort-header> Prix en DT </mat-header-cell>
-      <mat-cell *matCellDef="let row" data-label="Prix"> {{row.prix  }} </mat-cell>
+      <mat-cell *matCellDef="let row" data-label="Prix"> {{row.prix | number :'1.3'  }} </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="actions">
       <mat-header-cell *matHeaderCellDef></mat-header-cell>
       <mat-cell style="text-align: center" *matCellDef="let row">
-       <!-- <button mat-icon-button  (click)="getDetails(row)" title="Consulter"><mat-icon>visibility</mat-icon></button>
-        <button mat-icon-button color="primary" (click)="onEdit(row)" title="Modifier"><mat-icon>launch</mat-icon></button>
-        <button mat-icon-button color="warn" (click)="onDelete(row.idUtilisateur)"  title="Supprimer"><mat-icon>delete_outline</mat-icon></button>
--->
+
+        <button mat-icon-button color="warn" *ngIf="row.etat.idEtat === 1"  (click)="showModal()"  title="Supprimer"><mat-icon>delete_outline</mat-icon></button>
+        <div class="modal fade" id="DeleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" [ngStyle]="{'display': mdlSampleIsOpen ? 'block' : 'none', 'opacity': 1}">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Confirmation de la suppression</h5>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">×</span>
+                </button>
+              </div>
+              <div class="modal-body">Etes-vous sûr de vouloir supprimer cet élément ?</div>
+              <div class="modal-footer">
+                <button class="btn btn-secondary" (click)="hideModal()" type="button" data-dismiss="modal">Annuler</button>
+                <a class="btn btn-danger" (click)="onDelete(row.codeBarre)" data-dismiss="modal">Supprimer</a>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
       </mat-cell>
     </ng-container>
 

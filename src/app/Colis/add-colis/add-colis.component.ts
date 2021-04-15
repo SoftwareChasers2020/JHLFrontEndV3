@@ -53,37 +53,25 @@ export class AddColisComponent implements OnInit {
 
   ngOnInit(): void {
     this.listGouvernorat = this.gouvernoratService.getAllAGouvernorat();
-    this.colisService.getCompteur().subscribe(
-      data => {
-        this.c = data as Compteur;
-        this.CodeBarre.setValue(this.c.lastCodeBarre);
-        this.colisService.updateCompteur(this.c).subscribe(
-          res => console.log(res),
-          error => console.log(error)
-        );
-      }
 
-    );
   }
 
   onSubmit() {
 
+
     this.ville = this.Ville.value;
-    console.log(this.ville.idVille);
-    console.log(this.Ville.value);
-    this.ville = this.Ville.value; console.log("2");
-    this.colis.codeBarre = this.CodeBarre.value; console.log("3");
-    this.colis.adressDispo = this.AdressDispo.value; console.log("4");
-    this.colis.commentaire = this.Commentaire.value; console.log("5");
-    this.colis.designation = this.Designation.value; console.log("6");
-    this.colis.idFournisseur = this.tokenService.getId(); console.log("7");
-    this.colis.idVille = this.ville.idVille; console.log("8");
-    this.client.nom = this.Nom.value; console.log("9");
-    this.client.prenom = this.Prenom.value; console.log("10");
-    this.client.tel1 = this.Tel1.value; console.log("11");
-    this.client.tel2 = this.Tel2.value; console.log("12");
-    this.colis.client = this.client; console.log("client");
-    this.colis.nbArticle = this.NbArticle.value; console.log("13");
+    this.colis.codeBarre = this.CodeBarre.value;
+    this.colis.adressDispo = this.AdressDispo.value;
+    this.colis.commentaire = this.Commentaire.value;
+    this.colis.designation = this.Designation.value;
+    this.colis.idFournisseur = this.tokenService.getId();
+    this.colis.idVille = this.ville.idVille;
+    this.client.nom = this.Nom.value;
+    this.client.prenom = this.Prenom.value;
+    this.client.tel1 = this.Tel1.value;
+    this.client.tel2 = this.Tel2.value;
+    this.colis.client = this.client;
+    this.colis.nbArticle = this.NbArticle.value;
     this.colis.prix = this.Prix.value;
     if (this.select.value === "oui")
     {
