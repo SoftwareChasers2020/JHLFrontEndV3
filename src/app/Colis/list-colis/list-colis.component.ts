@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {MatTableDataSource} from '@angular/material/table';
 import {Fournisseur} from '../../Model/fournisseur';
 import {MatPaginator} from '@angular/material/paginator';
@@ -10,6 +10,10 @@ import {VilleService} from '../../Service/ville.service';
 import {Ville} from '../../Model/ville';
 import {Observable, Subscription} from 'rxjs';
 import {NotificationService} from '../../Service/notification.service';
+import {TokenStorageService} from '../../Service/Security/token-storage.service';
+import {ManifesteComponent} from '../manifeste/manifeste.component';
+import {NgxPrinterService} from 'ngx-printer';
+import {FournisseurService} from '../../Service/fournisseur.service';
 
 @Component({
   selector: 'app-list-colis',
@@ -19,26 +23,45 @@ import {NotificationService} from '../../Service/notification.service';
 export class ListColisComponent implements OnInit {
   displayedColumns: string[] = ['Code', 'date_ajout', 'Nom', 'Téléphone', 'Adresse', 'Prix', 'actions'];
   dataSource: MatTableDataSource<any>;
-  listcolis: Colis[];
+
   @ViewChild(MatPaginator) paginator: MatPaginator;
-  @ViewChild(MatSort) sort: MatSort;
-  @ViewChild('content') content: any;
+  sort;
+  // tslint:disable-next-line:max-line-length
+  @ViewChild(MatSort, {static: false}) set content(content: ElementRef) {  // hedhii zedthaa 5ater mba3d ma3malt div hidden fel html sorting ma3adech yemchi
+    this.sort = content;
+    if (this.sort){
+      this.dataSource.sort = this.sort;
+    }
+  }
+  listcolis: Colis[];
+  myDate = new Date();
   searchKey: any;
   ville: Ville;
   mdlSampleIsOpen = false;
+  fournisseur: Fournisseur;
+  colis: Colis[];
 
   constructor(private colisService: ColisService,
               private villeService: VilleService,
-              private notificationService: NotificationService) {
+              private fournisseurService: FournisseurService,
+              private tokenService: TokenStorageService,
+              private notificationService: NotificationService,
+              private printerService: NgxPrinterService) {
   }
 
   ngOnInit(): void {
 
-
-    this.colisService.getAllColis().subscribe(
+    this.getColisManifeste();
+    this.fournisseurService.getFournisseurById(this.tokenService.getId())
+      .subscribe(
+        data => this.fournisseur = data as Fournisseur,
+        error => console.log(error)
+      );
+    this.colisService.findByFournisseurIdAndEtat(this.tokenService.getId()).subscribe(
       res => {
 
-        this.listcolis = res;
+        this.listcolis = res as Colis[];
+
         this.dataSource = new MatTableDataSource(this.listcolis);
         this.dataSource.data.map(value => this.villeService.getvilleById(value.idVille).subscribe(
           value1 => {
@@ -81,6 +104,7 @@ export class ListColisComponent implements OnInit {
       },
       error => console.log(error)
     );
+
   }
 
   nestedFilterCheck(search, data, key): any {
@@ -110,9 +134,20 @@ export class ListColisComponent implements OnInit {
   }
 
 
-  getvillebyId(id) {
+  getColisManifeste() {
 
-    return this.villeService.getvilleById(id);
+    return   this.colisService.findByFournisseurIdAndEtat(this.tokenService.getId()).subscribe(
+      res => {
+            this.colis = res as Colis[];
+            this.colis.map(value => this.villeService.getvilleById(value.idVille).subscribe(
+              value1 => {
+                // @ts-ignore
+                value.idVille = value1.gouvernorat.nom;
+              }
+            ));
+      },
+      error => console.log(error)
+    );
 
   }
 
@@ -140,9 +175,9 @@ export class ListColisComponent implements OnInit {
   }
 
   reloadData() {
-    this.colisService.getAllColis().subscribe(
+    this.colisService.findByFournisseurIdAndEtat(this.tokenService.getId()).subscribe(
       data => {
-        this.listcolis = data;
+        this.listcolis = data as Colis [];
         this.dataSource = new MatTableDataSource(this.listcolis);
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
@@ -150,11 +185,32 @@ export class ListColisComponent implements OnInit {
   }
 
 
-  print() {
+
+  print(): void {
+    const printButton = document.getElementById("demo");
+    printButton.style.visibility = 'visible';
+    this.printerService.printOpenWindow = false;
+    this.printerService.printDiv('demo');
+    this.printerService.printOpenWindow = true;
+    printButton.style.visibility = 'hidden';
+
+
+
 
   }
   printManifeste() {
 
+    const printButton = document.getElementById("demo");
+    printButton.style.visibility = 'visible';
+    this.printerService.printOpenWindow = false;
+    this.printerService.printDiv('demo');
+    this.printerService.printOpenWindow = true;
+    printButton.style.visibility = 'hidden';
+
+  }
+
+  getSum(): number {
+    return  this.colis.reduce((accum, curr) => accum + curr.prix, 0);
   }
 
 }

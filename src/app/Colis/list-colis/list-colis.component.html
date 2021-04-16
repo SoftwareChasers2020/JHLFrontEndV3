@@ -20,7 +20,7 @@
   </div>
 </div>
 <div class="example-container mat-elevation-z8">
-  <mat-table  [dataSource]="dataSource" matSort >
+  <mat-table id="print-section" [dataSource]="dataSource" matSort >
     <!-- ID Column -->
     <ng-container matColumnDef="Code">
       <mat-header-cell *matHeaderCellDef mat-sort-header> Code </mat-header-cell>
@@ -62,7 +62,7 @@
       <mat-header-cell *matHeaderCellDef></mat-header-cell>
       <mat-cell style="text-align: center" *matCellDef="let row">
 
-        <button mat-icon-button color="warn" *ngIf="row.etat.idEtat === 1"  (click)="showModal()"  title="Supprimer"><mat-icon>delete_outline</mat-icon></button>
+        <button id="deletebutton" mat-icon-button color="warn" *ngIf="row.etat.idEtat === 1"  (click)="showModal()"  title="Supprimer"><mat-icon>delete_outline</mat-icon></button>
         <div class="modal fade" id="DeleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" [ngStyle]="{'display': mdlSampleIsOpen ? 'block' : 'none', 'opacity': 1}">
           <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -95,4 +95,69 @@
   </mat-table>
 
   <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+</div>
+
+
+<div class="form-property" id="demo" style="visibility: hidden">
+  <table style="width: 100%">
+    <tbody><tr>
+      <td><img src="https://www.firstdeliverygroup.com/fournisseur/images/logo.png" style="width: 130px; text-align: center"></td>
+      <td><div style="text-align: center;font-size: 26px; border: 1px solid #000; padding-left: 0px; margin-left: 0px; font-weight: bold;">MANIFESTE {{fournisseur.nomcommercial}}</div></td>
+      <td style="width: 25%"></td>
+    </tr>
+    </tbody></table>
+  <table style="width: 100%;margin-top: 20px;margin-bottom: 20px;">
+    <tbody><tr>
+      <td>
+        <div><b>Nom</b> : {{fournisseur.nomcommercial}}</div>
+      </td>
+      <td>
+      <div><b>Adresse</b> : {{fournisseur.adresse.ville.nom}} / {{fournisseur.adresse.ville.gouvernorat.nom}}</div>
+      </td>
+      <td>
+      <div><b>Téléphone</b> : {{fournisseur.tel}}</div>
+    </td><td>
+
+      <div><b>Date </b>: {{myDate | date:'dd/M/yyyy'}}</div></td>
+    </tr>
+    </tbody>
+
+  </table>
+  <table border="1" style="width: 100%">
+    <tbody><tr>
+      <th style="padding-top: 5px; padding-bottom: 5px; padding-left: 5px;">CODE</th>
+      <th style="padding-top: 5px; padding-bottom: 5px; padding-left: 5px;">PRIX</th>
+      <th style="padding-top: 5px; padding-bottom: 5px; padding-left: 5px;">GOUVERNORAT</th>
+      <th style="padding-top: 5px; padding-bottom: 5px; padding-left: 5px;">COORDONNES CLIENT</th>
+      <th style="padding-top: 5px; padding-bottom: 5px; padding-left: 5px;">DESIGNATION</th>
+    </tr>
+    <tr *ngFor="let item of colis ">
+      <td>{{item.codeBarre}}</td>
+      <td>{{item.prix}}</td>
+      <td>{{item.idVille}}</td>
+      <td>{{item.client.nom}} {{item.client.prenom}} <br> {{item.client.tel1}} / {{item.client.tel2}}</td>
+      <td>{{item.designation}}</td>
+    </tr>
+    </tbody>
+  </table>
+<!--   <tr >
+     <td> Total : {{colis.length}} colis</td>
+     <td> Total : {{getSum()}} DT </td>
+   </tr>-->
+<br>
+  <table border="0">
+    <tr >
+      <td style="width: 60%">
+
+      </td>
+      <td> <div><b>Total: {{colis.length}}colis </b> </div></td>
+      <td> <div><b>Total: {{getSum()}}</b> DT </div></td>
+    </tr>
+  </table>
+
+
+
+
+
+
 </div>

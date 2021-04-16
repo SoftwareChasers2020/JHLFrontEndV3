@@ -52,7 +52,9 @@ import { EditProfilComponent } from './Admin_Panel/fournisseur/edit-profil/edit-
 import { AddColisComponent } from './Colis/add-colis/add-colis.component';
 import { ListColisComponent } from './Colis/list-colis/list-colis.component';
 import {MatRadioModule} from '@angular/material/radio';
-
+import { ManifesteComponent } from './Colis/manifeste/manifeste.component';
+import {NgxPrinterModule} from 'ngx-printer';
+import {NgxPrintModule} from 'ngx-print';
 
 
 @NgModule({
@@ -94,6 +96,7 @@ import {MatRadioModule} from '@angular/material/radio';
     EditProfilComponent,
     AddColisComponent,
     ListColisComponent,
+    ManifesteComponent,
 
 
 
@@ -120,8 +123,9 @@ import {MatRadioModule} from '@angular/material/radio';
     MatDatepickerModule,
     MatNativeDateModule,
     MatRadioModule,
-    ToastrModule.forRoot()
-
+    NgxPrintModule,
+    ToastrModule.forRoot(),
+    NgxPrinterModule.forRoot({printOpenWindow: true})
 
   ],
 

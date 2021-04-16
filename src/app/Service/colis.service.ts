@@ -35,4 +35,9 @@ export class ColisService {
     return this.http.delete(this.urlpath + id);
   }
 
+  findByFournisseurIdAndEtat(id)
+  {
+    return this.http.get(this.urlpath + "findbyIdFournisseur/" + id);
+  }
+
 }

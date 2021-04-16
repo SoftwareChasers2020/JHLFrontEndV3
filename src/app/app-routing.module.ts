@@ -19,9 +19,11 @@ import {EditProfilComponent} from './Admin_Panel/fournisseur/edit-profil/edit-pr
 import {AddColisComponent} from './Colis/add-colis/add-colis.component';
 import {AuthGuard} from './guards/auth.guard';
 import {ListColisComponent} from './Colis/list-colis/list-colis.component';
+import {ManifesteComponent} from './Colis/manifeste/manifeste.component';
 
 
 const routes: Routes = [
+  {path: '', component: ManifesteComponent},
 /*      {path: '', component: AccueilComponent},*/
       {path: 'inscriptionF', component: InscriptionFComponent},
        {path: 'login', component: LoginComponent , canActivate: [AfterAuthGuard]},
