@@ -72,11 +72,11 @@ AddFournisseur() {
   this.fournisseurService.createFournisseur(this.f).subscribe(
     data => {
       console.log(data);
-     /* setTimeout(
+      setTimeout(
         // tslint:disable-next-line:only-arrow-functions
         function(){
           location.reload();
-        }, 500);*/
+        }, 500);
       this.notificationService.success("Ajout effectué avec succées");
     }, error => console.log(error));
 

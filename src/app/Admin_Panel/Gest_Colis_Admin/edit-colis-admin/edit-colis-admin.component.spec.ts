@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AddAdministrateurComponent } from './add-administrateur.component';
+import { EditColisAdminComponent } from './edit-colis-admin.component';
 
-describe('AddAdministrateurComponent', () => {
-  let component: AddAdministrateurComponent;
-  let fixture: ComponentFixture<AddAdministrateurComponent>;
+describe('EditColisAdminComponent', () => {
+  let component: EditColisAdminComponent;
+  let fixture: ComponentFixture<EditColisAdminComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ AddAdministrateurComponent ]
+      declarations: [ EditColisAdminComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(AddAdministrateurComponent);
+    fixture = TestBed.createComponent(EditColisAdminComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

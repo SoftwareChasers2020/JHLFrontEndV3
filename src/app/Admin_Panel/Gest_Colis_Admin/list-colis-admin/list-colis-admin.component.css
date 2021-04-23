@@ -1,0 +1,13 @@
+.badge-inverse{
+  background-color: #abd912;
+}
+.badge-route{
+  background-color: rgba(38, 182, 137, 0.89);
+}
+.badge-retour{
+  background-color: #f35719;
+
+}
+.paddingEtat {
+  padding-right: 35px;
+}

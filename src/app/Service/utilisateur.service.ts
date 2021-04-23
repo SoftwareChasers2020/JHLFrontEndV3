@@ -3,6 +3,7 @@ import {AbstractControl, FormBuilder, FormControl, Validators} from '@angular/fo
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {map} from "rxjs/operators";
+import {Utilisateur} from '../Model/utilisateur';
 
 @Injectable({
   providedIn: 'root'
@@ -68,7 +69,7 @@ export class UtilisateurService {
   }, { validator: this.passwordMatchValidator('Password', 'ConfirmPassword')});
 
   getUtilisateurById(id: any){
-    return this.http.get(this.urlpath + '/' + id);
+    return this.http.get<Utilisateur>(this.urlpath + '/' + id);
 
   }
   passwordMatchValidator(password: string, confirmPassword: string) {

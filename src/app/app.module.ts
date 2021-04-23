@@ -4,10 +4,8 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { AddAdministrateurComponent } from './Admin_Panel/Administrateur/add-administrateur/add-administrateur.component';
 import { HttpClientModule } from '@angular/common/http';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import { ListAdminComponent } from './Admin_Panel/Administrateur/list-admin/list-admin.component';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatTableModule} from '@angular/material/table';
 import {MatSortModule} from '@angular/material/sort';
@@ -20,8 +18,6 @@ import {MatExpansionModule} from '@angular/material/expansion';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatSelectModule} from '@angular/material/select';
-import { EditAdministrateurComponent } from './Admin_Panel/Administrateur/edit-administrateur/edit-administrateur.component';
-import { DetailAdminComponent } from './Admin_Panel/Administrateur/detail-admin/detail-admin.component';
 import { AddFournisseurComponent } from './Admin_Panel/fournisseur/add-fournisseur/add-fournisseur.component';
 import { EditFournisseurComponent } from './Admin_Panel/fournisseur/edit-fournisseur/edit-fournisseur.component';
 import { ListFournisseurComponent } from './Admin_Panel/fournisseur/list-fournisseur/list-fournisseur.component';
@@ -55,17 +51,17 @@ import {MatRadioModule} from '@angular/material/radio';
 import { ManifesteComponent } from './Colis/manifeste/manifeste.component';
 import {NgxPrinterModule} from 'ngx-printer';
 import {NgxPrintModule} from 'ngx-print';
+import { ListColisAdminComponent } from './Admin_Panel/Gest_Colis_Admin/list-colis-admin/list-colis-admin.component';
+import { NewColisAdminComponent } from './Admin_Panel/Gest_Colis_Admin/new-colis-admin/new-colis-admin.component';
+import { EditColisAdminComponent } from './Admin_Panel/Gest_Colis_Admin/edit-colis-admin/edit-colis-admin.component';
+import { DetailColisAdminComponent } from './Admin_Panel/Gest_Colis_Admin/detail-colis-admin/detail-colis-admin.component';
+import { EditColisComponent } from './Colis/edit-colis/edit-colis.component';
+import { DetailColisComponent } from './Colis/detail-colis/detail-colis.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-
-
-    AddAdministrateurComponent,
-    ListAdminComponent,
-    EditAdministrateurComponent,
-    DetailAdminComponent,
 
     ListGestionnaireDepotComponent,
     EditGestionnaireDepotComponent,
@@ -97,6 +93,12 @@ import {NgxPrintModule} from 'ngx-print';
     AddColisComponent,
     ListColisComponent,
     ManifesteComponent,
+    ListColisAdminComponent,
+    NewColisAdminComponent,
+    EditColisAdminComponent,
+    DetailColisAdminComponent,
+    EditColisComponent,
+    DetailColisComponent,
 
 
 

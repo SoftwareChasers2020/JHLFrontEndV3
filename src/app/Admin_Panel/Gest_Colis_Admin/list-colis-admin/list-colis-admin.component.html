@@ -1,0 +1,146 @@
+<h3 style="color: #0061f2"><i class="fa fa-angle-right" style="color: #0061f2"></i> Liste des colis </h3>
+<div class="example-header" fxLayout="row">
+  <div class="search-div">
+    <!--   <button mat-raised-button (click)="print()" title="Print">
+          <mat-icon>add</mat-icon>Ajouter
+        </button>-->
+    <mat-form-field class="search-form-field" floatLabel="never">
+      <input matInput [(ngModel)]="searchKey" placeholder="Rechercher" autocomplete="off" (keyup)="applyFilter()">
+      <button mat-button matSuffix mat-icon-button aria-label="Clear" *ngIf="searchKey"  (click)="onSearchClear()">
+        <mat-icon>close</mat-icon>
+      </button>
+    </mat-form-field>
+
+  </div>
+</div>
+<div class="example-container mat-elevation-z8">
+  <mat-table  [dataSource]="dataSource" matSort >
+    <!-- ID Column -->
+    <ng-container matColumnDef="Code">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Code </mat-header-cell>
+      <mat-cell *matCellDef="let row" data-label="Code"> {{row.codeBarre}} </mat-cell>
+    </ng-container>
+    <!-- ID Column -->
+
+
+    <ng-container matColumnDef="date_ajout">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Date d'ajout </mat-header-cell>
+      <mat-cell *matCellDef="let row" data-label="Date" > {{row.date_ajout | date:'yyyy-MM-dd' }} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="Nom">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Nom et Prénom </mat-header-cell>
+      <mat-cell *matCellDef="let row" data-label="Nom"> {{row.client.nom}} {{row.client.prenom}} </mat-cell>
+    </ng-container>
+
+
+    <ng-container matColumnDef="Téléphone">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Téléphone </mat-header-cell>
+      <mat-cell *matCellDef="let row" data-label="Téléphone" > {{row.client.tel1}} <br> {{row.client.tel2}} </mat-cell>
+    </ng-container>
+
+
+    <ng-container matColumnDef="Adresse">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Adresse </mat-header-cell>
+      <!-- <mat-cell *matCellDef="let row" data-label="Adresse" > {{getvillebyId(row.idVille) | json}} </mat-cell>-->
+      <mat-cell *matCellDef="let row" data-label="Adresse" > {{row.nomgouvernorat}} </mat-cell>
+    </ng-container>
+
+
+    <ng-container matColumnDef="Prix">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Prix en DT </mat-header-cell>
+      <mat-cell *matCellDef="let row" data-label="Prix"> {{row.prix | number :'1.3'}} </mat-cell>
+    </ng-container>
+
+    <ng-container  matColumnDef="Etat">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Etat </mat-header-cell>
+      <mat-cell  *matCellDef="let row" data-label="Etat">
+        <div *ngIf='row.idEtat==="En attente de ramassage"'>
+          <span class="badge badge-pill badge-inverse" style="font-size:small ">{{row.idEtat}}</span>
+        </div>
+        <div *ngIf='row.idEtat==="En Dépot"'>
+          <span class="badge badge-pill badge-info" style="font-size: small">{{row.idEtat}}</span>
+        </div>
+        <div *ngIf='row.idEtat==="En Route"'>
+          <span class="badge badge-pill badge-route" style="font-size: small">{{row.idEtat}}</span>
+        </div>
+        <div *ngIf='row.idEtat==="En Cours"'>
+          <span class="badge badge-pill badge-primary" style="font-size: small">{{row.idEtat}}</span>
+        </div>
+        <div *ngIf='row.idEtat==="Livré"'>
+          <span class="badge badge-pill badge-success" style="font-size: small">{{row.idEtat}}</span>
+        </div>
+        <div *ngIf='row.idEtat==="Refusé"'>
+          <span class="badge badge-pill badge-danger" style="font-size: small">{{row.idEtat}}</span>
+        </div> <div *ngIf='row.idEtat==="A Vérifier"'>
+        <span class="badge badge-pill badge-warning" style="font-size: small">{{row.idEtat}}</span>
+      </div>
+        <div *ngIf='row.idEtat==="Retour"'>
+          <span class="badge badge-pill badge-retour" style="font-size: small">{{row.idEtat}}</span>
+        </div>
+        <div *ngIf='row.idEtat==="Retour Fournisseur"'>
+          <span class="badge badge-pill badge-info" style="font-size: small">{{row.idEtat}}</span>
+        </div>
+
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="Fournisseur">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Fournisseur </mat-header-cell>
+      <mat-cell *matCellDef="let row" data-label="Fournisseur">
+        <div *ngIf="row.idFournisseur === 0">
+         Par Administrateur
+        </div>
+        <div *ngIf="row.idFournisseur != 0">
+          {{row.nomfournisseur }}
+        </div>
+
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="actions">
+      <mat-header-cell *matHeaderCellDef></mat-header-cell>
+      <mat-cell style="text-align: center" *matCellDef="let row">
+        <!--(click)="showModal(row.codeBarre)" -->
+        <button mat-icon-button  (click)="getDetails(row)" title="Consulter"><mat-icon>visibility</mat-icon></button>
+
+        <button mat-icon-button color="primary" [routerLink]="['/temp/EditColisAdmin', row.codeBarre]" title="Modifier"><mat-icon>launch</mat-icon></button>
+
+        <button  mat-icon-button color="warn"  (click)="onDelete(row.codeBarre)"   title="Supprimer"><mat-icon>delete_outline</mat-icon></button>
+
+        <!--
+                <div class="modal fade" id="DeleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" [ngStyle]="{'display': mdlSampleIsOpen ? 'block' : 'none', 'opacity': 1}" >
+                  <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Confirmation de la suppression</h5>
+                        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">×</span>
+                        </button>
+                      </div>
+                      <div class="modal-body">Etes-vous sûr de vouloir supprimer cet élément ?</div>
+                      <div class="modal-footer">
+                        <button class="btn btn-secondary" (click)="hideModal()" type="button" data-dismiss="modal">Annuler</button>
+                        <a class="btn btn-danger" (click)="onDelete(row.prix)" data-dismiss="modal">Supprimer</a>
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+        -->
+
+
+      </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+
+    <!--  Row shown when there is no matching data.-->
+    <!--   <mat-row *matNoDataRow>
+         <mat-cell colspan="4">No data matching the filter </mat-cell>
+       </mat-row>-->
+  </mat-table>
+
+  <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+</div>

@@ -77,7 +77,7 @@ export class FournisseurService {
   }
 
   getFournisseurById(id: number){
-    return this.http.get(this.urlpath + '/' + id);
+    return this.http.get<Fournisseur>(this.urlpath + '/' + id);
 
   }
 

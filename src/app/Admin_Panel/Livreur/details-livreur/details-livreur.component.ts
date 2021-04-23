@@ -10,8 +10,7 @@ import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 export class DetailsLivreurComponent implements OnInit {
 
   row: any;
-  constructor( private GDService: GestionnaireDepotService,
-               public dialogRef: MatDialogRef<DetailsLivreurComponent>,
+  constructor(public dialogRef: MatDialogRef<DetailsLivreurComponent>,
                @Inject(MAT_DIALOG_DATA) public data: any)
   {this.row = data; }
 

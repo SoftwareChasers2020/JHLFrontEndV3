@@ -10,8 +10,8 @@ import {GestionnaireDepotService} from '../../../Service/gestionnaireDepot.servi
 export class DetailsGDComponent implements OnInit {
 
   row: any;
-  constructor( private GDService: GestionnaireDepotService,
-               public dialogRef: MatDialogRef<DetailsGDComponent>,
+
+  constructor(   public dialogRef: MatDialogRef<DetailsGDComponent>,
                @Inject(MAT_DIALOG_DATA) public data: any)
   {this.row = data; }
 

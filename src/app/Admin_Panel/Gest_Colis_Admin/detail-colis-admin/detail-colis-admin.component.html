@@ -1,0 +1,83 @@
+<mat-dialog-content>
+
+  <div class="card"  color="primary" >
+    <div class="card-header bg-transparent" >
+      <h3 class="mb-0" >Details</h3>
+    </div>
+    <div class="card-body">
+      <div class="panel panel-primary">
+
+        <div class="panel-body">
+
+          <table class="table table-striped">
+            <tr>
+              <th> CodeBarre </th>
+              <td> {{row.codeBarre}} </td>
+            </tr>
+
+
+            <tr>
+              <th>
+                Nom et Prénom </th>
+              <td> {{row.client.nom}} {{row.client.prenom}} </td>
+            </tr>
+
+            <tr>
+              <th> Téléphone </th>
+              <td *ngIf="row.client.tel2.length != 0"> {{row.client.tel1}} / {{row.client.tel2}} </td>
+              <td *ngIf="row.client.tel2.length == 0"> {{row.client.tel1}}</td>
+            </tr>
+            <tr>
+              <th> Gouvernorat </th>
+              <td> {{row.nomgouvernorat}} </td>
+            </tr>
+            <tr>
+              <th> Ville </th>
+              <td> {{row.nomville}} </td>
+            </tr>
+            <tr>
+              <th> Adresse complète et code postal</th>
+              <td> {{row.adressDispo}} </td>
+            </tr>
+            <tr>
+              <th> Prix en DT </th>
+              <td> {{row.prix}} </td>
+            </tr>
+            <tr>
+              <th> Etat </th>
+              <td> {{row.etat.titre}} </td>
+            </tr>
+            <tr>
+              <th>
+                Date d'ajout
+              </th>
+              <td> {{row.date_ajout | date:'dd/MM/yyyy HH:mm'}} </td>
+            </tr>
+            <tr>
+              <th> Date de ramassage </th>
+              <td> {{row.date_ramassage}} </td>
+            </tr>
+            <tr>
+              <th> Date de Livraison </th>
+              <td> {{row.date_livraison}} </td>
+            </tr>
+
+            <tr *ngIf="tokenStorage.getRole() === 'Administrateur'">
+              <th> Fournisseur </th>
+              <td *ngIf="row.idFournisseur === 0">
+                Par Administrateur
+              </td>
+              <td *ngIf="row.idFournisseur != 0">
+                {{row.nomfournisseur }}
+              </td>
+            </tr>
+
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</mat-dialog-content>
+<mat-dialog-actions  align="center">
+  <button class="mat-raised-button btn btn-danger" (click)="close()">Close</button>
+</mat-dialog-actions>

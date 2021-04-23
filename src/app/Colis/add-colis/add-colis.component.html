@@ -7,57 +7,87 @@
     <div id="pay-invoice">
       <div class="card-body">
 
-        <form (ngSubmit)="onSubmit()" [formGroup]="formGroup" >
+        <form (ngSubmit)="onSubmit()" [formGroup]="colisService.formGroup" >
 
-<!--          <div class="form-group">
-            <label class="small mb-1" for="CodeBarre">Code à Barre </label>
-            <input class="form-control" id="CodeBarre" type="text"  formControlName="CodeBarre" readonly >
-          </div>-->
+          <!--          <div class="form-group">
+                      <label class="small mb-1" for="CodeBarre">Code à Barre </label>
+                      <input class="form-control" id="CodeBarre" type="text"  formControlName="CodeBarre" readonly >
+                    </div>-->
           <div class="form-row">
             <!-- Form Group (first name)-->
             <div class="form-group col-md-6">
               <label class="small mb-1" for="nom">Nom </label>
-              <input class="form-control" id="nom" type="text" placeholder="Saisir votre nom" formControlName="Nom" >
+              <input class="form-control"
+                     id="nom" type="text"
+                     placeholder="Saisir votre nom"
+                     formControlName="Nom"
+                     [ngClass]="{'is-invalid':colisService.Nom&&colisService.Nom.errors && colisService.Nom.touched}">
+              <div *ngIf="colisService.Nom&&colisService.Nom.hasError('required')"
+                   class="invalid-feedback">
+                Nom est Obligatoire
+              </div>
             </div>
             <!-- Form Group (last name)-->
             <div class="form-group col-md-6">
               <label class="small mb-1" for="prenom">Prenom </label>
-              <input class="form-control" id="prenom" type="text" placeholder="Saisir votre prenom" formControlName="Prenom" >
+              <input class="form-control"
+                     id="prenom" type="text"
+                     placeholder="Saisir votre prenom"
+                     formControlName="Prenom"
+                     [ngClass]="{'is-invalid':colisService.Prenom&&colisService.Prenom.errors && colisService.Prenom.touched}">
+
+              <div *ngIf="colisService.Prenom&&colisService.Prenom.hasError('required')"
+                   class="invalid-feedback">
+                Prenom est Obligatoire
+              </div>
             </div>
           </div>
           <div class="form-row " >
 
             <div class="form-group col-md-6" >
               <label for="Gouvernorat">Gouvernorat</label>
-              <select  formControlName="Gouvernorat" class="form-control" id="Gouvernorat" (change)="changevilleByGovNom(Gouvernorat.value)" >
+              <select  formControlName="Gouvernorat"
+                       class="form-control" id="Gouvernorat"
+                       (change)="changevilleByGovNom(colisService.Gouvernorat.value)"
+                       [ngClass]="{'is-invalid':colisService.Gouvernorat&&colisService.Gouvernorat.errors && colisService.Gouvernorat.touched}">
+                <option></option>
                 <option *ngFor="let gov of listGouvernorat | async"  value="{{gov.nom}}"  >
                   {{gov.nom}}
                 </option>
               </select>
+              <div *ngIf="colisService.Gouvernorat&&colisService.Gouvernorat.hasError('required')"
+                   class="invalid-feedback">
+                Gouvernorat est Obligatoire
+              </div>
             </div>
-        <!--    <mat-form-field>
-              <mat-select [formControl]="Ville" placeholder="Ville">
-                <mat-option>None</mat-option>
-                <ng-container *ngFor="let ville of listville | async"  >
-                  <mat-option value="{{ville.nom}}" [value]="ville">{{ville.nom}}</mat-option>
-                </ng-container>
-              </mat-select>
-              <mat-error>Selectionner une ville</mat-error>
-            </mat-form-field>-->
+
             <div class="form-group col-md-6 " >
               <label for="Ville">Ville</label>
-              <select  formControlName="Ville" class="form-control" id="Ville" >
+              <select  formControlName="Ville"
+                       class="form-control"
+                       id="Ville"
+                       [ngClass]="{'is-invalid':colisService.Ville&&colisService.Ville.errors && colisService.Ville.touched}">
+                <option></option>
                 <option *ngFor="let ville of listville | async"   [ngValue]="ville">
                   {{ville.nom}}
                 </option>
               </select>
+              <div *ngIf="colisService.Ville&&colisService.Ville.hasError('required')"
+                   class="invalid-feedback">
+                Ville est Obligatoire
+              </div>
             </div>
           </div>
 
           <div class="row">
             <div class="form-group col-md-6">
               <label class="small mb-1" for="Tel1">Téléphone 1</label>
-              <input class="form-control" id="Tel1" type="tel" placeholder="Saisir le 1ere numéro de téléphone " formControlName="Tel1" >
+              <input class="form-control" id="Tel1" type="tel" placeholder="Saisir le 1ere numéro de téléphone " formControlName="Tel1"
+                     [ngClass]="{'is-invalid':colisService.Tel1&&colisService.Tel1.errors && colisService.Tel1.touched}">
+              <div *ngIf="colisService.Tel1&&colisService.Tel1.hasError('required')"
+                   class="invalid-feedback">
+                Veillez choisir au moins un numéro de téléphone
+              </div>
             </div>
             <div class="form-group col-md-6">
               <label class="small mb-1" for="Tel2">Téléphone 2</label>
@@ -67,40 +97,54 @@
           <div class="row">
             <div class="form-group col-md-6">
               <label class="small mb-1" for="Designation">Désignation</label>
-              <input class="form-control" id="Designation" type="text" placeholder="Saisir la désignation " formControlName="Designation" >
+              <input class="form-control" id="Designation"
+                     type="text" placeholder="Saisir la désignation"
+                     formControlName="Designation"
+                     [ngClass]="{'is-invalid':colisService.Designation&&colisService.Designation.errors && colisService.Designation.touched}">
+              <div *ngIf="colisService.Designation&&colisService.Designation.hasError('required')"
+                   class="invalid-feedback">
+                Designation est Obligatoire
+              </div>
             </div>
             <div class="form-group col-md-6">
               <label class="small mb-1" for="NbArticle">Nombre d'article</label>
-              <input class="form-control" id="NbArticle" type="text" placeholder="Saisir le nombre d'articles" formControlName="NbArticle" >
+              <input class="form-control"
+                     id="NbArticle" type="text"
+                     placeholder="Saisir le nombre d'articles"
+                     formControlName="NbArticle"
+                     [ngClass]="{'is-invalid':colisService.NbArticle&&colisService.NbArticle.errors && colisService.NbArticle.touched}">
+              <div *ngIf="colisService.NbArticle&&colisService.NbArticle.hasError('required')"
+                   class="invalid-feedback">
+                Nombre d'article est Obligatoire
+              </div>
             </div>
           </div>
 
           <div class="row">
             <div class="form-group col-md-6">
               <label class="small mb-1" for="Prix">Prix</label>
-              <input class="form-control" id="Prix" type="tel" placeholder="Prix en DT : exemple 50.6" formControlName="Prix" >
+              <input class="form-control" id="Prix" type="tel" placeholder="Prix en DT : exemple 50.6" formControlName="Prix"
+                     [ngClass]="{'is-invalid':colisService.Prix&&colisService.Prix.errors && colisService.Prix.touched}">
+              <div *ngIf="colisService.Prix&&colisService.Prix.hasError('required')"
+                   class="invalid-feedback">
+                Prix est Obligatoire
+              </div>
             </div>
 
-<!--            <div class="col-12 col-md-6" >
-              <div class="form-group" >
-                <label  class="control-label mb-1">Echange</label>
-                <input name="echange" id="echange_non" type="radio" onclick="verif_echange()" value="0" checked=""> Non&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <input name="echange" type="radio" id="echange_oui" onclick="verif_echange()" value="1"> Oui
-              </div>
-            </div>-->
+
             <div class="col-12 col-md-6" >
               <div class="form-group" style="margin-top: 25px; margin-left: 10px">
                 <label  class="control-label mb-1">Echange</label>
-            <mat-radio-group  formControlName="select"   >
-              <mat-radio-button  value="non"  [checked]="true"  >Non</mat-radio-button>
-              <mat-radio-button  value="oui"  style="margin-left: 10px" >Oui</mat-radio-button>
+                <mat-radio-group  formControlName="select"   >
+                  <mat-radio-button  value="non"  [checked]="true"  >Non</mat-radio-button>
+                  <mat-radio-button  value="oui"  style="margin-left: 10px" >Oui</mat-radio-button>
 
-            </mat-radio-group>
+                </mat-radio-group>
               </div>
             </div>
 
           </div>
-          <div class="row" *ngIf="this.select.value == 'oui' " >
+          <div class="row" *ngIf="this.colisService.select.value == 'oui' " >
             <div class="col-12 col-md-6" >
               <div class="form-group">
                 <label  class="control-label mb-1" for="DesignationEchange">Désignation des articles échange</label>
@@ -116,17 +160,24 @@
           </div>
           <div class="row">
             <div class="form-group col-md-6">
-                <label  class="control-label mb-1" for="AdressDispo">Adresse complète et disponibilité</label>
-                <textarea formControlName="AdressDispo" id="AdressDispo" class="form-control cc-number identified visa" ></textarea>
-
+              <label  class="control-label mb-1" for="AdressDispo">Adresse complète et code postal</label>
+              <textarea formControlName="AdressDispo"
+                        id="AdressDispo"
+                        class="form-control"
+                        [ngClass]="{'is-invalid':colisService.AdressDispo&&colisService.AdressDispo.errors && colisService.AdressDispo.touched}"></textarea>
+              <div *ngIf="colisService.AdressDispo&&colisService.AdressDispo.hasError('required')"
+                   class="invalid-feedback">
+                Veuillez saisir l'adresse de disponibilité de client
               </div>
+
+            </div>
 
             <div class="form-group col-md-6">
 
-                <label  class="control-label mb-1" for="Commentaire">Commentaire</label>
-                <textarea formControlName="Commentaire" id="Commentaire" class="form-control cc-number identified visa"></textarea>
-                <span class="help-block" data-valmsg-for="cc-number" data-valmsg-replace="true"></span>
-              </div>
+              <label  class="control-label mb-1" for="Commentaire">Commentaire</label>
+              <textarea formControlName="Commentaire" id="Commentaire" class="form-control cc-number identified visa"></textarea>
+              <span class="help-block" data-valmsg-for="cc-number" data-valmsg-replace="true"></span>
+            </div>
           </div>
 
           <div style="margin-top: 30px">

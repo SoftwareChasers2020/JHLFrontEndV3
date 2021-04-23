@@ -98,7 +98,7 @@
             </mat-form-field>
 
 
-            <mat-form-field>
+         <!--   <mat-form-field>
               <input  [type]="hide ? 'password' : 'text'" formControlName="Password" matInput placeholder="Mot de passe">
               <button type="button"  mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
                 <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
@@ -116,7 +116,7 @@
               </button>
               <mat-error *ngIf="GDService.ConfirmPassword&&GDService.ConfirmPassword.hasError('required')">ce champ est obligatoire</mat-error>
               <mat-error  *ngIf="GDService.ConfirmPassword&&GDService.ConfirmPassword.hasError('passwordMismatch')">Mot de Passe Incorrect</mat-error>
-            </mat-form-field>
+            </mat-form-field>-->
 
           </div>
         </div>
@@ -126,7 +126,7 @@
 
         <div class="button-row">
           <button mat-raised-button color="primary" type="submit" >Valider</button>
-          <button mat-raised-button color="warn" (click)="onClear()">Reset</button>
+          <button mat-raised-button color="warn" type="reset" (click)="onClear()">Reset</button>
         </div>    </form>
     </mat-expansion-panel>
   </mat-accordion>

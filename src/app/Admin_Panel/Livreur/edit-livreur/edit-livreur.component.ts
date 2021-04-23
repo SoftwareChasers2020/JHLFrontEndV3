@@ -49,7 +49,6 @@ export class EditLivreurComponent implements OnInit {
         Nom : this.row.nom,
         Prenom : this.row.prenom,
         Password: this.row.password,
-        ConfirmPassword: this.row.password,
         dateEmbauche: this.row.date_embauche,
         Email: this.row.email,
         Tel: this.row.tel,
@@ -74,6 +73,7 @@ export class EditLivreurComponent implements OnInit {
         this.l.date_embauche = this.LService.dateEmbauche.value;
         this.l.email = this.LService.Email.value;
         this.l.num_urgence = this.LService.NumUrgence.value;
+        this.l.active = 1;
         this.adr.ville = data;
         this.l.adresse = this.adr;
         this.LService.updateLivreur(this.l).subscribe(

@@ -17,7 +17,9 @@ export class Colis {
   adressDispo: string;
   idVille: number;
   idFournisseur: number;
-
+  nomgouvernorat?: string;
+  nomville?: string;
+  nomfournisseur?: string;
   // tslint:disable-next-line:variable-name
   date_ramassage: Date;
   // tslint:disable-next-line:variable-name

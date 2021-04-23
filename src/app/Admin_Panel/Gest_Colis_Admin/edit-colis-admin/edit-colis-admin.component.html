@@ -1,0 +1,211 @@
+<div class="card">
+  <div class="card-header">
+    <strong class="card-title">Modifier Colis</strong>
+  </div>
+  <div class="card-body">
+    <!-- Credit Card -->
+    <div id="pay-invoice">
+      <div class="card-body">
+
+        <form (ngSubmit)="onSubmit()" [formGroup]="formGroup" >
+
+                    <div class="form-group">
+                      <label class="small mb-1" for="CodeBarre">Code à Barre </label>
+                      <input class="form-control" id="CodeBarre" type="text"  formControlName="CodeBarre" readonly >
+                    </div>
+          <div class="form-row">
+            <!-- Form Group (first name)-->
+            <div class="form-group col-md-6">
+              <label class="small mb-1" for="nom">Nom </label>
+              <input class="form-control"
+                     id="nom" type="text"
+                     placeholder="Saisir votre nom"
+                     formControlName="Nom"
+                     [ngClass]="{'is-invalid':Nom&&Nom.errors && Nom.touched}">
+              <div *ngIf="Nom&&Nom.hasError('required')"
+                   class="invalid-feedback">
+                Nom est Obligatoire
+              </div>
+            </div>
+            <!-- Form Group (last name)-->
+            <div class="form-group col-md-6">
+              <label class="small mb-1" for="prenom">Prenom </label>
+              <input class="form-control"
+                     id="prenom" type="text"
+                     placeholder="Saisir votre prenom"
+                     formControlName="Prenom"
+                     [ngClass]="{'is-invalid':Prenom&&Prenom.errors && Prenom.touched}">
+
+              <div *ngIf="Prenom&&Prenom.hasError('required')"
+                   class="invalid-feedback">
+                Prenom est Obligatoire
+              </div>
+            </div>
+          </div>
+          <div class="form-row " >
+
+            <div class="form-group col-md-6" >
+              <label for="Gouvernorat">Gouvernorat</label>
+              <select  formControlName="Gouvernorat"
+                       class="form-control" id="Gouvernorat"
+                       (change)="changevilleByGovNom(Gouvernorat.value)"
+                       [ngClass]="{'is-invalid':Gouvernorat&&Gouvernorat.errors && Gouvernorat.touched}">
+                <option></option>
+                <option *ngFor="let gov of listGouvernorat | async"  value="{{gov.nom}}"  >
+                  {{gov.nom}}
+                </option>
+              </select>
+              <div *ngIf="Gouvernorat&&Gouvernorat.hasError('required')"
+                   class="invalid-feedback">
+                Gouvernorat est Obligatoire
+              </div>
+            </div>
+
+            <div class="form-group col-md-6 " >
+              <label for="Ville">Ville</label>
+              <select  formControlName="Ville"
+                       class="form-control"
+                       id="Ville"
+                       [ngClass]="{'is-invalid':Ville&&Ville.errors && Ville.touched}">
+                <option></option><!--[ngValue]="ville"-->
+                <option *ngFor="let ville of listville | async"  [ngValue]="ville.nom"  >
+                  {{ville.nom}}
+                </option>
+              </select>
+              <div *ngIf="Ville&&Ville.hasError('required')"
+                   class="invalid-feedback">
+                Ville est Obligatoire
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="form-group col-md-6">
+              <label class="small mb-1" for="Tel1">Téléphone 1</label>
+              <input class="form-control" id="Tel1" type="tel" placeholder="Saisir le 1ere numéro de téléphone " formControlName="Tel1"
+                     [ngClass]="{'is-invalid':Tel1&&Tel1.errors && Tel1.touched}">
+              <div *ngIf="Tel1&&Tel1.hasError('required')"
+                   class="invalid-feedback">
+                Veillez choisir au moins un numéro de téléphone
+              </div>
+            </div>
+            <div class="form-group col-md-6">
+              <label class="small mb-1" for="Tel2">Téléphone 2</label>
+              <input class="form-control" id="Tel2" type="tel" placeholder="Saisir le 2eme numéro de téléphone " formControlName="Tel2" >
+            </div>
+          </div>
+          <div class="row">
+            <div class="form-group col-md-6">
+              <label class="small mb-1" for="Designation">Désignation</label>
+              <input class="form-control" id="Designation"
+                     type="text" placeholder="Saisir la désignation"
+                     formControlName="Designation"
+                     [ngClass]="{'is-invalid':Designation&&Designation.errors && Designation.touched}">
+              <div *ngIf="Designation&&Designation.hasError('required')"
+                   class="invalid-feedback">
+                Designation est Obligatoire
+              </div>
+            </div>
+            <div class="form-group col-md-6">
+              <label class="small mb-1" for="NbArticle">Nombre d'article</label>
+              <input class="form-control"
+                     id="NbArticle" type="text"
+                     placeholder="Saisir le nombre d'articles"
+                     formControlName="NbArticle"
+                     [ngClass]="{'is-invalid':NbArticle&&NbArticle.errors && NbArticle.touched}">
+              <div *ngIf="NbArticle&&NbArticle.hasError('required')"
+                   class="invalid-feedback">
+                Nombre d'article est Obligatoire
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="form-group col-md-4">
+              <label class="small mb-1" for="Prix">Prix</label>
+              <input class="form-control" id="Prix" type="tel" placeholder="Prix en DT : exemple 50.6" formControlName="Prix"
+                     [ngClass]="{'is-invalid':Prix&&Prix.errors && Prix.touched}">
+              <div *ngIf="Prix&&Prix.hasError('required')"
+                   class="invalid-feedback">
+                Prix est Obligatoire
+              </div>
+            </div>
+
+
+            <div class="col-12 col-md-4" >
+              <div class="form-group" style="margin-top: 8%; margin-left: 25%">
+                <label  class="control-label mb-1">Echange</label>
+                <mat-radio-group  formControlName="select">
+                  <mat-radio-button  value="false"  [checked]="formGroup.value.select === false"   >Non</mat-radio-button>
+                  <mat-radio-button  value="true"  [checked]="formGroup.value.select === true"  style="margin-left: 10px" >Oui</mat-radio-button>
+
+                </mat-radio-group>
+              </div>
+            </div>
+            <div class="col-12 col-md-4" >
+            <label for="Etat">Etat</label>
+            <select  formControlName="Etat"
+                     class="form-control"
+                     id="Etat"
+                     [ngClass]="{'is-invalid':Etat&&Etat.errors && Etat.touched}">
+              <option></option><!--[ngValue]="ville"-->
+              <option *ngFor="let etat of listEtat | async"  [ngValue]="etat.titre"  >
+                {{etat.titre}}
+              </option>
+            </select>
+            <div *ngIf="Etat&&Etat.hasError('required')"
+                 class="invalid-feedback">
+              Etat est Obligatoire
+            </div>
+          </div>
+          </div>
+
+          <div class="row" *ngIf="this.select.value ===true || this.select.value ==='true' " >
+            <div class="col-12 col-md-6" >
+              <div class="form-group">
+                <label  class="control-label mb-1" for="DesignationEchange">Désignation des articles échange</label>
+                <input formControlName="DesignationEchange" id="DesignationEchange" type="text" class=" form-control">
+              </div>
+            </div>
+            <div class="col-12 col-md-6">
+              <div class="form-group">
+                <label class="control-label mb-1" for="nbArticleEchange">Nombre des articles échange</label>
+                <input formControlName="NbArticleEchange" id="nbArticleEchange" type="text" class=" form-control">
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="form-group col-md-6">
+              <label  class="control-label mb-1" for="AdressDispo">Adresse complète et code postal</label>
+              <textarea formControlName="AdressDispo"
+                        id="AdressDispo"
+                        class="form-control"
+                        [ngClass]="{'is-invalid':AdressDispo&&AdressDispo.errors && AdressDispo.touched}"></textarea>
+              <div *ngIf="AdressDispo&&AdressDispo.hasError('required')"
+                   class="invalid-feedback">
+                Veuillez saisir l'adresse de disponibilité de client
+              </div>
+
+            </div>
+
+            <div class="form-group col-md-6">
+
+              <label  class="control-label mb-1" for="Commentaire">Commentaire</label>
+              <textarea formControlName="Commentaire" id="Commentaire" class="form-control cc-number identified visa"></textarea>
+              <span class="help-block" data-valmsg-for="cc-number" data-valmsg-replace="true"></span>
+            </div>
+          </div>
+
+          <div style="margin-top: 30px">
+            <button id="payment-button" type="submit" class="btn btn-lg btn-info btn-block">
+              <i class="fa fa-lock fa-lg"></i>&nbsp;
+              <span id="payment-button-amount">Modifier</span>
+
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+  </div>
+</div>

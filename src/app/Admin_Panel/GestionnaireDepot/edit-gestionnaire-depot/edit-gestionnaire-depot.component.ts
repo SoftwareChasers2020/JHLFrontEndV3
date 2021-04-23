@@ -56,7 +56,6 @@ export class EditGestionnaireDepotComponent implements OnInit {
         Nom : this.row.nom,
         Prenom : this.row.prenom,
         Password: this.row.password,
-        ConfirmPassword: this.row.password,
         Email: this.row.email,
         Tel: this.row.tel,
         dateEmbauche: this.row.date_embauche,
@@ -81,6 +80,7 @@ export class EditGestionnaireDepotComponent implements OnInit {
         this.gd.date_embauche = this.GDService.formGroup.get('dateEmbauche').value;
         this.adr.ville = data;
         this.gd.adresse = this.adr;
+        this.gd.active = 1;
         this.GDService.updateGestionnaireDepot(this.gd).subscribe(
           res =>
           {
@@ -90,7 +90,7 @@ export class EditGestionnaireDepotComponent implements OnInit {
               // tslint:disable-next-line:only-arrow-functions
               function(){
                 location.reload();
-              }, 1500);
+              }, 500);
             this.notificationService.success("Modification a effectué avec succées");
 
           }, error => console.log(error)

@@ -11,4 +11,39 @@
 .modal-content {
   overflow:hidden;
 }
+.title {
+  text-align: center;
+  font-size: 26px;
+  border: 1px solid #000;
+  padding-left: 0px;
+  margin-left: 10%;
+  font-weight: bold;
+}
+.th{
+  padding-top: 5px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+}
+.cadre{
+  text-align: center;
+  font-size: 26px;
+  border: 1px solid #000;
+  padding-left: 0px;
+  margin-left: 0px;
+  font-weight: bold;
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+.container{
+border:1px solid #000
+}
 
+@media print {
+  .pagebreak { page-break-before: always; } /* page-break-after works, as well */
+}
+/*@media print {
+  !* top-level divs with ids *!
+ div[id] {
+    page-break-before: always;
+  }
+}*/

@@ -43,7 +43,8 @@ export class ListFournisseurComponent implements OnInit {
       res => {
 
         this.listfournisseur = res;
-        this.dataSource = new MatTableDataSource(this.listfournisseur);
+        const listFournisseurAfterFilterIdFour0 =   this.listfournisseur.filter(x => x.idUtilisateur > 0);
+        this.dataSource = new MatTableDataSource(listFournisseurAfterFilterIdFour0);
         this.dataSource.filterPredicate = (data, filter: string)  => {
           const accumulator = (currentTerm, key) => {
             return this.nestedFilterCheck(currentTerm, data, key);

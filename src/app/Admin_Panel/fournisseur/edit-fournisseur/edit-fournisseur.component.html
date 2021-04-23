@@ -93,7 +93,7 @@
               <mat-error>Selectionner une ville</mat-error>
             </mat-form-field>
 
-            <mat-form-field>
+          <!--  <mat-form-field>
               <input  [type]="hide ? 'password' : 'text'" formControlName="Password" matInput placeholder="Mot de passe">
               <button type="button" mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
                 <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
@@ -102,7 +102,7 @@
               <mat-error *ngIf="utilisateurService.Password&&utilisateurService.Password.hasError('required')">ce champ est obligatoire</mat-error>
               <mat-error *ngIf="utilisateurService.Password&&utilisateurService.Password.hasError('minlength')">Mot de passe doit etre > 8 caractère</mat-error>
               <mat-error *ngIf="utilisateurService.Password&&utilisateurService.Password.hasError('maxlength')">Mot de passe doit etre < 30 caractère</mat-error>
-            </mat-form-field>
+            </mat-form-field>-->
 
 
 
@@ -113,8 +113,8 @@
 
 
         <div class="button-row">
-          <button mat-raised-button color="primary" type="submit" >Valider</button>
-          <button mat-raised-button color="warn" (click)="onClear()">Reset</button>
+          <button mat-raised-button color="primary" type="submit"  >Valider</button>
+          <button mat-raised-button color="warn" type="reset" (click)="onClear()">Reset</button>
         </div>    </form>
     </mat-expansion-panel>
   </mat-accordion>

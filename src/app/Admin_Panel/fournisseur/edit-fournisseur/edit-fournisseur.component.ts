@@ -74,10 +74,11 @@ export class EditFournisseurComponent implements OnInit {
          this.f.login = this.utilisateurService.Login.value;
          this.f.nomcommercial = this.utilisateurService.NomCommercial.value;
          this.f.email = this.utilisateurService.Email.value;
-         this.f.password = this.utilisateurService.Password.value;
          this.f.nom = this.utilisateurService.Nom.value;
          this.f.prenom = this.utilisateurService.Prenom.value;
          this.f.tel = this.utilisateurService.Tel.value;
+         this.f.password = this.utilisateurService.Password.value;
+         this.f.active = 1;
          this.adr.ville = data;
          this.f.adresse = this.adr;
          this.fournisseurService.updateFournisseur(this.f).subscribe(

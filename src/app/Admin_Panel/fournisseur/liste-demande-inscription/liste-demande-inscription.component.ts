@@ -31,8 +31,8 @@ export class ListeDemandeInscriptionComponent implements OnInit {
     this.fournisseurService.getFournisseurNoActive().subscribe(
       res => {
         this.listFournisseurs = res as Fournisseur[];
-        this.dataSource = new MatTableDataSource(this.listFournisseurs);
-
+        const listFournisseurAfterFilterIdFour0 =   this.listFournisseurs.filter(x => x.idUtilisateur > 0);
+        this.dataSource = new MatTableDataSource(listFournisseurAfterFilterIdFour0);
         this.dataSource.sortingDataAccessor = (item, property) => {
           switch (property) {
             case 'NomCommercial': return item.nomcommercial;

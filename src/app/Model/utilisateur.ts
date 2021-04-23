@@ -10,6 +10,7 @@ export class Utilisateur {
   password: string ;
   tel: string ;
   adresse?: Adresse;
+  active: number;
 
 
 

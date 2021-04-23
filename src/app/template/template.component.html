@@ -44,7 +44,6 @@
       <div  id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
         <div class="bg-white py-2 collapse-inner rounded">
 
-          <a class="collapse-item" routerLink="/temp/List_admin" routerLinkActive="active" >Administrateurs</a>
           <a class="collapse-item" routerLink="/temp/List_Fournisseur" routerLinkActive="active">Fournisseurs</a>
           <a class="collapse-item"  routerLink="/temp/List_Livreur" routerLinkActive="active">Livreurs</a>
           <a class="collapse-item" routerLink="/temp/List_GestDepot" routerLinkActive="active">GestionnaireDepot</a>
@@ -71,7 +70,7 @@
     </li>
     <hr class="sidebar-divider">
     <div class="sidebar-heading">
-      Addons
+      Colis
     </div>
 
     <li class="nav-item" *ngIf="this.tokenStorage.getRole()==='Fournisseur'">
@@ -80,6 +79,22 @@
         <span>Mes Colis</span>
       </a>
     </li>
+
+
+    <li class="nav-item" *ngIf="tokenStorage.getRole()==='Administrateur' || tokenStorage.getRole()==='GestionnaireDepot' ">
+      <a class="nav-link collapsed" href="" data-toggle="collapse" data-target="#collapseFour" aria-expanded="true" aria-controls="collapseTwo">
+        <i class="fas fa-cubes"></i>
+        <span>Colis</span>
+      </a>
+
+      <div  id="collapseFour" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+        <div class="bg-white py-2 collapse-inner rounded">
+          <a class="collapse-item" routerLink="/temp/newColisAdmin" routerLinkActive="active" >Nouveau Colis</a>
+          <a class="collapse-item" routerLink="/temp/ListColisAdmin" routerLinkActive="active">List Colis</a>
+        </div>
+
+      </div></li>
+    <!--ListColisAdmin-->
     <!-- Divider -->
    <!-- <hr class="sidebar-divider">
     &lt;!&ndash; Heading &ndash;&gt;
