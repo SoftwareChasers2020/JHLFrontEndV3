@@ -2,11 +2,12 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Colis} from '../../Model/GestColis/colis';
 import {Observable} from 'rxjs';
-import {FormBuilder, FormControl, Validators} from '@angular/forms';
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {Client} from '../../Model/GestColis/client';
 import {Ville} from 'src/app/Model/ville';
 import {TokenStorageService} from '../Security/token-storage.service';
 import {Etat} from '../../Model/GestColis/etat';
+import {NotificationService} from '../notification.service';
 
 @Injectable({
   providedIn: 'root'
@@ -19,7 +20,8 @@ export class ColisService {
 
   constructor(private http: HttpClient,
               private fb: FormBuilder,
-              private tokenService: TokenStorageService) {
+              private tokenService: TokenStorageService,
+              private notificationService: NotificationService) {
 
     this.urlpath = 'http://localhost:8081/colis/';
   }
@@ -135,13 +137,20 @@ export class ColisService {
       data => {
         console.log(data);
         this.formGroup.reset();
-
+        this.notificationService.success("Ajout a effectué avec succées");
       },
       error => console.log(error)
     );
   }
 
-
+  validateAllFormFields(formGroup: FormGroup)
+  {Object.keys(formGroup.controls).forEach(field =>
+  {const control = formGroup.get(field);
+   if (control instanceof FormControl)
+    {control.markAsTouched({ onlySelf: true }); }
+    else if (control instanceof FormGroup)
+    {this.validateAllFormFields(control); }});
+  }
 
   createColis(c: Colis){
 
@@ -160,6 +169,9 @@ export class ColisService {
     return this.http.get<Colis[]>(this.urlpath + "ByEtatIds");
   }
 
+  getColisForFeuilleRoute(){
+    return this.http.get<Colis[]>(this.urlpath + "ColisEnDepot");
+  }
   getColisById(id)
   {
     return this.http.get<Colis>(this.urlpath + id);
@@ -178,5 +190,7 @@ export class ColisService {
   getcodeQr(code): Observable<Blob>{
     return this.http.get("http://localhost:8081/genrateQRCode/" + code , { responseType: 'blob' });
   }
+
+
 
 }

@@ -41,8 +41,12 @@ export class AddColisComponent implements OnInit {
 
   onSubmit() {
 
-    this.colisService.addColisFromService();
 
+    if (this.colisService.formGroup.valid) {
+      this.colisService.addColisFromService();
+    }else {
+      this.colisService.validateAllFormFields(this.colisService.formGroup);
+    }
   }
 
   changevilleByGovNom(val: any){

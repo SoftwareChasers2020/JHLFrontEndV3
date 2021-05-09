@@ -37,10 +37,9 @@ export class LoginComponent implements OnInit {
     password: new FormControl('', Validators.required),
   });
 
-  isLoggedIn = false;
-  isLoginFailed = false;
-  errorMessage = '';
-  roles: string[] = [];
+
+
+
 
   ngOnInit(): void {
 
@@ -97,7 +96,7 @@ export class LoginComponent implements OnInit {
                 {
                   this.router.navigateByUrl('/temp/accueilFournisseur');
 
-                }else if (this.tokenStorage.getRole() !== 'Livreur') {
+                }else if (this.tokenStorage.getRole() === 'GestionnaireDepot') {
                   this.router.navigateByUrl('/temp/accueilGestionnaire');
 
                 } else {

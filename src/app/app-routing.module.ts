@@ -22,6 +22,9 @@ import {ListColisAdminComponent} from './Admin_Panel/Gest_Colis_Admin/list-colis
 import {NewColisAdminComponent} from './Admin_Panel/Gest_Colis_Admin/new-colis-admin/new-colis-admin.component';
 import {EditColisAdminComponent} from './Admin_Panel/Gest_Colis_Admin/edit-colis-admin/edit-colis-admin.component';
 import {EditColisComponent} from './Colis/edit-colis/edit-colis.component';
+import {AddFeuillerouteComponent} from './FeuilleRoute/add-feuilleroute/add-feuilleroute.component';
+import {ListFeuillerouteComponent} from './FeuilleRoute/list-feuilleroute/list-feuilleroute.component';
+import {ConsulterFeuilleRouteComponent} from './FeuilleRoute/consulter-feuille-route/consulter-feuille-route.component';
 
 
 const routes: Routes = [
@@ -31,7 +34,7 @@ const routes: Routes = [
        {path: 'login', component: LoginComponent , canActivate: [AfterAuthGuard]},
 
           {path: 'temp', component: TemplateComponent, children : [
-
+          {path: 'coli', component: AddColisComponent},
           {path: 'accueilFournisseur', component: AccueilFournisseurComponent},
           {path: 'accueilGestionnaire', component: AccueilGestionnaireComponent},
           {path: 'accueilLivreur', component: AccueilLivreurComponent},
@@ -41,12 +44,17 @@ const routes: Routes = [
           {path: 'DemandeFour/:id', component: DemandeFournisseurComponent},
           {path: 'listDemandeFour', component: ListeDemandeInscriptionComponent},
           {path: 'editProfil/:id', component: EditProfilComponent},
+
           {path: 'coli', component: AddColisComponent},
-              {path: 'ListColis', component: ListColisComponent},
-              {path: 'ListColisAdmin', component: ListColisAdminComponent},
-              {path: 'newColisAdmin', component: NewColisAdminComponent},
-              {path: 'EditColisAdmin/:codeBarre', component: EditColisAdminComponent},
-              {path: 'EditColis/:codeBarre', component: EditColisComponent},
+          {path: 'ListColis', component: ListColisComponent},
+          {path: 'ListColisAdmin', component: ListColisAdminComponent},
+          {path: 'newColisAdmin', component: NewColisAdminComponent},
+          {path: 'EditColisAdmin/:codeBarre', component: EditColisAdminComponent},
+          {path: 'EditColis/:codeBarre', component: EditColisComponent},
+
+          {path: 'FeuilleRoute', component: AddFeuillerouteComponent},
+              {path: 'ListFeuilleRoute', component: ListFeuillerouteComponent},
+              {path: 'Consulterfeuille/:idFeuilleRoute', component: ConsulterFeuilleRouteComponent},
           {path: '', component: DashbordComponent},
     ], canActivate: [AuthGuard]},
 

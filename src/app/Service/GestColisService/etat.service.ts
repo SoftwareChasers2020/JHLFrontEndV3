@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Etat} from '../../Model/GestColis/etat';
+import {Colis} from '../../Model/GestColis/colis';
 
 @Injectable({
   providedIn: 'root'
@@ -23,4 +24,6 @@ export class EtatService {
   {
   return this.http.get<Etat>(this.urlpath + "Bytitre/" + titre);
   }
+
+
 }

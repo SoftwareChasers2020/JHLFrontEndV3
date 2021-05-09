@@ -57,6 +57,10 @@ import { EditColisAdminComponent } from './Admin_Panel/Gest_Colis_Admin/edit-col
 import { DetailColisAdminComponent } from './Admin_Panel/Gest_Colis_Admin/detail-colis-admin/detail-colis-admin.component';
 import { EditColisComponent } from './Colis/edit-colis/edit-colis.component';
 import { DetailColisComponent } from './Colis/detail-colis/detail-colis.component';
+import { AddFeuillerouteComponent } from './FeuilleRoute/add-feuilleroute/add-feuilleroute.component';
+import { ListFeuillerouteComponent } from './FeuilleRoute/list-feuilleroute/list-feuilleroute.component';
+import {MatCheckboxModule} from '@angular/material/checkbox';
+import { ConsulterFeuilleRouteComponent } from './FeuilleRoute/consulter-feuille-route/consulter-feuille-route.component';
 
 
 @NgModule({
@@ -99,6 +103,9 @@ import { DetailColisComponent } from './Colis/detail-colis/detail-colis.componen
     DetailColisAdminComponent,
     EditColisComponent,
     DetailColisComponent,
+    AddFeuillerouteComponent,
+    ListFeuillerouteComponent,
+    ConsulterFeuilleRouteComponent,
 
 
 
@@ -126,6 +133,7 @@ import { DetailColisComponent } from './Colis/detail-colis/detail-colis.componen
     MatNativeDateModule,
     MatRadioModule,
     NgxPrintModule,
+    MatCheckboxModule,
     ToastrModule.forRoot(),
     NgxPrinterModule.forRoot({printOpenWindow: true})
 

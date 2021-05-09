@@ -24,7 +24,9 @@ import {DetailColisAdminComponent} from '../../Admin_Panel/Gest_Colis_Admin/deta
 })
 export class ListColisComponent implements OnInit {
   // tslint:disable-next-line:max-line-length
-  @ViewChild(MatPaginator, {static: false}) set contentP(contentP: ElementRef) {  // hedhii zedthaa 5ater mba3d ma3malt div hidden fel html sorting ma3adech yemchi
+  private mdlSampleIsOpen: boolean;
+
+  @ViewChild(MatPaginator, {static: false}) set contentP(contentP: ElementRef) {
     this.paginator = contentP;
     if (this.paginator) {
       this.dataSource.paginator = this.paginator;
@@ -172,6 +174,8 @@ export class ListColisComponent implements OnInit {
 
 
   onDelete(codeBarre: any) {
+
+    console.log(codeBarre);
     if (confirm('Confirmez-vous la suppression ?')) {
       this.colisService.deleteColis(codeBarre).subscribe(
         () => {
@@ -238,19 +242,19 @@ export class ListColisComponent implements OnInit {
     return this.colis.reduce((accum, curr) => accum + curr.prix, 0);
   }
 
-  /*  hideModal() {
-      this.mdlSampleIsOpen = false;
-    }*/
+  hideModal() {
+    this.mdlSampleIsOpen = false;
+  }
 
-  /*  onEdit(row) {
-    }*/
+  onEdit(row) {
+  }
 
-  /*  showModal(c) {
-      /!*this.mdlSampleIsOpen = true;
-      console.log(c);*!/
-      const DeleteModal = document.getElementById("DeleteModal");
-      DeleteModal.style.visibility = 'visible';
-    }*/
+  showModal(c) {
+    this.mdlSampleIsOpen = true;
+    console.log(c);
+    /*      const DeleteModal = document.getElementById("DeleteModal");
+          DeleteModal.style.visibility = 'visible';*/
+  }
 
 
   getDetails(row) {
@@ -275,7 +279,6 @@ export class ListColisComponent implements OnInit {
     this.printerService.printAngular(this.PrintTemplateTpl);
     this.printerService.printOpenWindow = true;
     this.getColisManifeste();
-
 
 
   }

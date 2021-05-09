@@ -78,7 +78,7 @@ export class LivreurService {
   }
 
   getLivreurById(id: number){
-    return this.http.get(this.urlpath + '/' + id);
+    return this.http.get<Livreur>(this.urlpath + '/' + id);
 
   }
 

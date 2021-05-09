@@ -17,6 +17,11 @@ export class AfterAuthGuard implements CanActivate {
   ) {
 
   }
+   tokenExpired(token: string) {
+    const expiry = (JSON.parse(atob(token.split('.')[1]))).exp;
+    // tslint:disable-next-line:new-parens
+    return (Math.floor((new Date).getTime() / 1000)) >= expiry;
+  }
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): boolean {

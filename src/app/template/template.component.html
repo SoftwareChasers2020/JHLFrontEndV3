@@ -94,6 +94,21 @@
         </div>
 
       </div></li>
+
+
+    <li class="nav-item" *ngIf="tokenStorage.getRole()==='Administrateur' || tokenStorage.getRole()==='GestionnaireDepot' ">
+      <a class="nav-link collapsed" href="" data-toggle="collapse" data-target="#collapseFeuilleRoute" aria-expanded="true" aria-controls="collapseTwo">
+        <i class="far fa-clipboard"></i>
+        <span>Feuille de route</span>
+      </a>
+
+      <div  id="collapseFeuilleRoute" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+        <div class="bg-white py-2 collapse-inner rounded">
+          <a class="collapse-item" routerLink="/temp/FeuilleRoute" routerLinkActive="active" >Nouveau Feuille de route</a>
+          <a class="collapse-item" routerLink="/temp/ListFeuilleRoute" routerLinkActive="active">List des Feuille de route</a>
+        </div>
+
+      </div></li>
     <!--ListColisAdmin-->
     <!-- Divider -->
    <!-- <hr class="sidebar-divider">

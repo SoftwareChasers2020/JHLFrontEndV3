@@ -1,0 +1,113 @@
+<div class="card">
+  <div class="card-header">
+
+    <strong class="card-title" style="color: #0061f2">Liste des feuilles de route</strong>
+
+
+      <mat-form-field style="width: 50%; margin-left: 30%"  >
+        <input  matInput [(ngModel)]="searchKey"   placeholder="Rechercher" autocomplete="off" (keyup)="applyFilter()">
+        <button mat-button matSuffix mat-icon-button aria-label="Clear" *ngIf="searchKey"  (click)="onSearchClear()">
+          <mat-icon>close</mat-icon>
+        </button>
+      </mat-form-field>
+
+    </div>
+
+  <div class="card-body">
+    <!-- Credit Card -->
+
+      <div class="card-body">
+
+
+
+        <div class="example-container mat-elevation-z8">
+          <mat-table [dataSource]="dataSource" matSort>
+            <!-- ID Column ['Numero', 'Date', 'Livreur']; -->
+            <ng-container matColumnDef="Numero">
+              <mat-header-cell *matHeaderCellDef mat-sort-header> Numero</mat-header-cell>
+              <mat-cell *matCellDef="let row" data-label="Numero"> {{row.idFeuilleRoute}} </mat-cell>
+            </ng-container>
+            <!-- ID Column -->
+
+
+            <ng-container matColumnDef="Date">
+              <mat-header-cell *matHeaderCellDef mat-sort-header> Date</mat-header-cell>
+              <mat-cell *matCellDef="let row" data-label="Date"> {{row.date | date:'dd/MM/y'}} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="Livreur">
+              <mat-header-cell *matHeaderCellDef mat-sort-header> Livreur</mat-header-cell>
+              <mat-cell *matCellDef="let row" data-label="Livreur"> {{row.idLivreur}} </mat-cell>
+            </ng-container>
+
+
+                 <ng-container matColumnDef="actions">
+                   <mat-header-cell *matHeaderCellDef></mat-header-cell>
+                   <mat-cell  *matCellDef="let row">
+                     <button mat-icon-button  [routerLink]="['/temp/Consulterfeuille', row.idFeuilleRoute]" title="Consulter"><mat-icon>visibility</mat-icon></button>
+                     <button mat-icon-button (click)="imprimer(row.idFeuilleRoute)" title="Imprimer">
+                       <mat-icon>print</mat-icon>
+                     </button>
+                     <button mat-icon-button color="warn" (click)="onDelete(row.idFeuilleRoute)"
+                             title="Supprimer">
+                       <mat-icon>delete_outline</mat-icon>
+                     </button>
+                   </mat-cell>
+
+                 </ng-container>
+
+            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+
+            <!--  Row shown when there is no matching data.-->
+            <!--   <mat-row *matNoDataRow>
+                 <mat-cell colspan="4">No data matching the filter </mat-cell>
+               </mat-row>-->
+          </mat-table>
+
+          <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+        </div>
+      </div>
+
+  </div>
+</div>
+
+
+<ng-template #feuille  >
+
+  <div  *ngFor="let feuilleroute of listefeuilleRouteimp">
+    <table style="width: 90%; margin-left:8%;margin-top: 5%;font-size: 20px">
+      <tr>
+
+        <th>Date: {{feuilleroute.date | date:'dd/MM/y' }}</th>
+        <th>Feuille de Route</th>
+        <th>Livreur : {{livreur.nom}} {{livreur.prenom}}</th>
+      </tr>
+    </table>
+
+    <div>
+      <table border="1" style="width: 80%; margin-left: 9%; margin-top: 3% ; height: 50px; text-align: center; font-size: 20px">
+        <tr>
+          <th>CodeBarre</th>
+          <th>Nom et Prenom</th>
+          <th>Num Tel</th>
+          <th>Adresse</th>
+          <th>Prix</th>
+          <th>Etat</th>
+        </tr>
+        <tr *ngFor="let ligne of feuilleroute.ligneFeuilleRoute">
+          <td><img src="http://localhost:8081/genrateQRCode/{{ligne.colis.codeBarre}}" width="100px"></td>
+          <td>
+            {{ligne.colis.client.nom}} {{ligne.colis.client.prenom}}
+          </td>
+          <td *ngIf="ligne.colis.client.tel2 !== ''">{{ligne.colis.client.tel1}} / {{ligne.colis.client.tel2}}</td>
+          <td *ngIf="ligne.colis.client.tel2 == ''">{{ligne.colis.client.tel1}}</td>
+          <td>{{ligne.colis.adressDispo}} {{ligne.colis.nomville}} {{ligne.colis.nomgouvernorat}}</td>
+          <td>{{ligne.colis.prix}}</td>
+          <td></td>
+        </tr>
+      </table>
+    </div>
+  </div>
+
+</ng-template>

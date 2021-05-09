@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-import {TokenStorageService} from "../Service/Security/token-storage.service";
-import {Router} from "@angular/router";
-import {UtilisateurService} from "../Service/utilisateur.service";
-import {Utilisateur} from "../Model/utilisateur";
-import * as $ from "jquery";
+import {Component, OnInit} from '@angular/core';
+import {TokenStorageService} from '../Service/Security/token-storage.service';
+import {Router} from '@angular/router';
+import {UtilisateurService} from '../Service/utilisateur.service';
+import {Utilisateur} from '../Model/utilisateur';
+import * as $ from 'jquery';
+
 @Component({
   selector: 'app-template',
   templateUrl: './template.component.html',
@@ -19,54 +20,72 @@ export class TemplateComponent implements OnInit {
 
   }
 
-  ngOnInit(): void {
+  private tokenExpired(token: string) {
+    const expiry = (JSON.parse(atob(token.split('.')[1]))).exp;
+    // tslint:disable-next-line:new-parens
+    return (Math.floor((new Date).getTime() / 1000)) >= expiry;
+  }
 
-    this.utilisateurService.getUtilisateurById(this.tokenStorage.getId()).subscribe(
-      obj => this.utilisateur = obj as Utilisateur,
-      err => console.log(err));
-/*    setTimeout(() => this.activate(), 1000); */ }
+  ngOnInit(): void {
+    if (this.tokenExpired(this.tokenStorage.getToken())) {
+      // token expired
+      console.log('token expireeeeeeed');
+      this.tokenStorage.signOut();
+      this.router.navigateByUrl('/login');
+    } else {
+      // token valid
+      console.log((Math.floor((new Date).getTime() / 1000)) + '+++' + JSON.parse(atob(this.tokenStorage.getToken().split('.')[1])).exp);
+
+      this.utilisateurService.getUtilisateurById(this.tokenStorage.getId()).subscribe(
+        obj => this.utilisateur = obj as Utilisateur,
+        err => console.log(err));
+      /*    setTimeout(() => this.activate(), 1000);*/
+    }
+  }
 
   logout() {
 
     this.tokenStorage.remove();
-    this.router.navigateByUrl("/login");
+    this.router.navigateByUrl('/login');
 
   }
-activate(){
-  location.reload(true);
 
-}
- /* activate() {
+  activate() {
+    location.reload(true);
 
+  }
 
-      "use strict"; // Start of use strict
-
-      // Toggle the side navigation
-    // tslint:disable-next-line:only-arrow-functions
-      $("#sidebarToggle, #sidebarToggleTop").on('click', function(e) {
-        $("body").toggleClass("sidebar-toggled");
-        $(".sidebar").toggleClass("toggled");
-        if ($(".sidebar").hasClass("toggled")) {
-          $('.sidebar .collapse').collapse('hide');
-        }
-      });
-
-      // Close any open menu accordions when window is resized below 768px
-    // tslint:disable-next-line:only-arrow-functions
-      $(window).resize(function() {
-        if ($(window).width() < 768) {
-          $('.sidebar .collapse').collapse('hide');
-        }
-
-        // Toggle the side navigation when window is resized below 480px
-        if ($(window).width() < 480 && !$(".sidebar").hasClass("toggled")) {
-          $("body").addClass("sidebar-toggled");
-          $(".sidebar").addClass("toggled");
-          $('.sidebar .collapse').collapse('hide');
-        }
-      });
+  /* activate() {
 
 
-    }*/
+       "use strict"; // Start of use strict
+
+       // Toggle the side navigation
+     // tslint:disable-next-line:only-arrow-functions
+       $("#sidebarToggle, #sidebarToggleTop").on('click', function(e) {
+         $("body").toggleClass("sidebar-toggled");
+         $(".sidebar").toggleClass("toggled");
+         if ($(".sidebar").hasClass("toggled")) {
+           $('.sidebar .collapse').collapse('hide');
+         }
+       });
+
+       // Close any open menu accordions when window is resized below 768px
+     // tslint:disable-next-line:only-arrow-functions
+       $(window).resize(function() {
+         if ($(window).width() < 768) {
+           $('.sidebar .collapse').collapse('hide');
+         }
+
+         // Toggle the side navigation when window is resized below 480px
+         if ($(window).width() < 480 && !$(".sidebar").hasClass("toggled")) {
+           $("body").addClass("sidebar-toggled");
+           $(".sidebar").addClass("toggled");
+           $('.sidebar .collapse').collapse('hide');
+         }
+       });
+
+
+     }*/
 
 }

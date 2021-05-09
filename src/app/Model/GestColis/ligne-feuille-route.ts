@@ -9,4 +9,14 @@ export class LigneFeuilleRoute {
   remarque: string;
   feuilleRoute: FeuilleDeRoute;
   colis: Colis;
+
+
+  constructor(colis?: Colis) {
+    this.colis = colis;
+  }
+
+  /*  constructor(feuilleRoute: FeuilleDeRoute, colis: Colis) {
+    this.feuilleRoute = feuilleRoute;
+    this.colis = colis;
+  }*/
 }

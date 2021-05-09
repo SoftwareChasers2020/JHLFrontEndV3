@@ -1,12 +1,12 @@
 import {Client} from './client';
 
-import {Manifeste} from './manifeste';
+
 import {Etat} from './etat';
 import {LigneFeuilleRoute} from './ligne-feuille-route';
 
 export class Colis {
-  idColis: number;
-  codeBarre: string;
+ // idColis: number;
+  codeBarre: number;
   designation: string;
   nbArticle: number;
   prix: number;
@@ -17,6 +17,7 @@ export class Colis {
   adressDispo: string;
   idVille: number;
   idFournisseur: number;
+  etatTitre?: string;
   nomgouvernorat?: string;
   nomville?: string;
   nomfournisseur?: string;
@@ -28,6 +29,5 @@ export class Colis {
   date_ajout: Date;
   client: Client;
   etat: Etat;
-  manifeste: Manifeste;
   ligneFeuilleRouteColis: LigneFeuilleRoute[];
 }

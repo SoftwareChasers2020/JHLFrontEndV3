@@ -9,6 +9,7 @@ import {Colis} from '../../Model/GestColis/colis';
 import {Client} from '../../Model/GestColis/client';
 import { Ville } from 'src/app/Model/ville';
 import { Gouvernorat } from 'src/app/Model/gouvernorat';
+import {NotificationService} from '../../Service/notification.service';
 
 @Component({
   selector: 'app-edit-colis',
@@ -19,6 +20,7 @@ export class EditColisComponent implements OnInit {
 
   constructor(private fb: FormBuilder,
               private gouvernoratService: GouvernoratService,
+              private notificationService: NotificationService,
               private villeService: VilleService,
               private colisService: ColisService,
               private route: ActivatedRoute,
@@ -35,18 +37,17 @@ export class EditColisComponent implements OnInit {
     Nom: ['', Validators.required],
     Prenom: ['', Validators.required],
     Tel1: ['', [Validators.required, Validators.pattern('[0-9]{8}')]],
-    Tel2: ['', [Validators.required, Validators.pattern('[0-9]{8}')]],
+    Tel2: null,
     Gouvernorat: new FormControl('', Validators.required),
     Ville: new FormControl('', Validators.required),
-    Etat: new FormControl('', Validators.required),
     Designation: ['', Validators.required],
     NbArticle: ['', Validators.required],
-    Commentaire : ['', Validators.required],
-    DesignationEchange: ['', Validators.required],
-    NbArticleEchange: ['', Validators.required],
+    Commentaire : null,
+    DesignationEchange: null,
+    NbArticleEchange: null,
     AdressDispo : ['', Validators.required],
     Prix : ['', Validators.required],
-    select : ['', Validators.required]
+    select : null
 
   });
 
@@ -97,53 +98,59 @@ export class EditColisComponent implements OnInit {
   }
   onSubmit() {
 
-    console.log(this.colis.echange);
-
-    this.villeService.getVilleByNom(this.Ville.value).subscribe(
-            data => {
-              this.colis.codeBarre = this.CodeBarre.value;
-              this.colis.adressDispo = this.AdressDispo.value;
-              this.colis.commentaire = this.Commentaire.value;
-              this.colis.designation = this.Designation.value;
-              this.colis.idVille = data.idVille;
-              this.client.nom = this.Nom.value;
-              this.client.prenom = this.Prenom.value;
-              this.client.tel1 = this.Tel1.value;
-              this.client.tel2 = this.Tel2.value;
-              this.colis.client = this.client;
-              this.colis.nbArticle = this.NbArticle.value;
-              this.colis.prix = this.Prix.value;
-
-              if (this.select.value === "true" || this.select.value === true)
-              {
-                this.colis.designationEchange = this.DesignationEchange.value;
-                this.colis.nbArticleEchange = this.NbArticleEchange.value;
-                this.colis.echange = true;
-              }else {
-                this.colis.designationEchange = "";
-                this.colis.nbArticleEchange = 0;
-                this.colis.echange = false;
-              }
-              this.colisService.updateColis(this.colis).subscribe(
-                res => {
-                  console.log(res);
-                  this.formGroup.reset();
-                  this.router.navigateByUrl("temp/ListColis");
-
-                },
-                error => console.log(error)
-              );
-            },
-
-            error => console.log(error)
-          );
-
-        }
+    if (this.formGroup.valid) {
+      this.EditColis();
+    }else {
+      this.colisService.validateAllFormFields(this.formGroup);
+    }
+  }
 
 
 
 
+EditColis()
+{
+  this.villeService.getVilleByNom(this.Ville.value).subscribe(
+    data => {
+      this.colis.codeBarre = this.CodeBarre.value;
+      this.colis.adressDispo = this.AdressDispo.value;
+      this.colis.commentaire = this.Commentaire.value;
+      this.colis.designation = this.Designation.value;
+      this.colis.idVille = data.idVille;
+      this.client.nom = this.Nom.value;
+      this.client.prenom = this.Prenom.value;
+      this.client.tel1 = this.Tel1.value;
+      this.client.tel2 = this.Tel2.value;
+      this.colis.client = this.client;
+      this.colis.nbArticle = this.NbArticle.value;
+      this.colis.prix = this.Prix.value;
 
+      if (this.select.value === "true" || this.select.value === true)
+      {
+        this.colis.designationEchange = this.DesignationEchange.value;
+        this.colis.nbArticleEchange = this.NbArticleEchange.value;
+        this.colis.echange = true;
+      }else {
+        this.colis.designationEchange = "";
+        this.colis.nbArticleEchange = 0;
+        this.colis.echange = false;
+      }
+      this.colisService.updateColis(this.colis).subscribe(
+        res => {
+          console.log(res);
+
+          this.formGroup.reset();
+          this.router.navigateByUrl("temp/ListColis");
+          this.notificationService.success("Modification a effectué avec succées");
+        },
+        error => console.log(error)
+      );
+    },
+
+    error => console.log(error)
+  );
+
+}
 
 
 
