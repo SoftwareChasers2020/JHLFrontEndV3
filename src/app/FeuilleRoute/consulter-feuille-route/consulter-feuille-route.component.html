@@ -1,6 +1,10 @@
+<button class="btn-primary" style="float: right" (click)="imprimer('FeuilleRoute')">Imprimer</button>
+<!--
+<button mat-icon-button (click)="imprimer('FeuilleRoute')" title="Imprimer">
+-->
 
-<div>
-  <table style="width: 120%; margin-left: 9%;margin-top: 5%;font-size: 20px">
+<div id="FeuilleRoute">
+  <table  style="width: 90%; margin-left:11%;margin-top: 5%;font-size: 20px">
     <tr>
       <th>Date: {{feuilleroute.date | date:'dd/MM/y' }}</th>
       <th>Feuille de route</th>
@@ -19,7 +23,7 @@
         <th>Etat</th>
       </tr>
       <tr *ngFor="let ligne of feuilleroute.ligneFeuilleRoute">
-        <td><img src="http://localhost:8081/genrateQRCode/{{ligne.colis.codeBarre}}" width="100px"></td>
+        <td><img src="http://localhost:8081/genrateQRCode/{{ligne.colis.codeBarre}}" width="100px">{{ligne.colis.codeBarre}}</td>
         <td>
           {{ligne.colis.client.nom}} {{ligne.colis.client.prenom}}
         </td>
@@ -27,8 +31,9 @@
         <td *ngIf="ligne.colis.client.tel2 == ''">{{ligne.colis.client.tel1}}</td>
         <td>{{ligne.colis.adressDispo}} {{ligne.colis.nomville}} {{ligne.colis.nomgouvernorat}}</td>
         <td>{{ligne.colis.prix}}</td>
-        <td></td>
+        <td>{{ligne.colis.etat.titre}}</td>
       </tr>
     </table>
   </div>
 </div>
+

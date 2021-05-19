@@ -148,7 +148,12 @@
             <div class="col-12 col-md-6" >
               <div class="form-group">
                 <label  class="control-label mb-1" for="DesignationEchange">Désignation des articles échange</label>
-                <input formControlName="DesignationEchange" id="DesignationEchange" type="text" class=" form-control">
+                <input formControlName="DesignationEchange" id="DesignationEchange" type="text" class=" form-control"
+                       [ngClass]="{'is-invalid':colisService.DesignationEchange&&colisService.DesignationEchange.errors && colisService.DesignationEchange.touched}">
+                <div *ngIf="colisService.DesignationEchange&&colisService.DesignationEchange.hasError('required')"
+                     class="invalid-feedback">
+                  DesignationEchange est Obligatoire
+                </div>
               </div>
             </div>
             <div class="col-12 col-md-6">
@@ -193,3 +198,6 @@
 
   </div>
 </div>
+
+
+

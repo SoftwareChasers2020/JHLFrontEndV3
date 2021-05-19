@@ -5,6 +5,7 @@ import {VilleService} from '../../Service/ville.service';
 import {FeuilleDeRoute} from '../../Model/GestColis/feuille-de-route';
 import {Livreur} from '../../Model/livreur';
 import {ActivatedRoute, Router} from '@angular/router';
+import {NgxPrinterService} from 'ngx-printer';
 
 @Component({
   selector: 'app-consulter-feuille-route',
@@ -17,7 +18,9 @@ export class ConsulterFeuilleRouteComponent implements OnInit {
               private livreurService: LivreurService,
               private villeService: VilleService,
               private route: ActivatedRoute,
-              private router: Router,) {
+              private router: Router,
+              private printerService: NgxPrinterService,
+              ) {
   }
 
   feuilleroute: FeuilleDeRoute;
@@ -39,6 +42,20 @@ export class ConsulterFeuilleRouteComponent implements OnInit {
       },
       error => console.log(error)
     );
+  }
+  imprimer(divName)
+  {
+    // tslint:disable-next-line:prefer-const
+    let printContents = document.getElementById(divName).innerHTML;
+    // tslint:disable-next-line:prefer-const
+    let originalContents = document.body.innerHTML;
+
+    document.body.innerHTML = printContents;
+
+    window.print();
+
+    document.body.innerHTML = originalContents;
+
   }
 
 

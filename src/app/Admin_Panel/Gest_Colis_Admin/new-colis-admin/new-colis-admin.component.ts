@@ -28,11 +28,21 @@ export class NewColisAdminComponent implements OnInit {
 
   ngOnInit(): void {
     this.listGouvernorat = this.gouvernoratService.getAllAGouvernorat();
+    this.colisService.formGroup.patchValue(
+      {
+        select : false
+      }
+    );
   }
 
   onSubmit() {
 
-    this.colisService.addColisFromService();
+    if (this.colisService.formGroup.valid) {
+      this.colisService.addColisFromService();
+    } else {
+      console.log("test");
+      this.colisService.validateAllFormFields(this.colisService.formGroup);
+    }
 
   }
 

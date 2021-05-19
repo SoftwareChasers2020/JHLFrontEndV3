@@ -2,7 +2,7 @@
   <div class="card-header">
     <strong class="card-title" style="color: #0061f2">Nouveau Feuille de route</strong>
 
-    <button mat-raised-button color="primary" style="float: right;" (click)="AddLigneFeuilledeRoute()">Créer une Feuile de route</button>
+    <button mat-raised-button color="primary" style="float: right;" (click)="AddFeuilledeRoute()">Créer une Feuile de route</button>
   </div>
   <div class="card-body">
     <!-- Credit Card -->
@@ -10,7 +10,7 @@
       <div class="card-body">
 
         <div class="form-row " >
-          <div class="form-group col-md-6 " >
+          <div class="form-group col-md-4 " >
             <label for="Livreur">Livreur</label>
             <select  [formControl]="Livreur"
                      class="form-control"
@@ -27,24 +27,31 @@
             </div>
           </div>
 
-          <div class="form-group col-md-6" >
+          <div class="form-group col-md-4" >
             <label for="Gouvernorat">Gouvernorat</label>
             <select  [formControl]="Gouvernorat"
                      class="form-control" id="Gouvernorat"
-                     (change)="GetColisByGouvernorat(Gouvernorat.value)"
-                     [ngClass]="{'is-invalid':Gouvernorat&&Gouvernorat.errors && Gouvernorat.touched}">
+                     (change)="GetColisByGouvernorat(Gouvernorat.value)">
               <option></option>
               <option *ngFor="let gov of listGouvernorat "  value="{{gov.nom}}"  >
                 {{gov.nom}}
               </option>
             </select>
-            <div *ngIf="Gouvernorat&&Gouvernorat.hasError('required')"
-                 class="invalid-feedback">
-              Gouvernorat est Obligatoire
-            </div>
+
           </div>
 
+          <div class="form-group col-md-4" >
 
+            <label for="DateSortie" >Date de sortie</label>
+
+            <input class="form-control" type="date"  [formControl]="DateSortie"  id="DateSortie"
+                   [ngClass]="{'is-invalid':DateSortie&&DateSortie.errors && DateSortie.touched}">
+
+            <div *ngIf="DateSortie&&DateSortie.hasError('required')"
+                 class="invalid-feedback">
+              DateSortie est Obligatoire
+            </div>
+          </div>
         </div>
 
 

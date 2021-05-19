@@ -162,7 +162,8 @@
       <td>{{item.codeBarre}}</td>
       <td>{{item.prix}}</td>
       <td>{{item.idVille}} </td>
-      <td>{{item.client.nom}} {{item.client.prenom}} <br> {{item.client.tel1}} / {{item.client.tel2}}</td>
+      <td *ngIf="item.client.tel2 !== '' ">{{item.client.nom}} {{item.client.prenom}} <br> {{item.client.tel1}} / {{item.client.tel2}}</td>
+      <td *ngIf="item.client.tel2 == '' ">{{item.client.nom}} {{item.client.prenom}} <br> {{item.client.tel1}} </td>
       <td>{{item.designation}}</td>
     </tr>
     </tbody>

@@ -1,5 +1,5 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {FormControl} from '@angular/forms';
+import {FormControl, Validators} from '@angular/forms';
 import {LivreurService} from '../../Service/livreur.service';
 import {Livreur} from '../../Model/livreur';
 import {GouvernoratService} from '../../Service/gouvernorat.service';
@@ -23,6 +23,7 @@ import {LignefeuillerouteService} from '../../Service/GestColisService/lignefeui
 import {FeuillerouteService} from '../../Service/GestColisService/feuilleroute.service';
 import {LigneFeuilleRoute} from '../../Model/GestColis/ligne-feuille-route';
 import {FeuilleDeRoute} from '../../Model/GestColis/feuille-de-route';
+import {Etat} from '../../Model/GestColis/etat';
 
 @Component({
   selector: 'app-add-feuilleroute',
@@ -30,8 +31,9 @@ import {FeuilleDeRoute} from '../../Model/GestColis/feuille-de-route';
   styleUrls: ['./add-feuilleroute.component.css']
 })
 export class AddFeuillerouteComponent implements OnInit {
-  Livreur = new FormControl();
+  Livreur = new FormControl('', Validators.required);
   Gouvernorat = new FormControl();
+  DateSortie = new FormControl('', Validators.required);
   listLivreurs: Array<Livreur> = [];
   listLigneFeuilleRoute: Array<LigneFeuilleRoute> = [];
   listGouvernorat: Gouvernorat[];
@@ -39,6 +41,7 @@ export class AddFeuillerouteComponent implements OnInit {
   dataSource: MatTableDataSource<any>;
   listcolis: Array<Colis> = [];
   listcolisAfterFilterGouv: Array<Colis> = [];
+  listColisforUpdateEtatColis: Array<Colis> = [];
   searchKey: any;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
@@ -48,14 +51,11 @@ export class AddFeuillerouteComponent implements OnInit {
 
   constructor(private colisService: ColisService,
               private villeService: VilleService,
-              private tokenService: TokenStorageService,
               private notificationService: NotificationService,
               private fournisseurService: FournisseurService,
               private etatService: EtatService,
-              private dialog: MatDialog,
               private livreurService: LivreurService,
               private gouvernoratService: GouvernoratService,
-              private lignefeuillerouteService: LignefeuillerouteService,
               private feuillerouteService: FeuillerouteService) {
   }
 
@@ -63,10 +63,11 @@ export class AddFeuillerouteComponent implements OnInit {
     this.getAllLivreursActive();
     this.getAllGouvernorat();
     this.getColisForFeuilleRoute();
-    this.feuillerouteService.getFeuillerouteById(3).subscribe(
-      data => console.log(data),
-      error => console.log(error)
-    );
+    this.DateSortie.patchValue(this.currentDate());
+    /*    this.feuillerouteService.getFeuillerouteById(3).subscribe(
+          data => console.log(data),
+          error => console.log(error)
+        );*/
   }
 
   getAllLivreursActive() {
@@ -193,7 +194,7 @@ export class AddFeuillerouteComponent implements OnInit {
 
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
-        // console.log(this.listcolis);
+
       },
       error => console.log(error)
     );
@@ -227,29 +228,56 @@ export class AddFeuillerouteComponent implements OnInit {
   }
 
 
-  AddLigneFeuilledeRoute() {
+  AddFeuilledeRoute() {
+    console.log(this.selection.hasValue());
+    if (this.Livreur.valid) {
+      this.selection.selected.forEach(x => {
 
-    this.selection.selected.forEach(x => {
+          delete x.nomgouvernorat;
+          delete x.nomfournisseur;
+          delete x.nomville;
+          delete x.etatTitre;
 
-      delete x.nomgouvernorat;
-      delete x.nomfournisseur;
-      delete x.nomville;
-      delete x.etatTitre;
+          x.etat = new Etat(4, 'En Cours');
+          //  this.listColisforUpdateEtatColis.push(x);
+          this.colisService.updateColis(x)
+            .subscribe(data => {
 
-      this.listLigneFeuilleRoute.push(new LigneFeuilleRoute(x));
+            }, error => console.log(error));
+          console.log(x);
+          this.listLigneFeuilleRoute.push(new LigneFeuilleRoute(x));
+          console.log(this.listLigneFeuilleRoute);
+        }
+      );
 
-    });
-
-    this.feuilleroute.ligneFeuilleRoute = this.listLigneFeuilleRoute;
-    this.feuilleroute.idLivreur = this.Livreur.value;
-    this.feuillerouteService.createFeuilleroute(this.feuilleroute).subscribe(
-      res => console.log(res),
-      error => console.log(error)
-    );
-    this.listLigneFeuilleRoute.length = 0;
-    this.selection.clear();
-
-    this.getColisForFeuilleRoute();
+      /*      this.colisService.SaveAllColis(this.listColisforUpdateEtatColis).subscribe(
+              data => {
+                console.log(data);
+              }, error => console.log(error)
+            );*/
+      /*      this.listColisforUpdateEtatColis.forEach(x => {
+              this.listLigneFeuilleRoute.push(new LigneFeuilleRoute(x));
+            });*/
+      this.feuilleroute.ligneFeuilleRoute = this.listLigneFeuilleRoute;
+      this.feuilleroute.idLivreur = this.Livreur.value;
+      this.feuilleroute.dateSortie = this.DateSortie.value;
+      this.feuillerouteService.createFeuilleroute(this.feuilleroute).subscribe(
+        res => {
+          console.log(res);
+          this.getColisForFeuilleRoute();
+          this.selection.clear();
+          setTimeout(() => window.location.reload(), 500);
+          /*this.getColisForFeuilleRoute();*/
+          // setTimeout(() => window.location.reload(), 500);
+        },
+        error => console.log(error)
+      );
+      this.listLigneFeuilleRoute.length = 0;
+    } else {
+      {
+        this.Livreur.markAsTouched({onlySelf: true});
+      }
+    }
 
   }
 
@@ -265,7 +293,10 @@ export class AddFeuillerouteComponent implements OnInit {
 
   }
 
-  testLiv() {
-    console.log(this.Livreur.value);
+  currentDate() {
+    const currentDate = new Date();
+    return currentDate.toISOString().substring(0, 10);
   }
+
+
 }

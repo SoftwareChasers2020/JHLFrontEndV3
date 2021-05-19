@@ -10,6 +10,8 @@ import {VilleService} from '../../Service/ville.service';
 import {Livreur} from '../../Model/livreur';
 import {NgxPrinterService} from 'ngx-printer';
 import {NotificationService} from '../../Service/notification.service';
+import {ColisService} from '../../Service/GestColisService/colis.service';
+import {Etat} from '../../Model/GestColis/etat';
 
 @Component({
   selector: 'app-list-feuilleroute',
@@ -17,7 +19,7 @@ import {NotificationService} from '../../Service/notification.service';
   styleUrls: ['./list-feuilleroute.component.css']
 })
 export class ListFeuillerouteComponent implements OnInit {
-  displayedColumns: string[] = ['Numero', 'Date', 'Livreur', 'actions'];
+  displayedColumns: string[] = ['Numero', 'Date', 'Livreur', 'DateSortie', 'actions'];
   dataSource: MatTableDataSource<any>;
   listefeuilleRoute: Array<FeuilleDeRoute> = [];
   listefeuilleRouteimp: Array<FeuilleDeRoute> = [];
@@ -26,12 +28,14 @@ export class ListFeuillerouteComponent implements OnInit {
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild('feuille')
   private PrintTemplateTpl: TemplateRef<any>;
+  listcolis: Array<Colis> = [];
 
   constructor(private feuillerouteService: FeuillerouteService,
               private livreurService: LivreurService,
               private villeService: VilleService,
               private printerService: NgxPrinterService,
               private notificationService: NotificationService,
+              private colisService: ColisService
   ) {
   }
 
@@ -75,6 +79,8 @@ export class ListFeuillerouteComponent implements OnInit {
               return item.idFeuilleRoute;
             case 'Date' :
               return item.date;
+            case 'DateSortie' :
+              return item.dateSortie;
             case 'Livreur' :
               return item.idLivreur;
 
@@ -118,11 +124,20 @@ export class ListFeuillerouteComponent implements OnInit {
     this.applyFilter();
   }
 
-  onDelete(row: any) {
-
-
+  onDelete(row: FeuilleDeRoute) {
     if (confirm('Confirmez-vous la suppression ?')) {
-      this.feuillerouteService.deleteFeuilleroute(row).subscribe(
+      row.ligneFeuilleRoute.forEach(x => {
+        console.log(x.colis.codeBarre);
+        x.colis.etat = new Etat(2, 'En Dépot');
+        this.listcolis.push(x.colis);
+
+      });
+
+      this.colisService.SaveAllColis(this.listcolis).subscribe(data => console.log(data),
+        error => console.log(error));
+
+
+      this.feuillerouteService.deleteFeuilleroute(row.idFeuilleRoute).subscribe(
         () => {
           this.reloadData();
         }
@@ -132,9 +147,10 @@ export class ListFeuillerouteComponent implements OnInit {
     }
   }
 
+
   imprimer(row) {
     console.log(row);
-    this.listefeuilleRouteimp.length = 0;
+
     this.feuillerouteService.getFeuillerouteById(row).subscribe(
       data => {
 
@@ -151,15 +167,54 @@ export class ListFeuillerouteComponent implements OnInit {
           res => this.livreur = res as Livreur,
           error => console.log(error)
         );
-        this.printerService.printOpenWindow = false;
-        this.printerService.printAngular(this.PrintTemplateTpl);
-        this.printerService.printOpenWindow = true;
+        /*        this.printerService.printOpenWindow = false;
+                this.printerService.printAngular(this.PrintTemplateTpl);
+                this.printerService.printOpenWindow = true;*/
 
+/*        const manifeste = document.getElementById('feuilleroute');
+        manifeste.style.visibility = 'visible';
+        this.printerService.printOpenWindow = false;
+        this.printerService.printDiv('feuilleroute');
+        this.printerService.printOpenWindow = true;
+        manifeste.style.visibility = 'hidden';*/
+
+        setTimeout(() => this.activate(), 1000);
+        this.listefeuilleRouteimp.length = 0;
       },
       error => console.log(error)
     );
 
 
+  }
+
+  activate() {
+    const feuilleroute = document.getElementById('feuilleroute');
+    feuilleroute.style.visibility = 'visible';
+    const printContents = document.getElementById('feuilleroute').innerHTML;
+    // tslint:disable-next-line:prefer-const
+    let originalContents = document.body.innerHTML;
+
+    document.body.innerHTML = printContents;
+
+    window.print();
+    window.location.reload();
+
+
+
+  }
+
+  print() {
+    const printContents = document.getElementById('feuilleroute').innerHTML;
+    // tslint:disable-next-line:prefer-const
+    let originalContents = document.body.innerHTML;
+
+    document.body.innerHTML = printContents;
+
+    window.print();
+
+    document.body.innerHTML = originalContents;
+    const feuilleroute = document.getElementById('feuilleroute');
+    feuilleroute.style.visibility = 'hidden';
   }
 
   private reloadData() {

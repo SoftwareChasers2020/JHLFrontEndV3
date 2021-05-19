@@ -1,8 +1,22 @@
+<html>
+<head>
 
-<div>
+</head>
+<body>
+
+
+<div id="Manifeste" style="float: none">
+  <p style="break-before: page !important">Page 1</p>
+  <p style="break-before: page !important">Page 2</p>
+</div>
+
+<button class="btn-primary" (click)="test('Manifeste')">Imprimer</button>
+</body>
+</html>
+<!--<div>
   <table style="width: 120%; margin-left: 9%;margin-top: 5%;font-size: 20px">
     <tr>
-      <!--   <th>Date: ...............................</th>-->
+      &lt;!&ndash;   <th>Date: ...............................</th>&ndash;&gt;
       <th>Date: {{feuilleroute.date | date:'dd/MM/y' }}</th>
       <th>Livreur : {{livreur.nom}} {{livreur.prenom}}</th>
     </tr>
@@ -31,7 +45,7 @@
       </tr>
     </table>
   </div>
-</div>
+</div>-->
 
 
 <!--

@@ -8,6 +8,7 @@ import {Ville} from 'src/app/Model/ville';
 import {TokenStorageService} from '../Security/token-storage.service';
 import {Etat} from '../../Model/GestColis/etat';
 import {NotificationService} from '../notification.service';
+import {LigneFeuilleRoute} from '../../Model/GestColis/ligne-feuille-route';
 
 @Injectable({
   providedIn: 'root'
@@ -25,8 +26,25 @@ export class ColisService {
 
     this.urlpath = 'http://localhost:8081/colis/';
   }
-
   formGroup = this.fb.group({
+    CodeBarre : null,
+    Nom: ['', Validators.required],
+    Prenom: ['', Validators.required],
+    Tel1: ['', [Validators.required, Validators.pattern('[0-9]{8}')]],
+    Tel2: null,
+    Gouvernorat: new FormControl('', Validators.required),
+    Ville: new FormControl('', Validators.required),
+    Designation: ['', Validators.required],
+    NbArticle: ['', Validators.required],
+    Commentaire : null,
+    DesignationEchange: null,
+    NbArticleEchange: null,
+    AdressDispo : null,
+    Prix : ['', Validators.required],
+    select : new FormControl('', Validators.required)
+
+  });
+/*  formGroup = this.fb.group({
     CodeBarre : ['', Validators.required],
     Nom: ['', Validators.required],
     Prenom: ['', Validators.required],
@@ -43,7 +61,7 @@ export class ColisService {
     Prix : ['', Validators.required],
     select : new FormControl('', Validators.required)
 
-  });
+  });*/
 
   get CodeBarre() {
     return this.formGroup.get('CodeBarre');
@@ -96,6 +114,7 @@ export class ColisService {
 
   addColisFromService()
   {
+    console.log("temchii");
 
     this.ville = this.Ville.value;
     this.colis.codeBarre = this.CodeBarre.value;
@@ -170,7 +189,7 @@ export class ColisService {
   }
 
   getColisForFeuilleRoute(){
-    return this.http.get<Colis[]>(this.urlpath + "ColisEnDepot");
+    return this.http.get<Colis[]>(this.urlpath + "ColisPourFeuilleRoute");
   }
   getColisById(id)
   {
@@ -187,10 +206,10 @@ export class ColisService {
     return this.http.get(this.urlpath + "findbyIdFournisseur/" + id);
   }
 
-  getcodeQr(code): Observable<Blob>{
-    return this.http.get("http://localhost:8081/genrateQRCode/" + code , { responseType: 'blob' });
+  SaveAllColis(listColis: Colis[])
+  {
+    return this.http.put(this.urlpath + "updateAllColis/" , listColis );
   }
-
 
 
 }

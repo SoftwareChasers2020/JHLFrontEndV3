@@ -229,13 +229,21 @@ export class ListColisComponent implements OnInit {
 
   printManifeste() {
 
+
+    /*  this.printerService.printOpenWindow = false;
+      this.printerService.printDiv('Manifeste');
+      this.printerService.printOpenWindow = true;*/
     const manifeste = document.getElementById('Manifeste');
     manifeste.style.visibility = 'visible';
-    this.printerService.printOpenWindow = false;
-    this.printerService.printDiv('Manifeste');
-    this.printerService.printOpenWindow = true;
-    manifeste.style.visibility = 'hidden';
+    const printContents = document.getElementById('Manifeste').innerHTML;
+    // tslint:disable-next-line:prefer-const
+    const originalContents = document.body.innerHTML;
 
+    document.body.innerHTML = printContents;
+
+    window.print();
+
+    window.location.reload();
   }
 
   getSum(): number {

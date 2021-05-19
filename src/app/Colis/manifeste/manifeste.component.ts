@@ -40,5 +40,16 @@ export class ManifesteComponent implements OnInit {
     );
   }
 
+   test(divName) {
+     // tslint:disable-next-line:prefer-const
+    let printContents = document.getElementById(divName).innerHTML;
+     // tslint:disable-next-line:prefer-const
+    let originalContents = document.body.innerHTML;
 
+    document.body.innerHTML = printContents;
+
+    window.print();
+
+    document.body.innerHTML = originalContents;
+  }
 }
