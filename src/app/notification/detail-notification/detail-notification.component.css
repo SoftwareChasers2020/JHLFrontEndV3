@@ -1,0 +1,26 @@
+#container {
+  width: 100%;
+}
+
+#left {
+  float: left;
+  width: 100px;
+}
+
+#center {
+  margin: 0 auto;
+  width: 100px;
+}
+
+#right {
+  float: right;
+  width: 100px;
+}
+
+.img-circle {
+  border-radius: 50%;
+  height: 80px;
+  width: 80px;
+  background-color: #c7deef;
+
+}

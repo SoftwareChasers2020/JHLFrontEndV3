@@ -1,0 +1,32 @@
+<mat-dialog-content>
+
+  <div class="card"  color="primary" >
+    <div class="card-header bg-transparent" >
+      <h3 class="mb-0" style="color: #4E73DF">Notification</h3>
+    </div>
+    <div class="card-body">
+      <div class="panel panel-primary">
+
+        <div class="panel-body">
+
+          <div id="container" >
+            <div id="left">
+
+              <img src="assets/Logo_JHL_Notif.jpg" class="img-circle">
+            </div>
+            <div id="center">
+              <h6 >{{row.notification.title}}</h6>
+              {{row.notification.nomcommercial}}
+              <p style="font-size: 12px">{{row.notification.body}}{{row.notification.listCodeBarre.length}}</p>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</mat-dialog-content>
+<mat-dialog-actions  align="center">
+  <button class="mat-raised-button btn btn-danger" (click)="close()">Close</button>
+</mat-dialog-actions>
