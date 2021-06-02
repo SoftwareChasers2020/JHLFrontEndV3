@@ -9,3 +9,7 @@
   box-sizing: border-box;
 }
 
+.ScrollNotifHeight{
+  overflow-y: scroll;
+  height:440px;
+}

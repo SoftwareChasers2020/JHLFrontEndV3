@@ -1,5 +1,9 @@
 <h3 style="color: #0061f2"><i class="fa fa-angle-right" style="color: #0061f2"></i> Liste des colis en attente</h3>
+<button mat-raised-button color="primary" style="float: right" (click)="SendNotification()" title="Envoyer Notification">
+  <i class="fas fa-print"></i> Envoyer Notification
+</button>
 <div class="example-header" fxLayout="row">
+
   <div class="search-div">
     <!--   <button mat-raised-button (click)="print()" title="Print">
           <mat-icon>add</mat-icon>Ajouter
@@ -16,6 +20,7 @@
     <button mat-raised-button color="warn" (click)="print()" title="Imprimer manifeste">
       <i class="fas fa-print"></i> impression multiple bons de livraison
     </button>
+
   </div>
 </div>
 <div class="example-container mat-elevation-z8">

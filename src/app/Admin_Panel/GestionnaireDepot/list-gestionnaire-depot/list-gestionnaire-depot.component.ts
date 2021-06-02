@@ -111,7 +111,11 @@ export class ListGestionnaireDepotComponent implements OnInit {
     dialogConfig.minWidth = '40%';
     dialogConfig.panelClass = "marg";
     dialogConfig.data = row;
-    this.dialog.open(EditGestionnaireDepotComponent, dialogConfig);
+    this.dialog.open(EditGestionnaireDepotComponent, dialogConfig).afterClosed().subscribe(
+      result => {
+        this.reloadData();
+      }
+    );
   }
 
   onDelete(id: any) {
@@ -133,7 +137,11 @@ export class ListGestionnaireDepotComponent implements OnInit {
     dialogConfig.maxWidth = '100%';
     dialogConfig.minWidth = '40%';
     dialogConfig.panelClass = "marg";
-    this.dialog.open(AddGestionnaireDepotComponent, dialogConfig);
+    this.dialog.open(AddGestionnaireDepotComponent, dialogConfig).afterClosed().subscribe(
+      result => {
+        this.reloadData();
+      }
+    );
   }
 
 

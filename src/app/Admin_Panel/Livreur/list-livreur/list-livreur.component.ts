@@ -109,7 +109,11 @@ export class ListLivreurComponent implements OnInit {
     dialogConfig.minWidth = '40%';
     dialogConfig.panelClass = "marg";
     dialogConfig.data = row;
-    this.dialog.open(EditLivreurComponent, dialogConfig);
+    this.dialog.open(EditLivreurComponent, dialogConfig).afterClosed().subscribe(
+      result => {
+        this.reloadData();
+      }
+    );
   }
 
   onDelete(id: any) {
@@ -133,7 +137,11 @@ export class ListLivreurComponent implements OnInit {
     dialogConfig.panelClass = "marg";
 
 
-    this.dialog.open(AddLivreurComponent, dialogConfig);
+    this.dialog.open(AddLivreurComponent, dialogConfig).afterClosed().subscribe(
+      result => {
+        this.reloadData();
+      }
+    );
   }
 
 

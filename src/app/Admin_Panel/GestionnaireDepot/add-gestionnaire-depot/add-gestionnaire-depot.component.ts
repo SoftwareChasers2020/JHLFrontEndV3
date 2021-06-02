@@ -80,13 +80,15 @@ export class AddGestionnaireDepotComponent implements OnInit {
     this.GDService.createGestionnaireDepot(this.gd)
       .subscribe(data =>
       {
-        console.log(data);
+/*        console.log(data);
         this.notificationService.success("Ajout effectué avec succées");
         setTimeout(
           // tslint:disable-next-line:only-arrow-functions
           function(){
             location.reload();
-          }, 1500);
+          }, 1500);*/
+        this.dialogRef.close();
+        this.notificationService.success("Ajout effectué avec succées");
 
       }, error => console.log(error));
   }

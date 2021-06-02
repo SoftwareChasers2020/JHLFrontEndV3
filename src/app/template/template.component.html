@@ -18,7 +18,7 @@
         <i class="fas fa-home"></i>
         <span>Tableau de bord</span></a>
     </li>
-    <li class="nav-item active" *ngIf="this.tokenStorage.getRole()==='Fournisseur'" >
+    <li class="nav-item active" *ngIf="this.tokenStorage.getRole()==='Fournisseur'">
       <a class="nav-link" routerLink="/temp/accueilFournisseur">
         <i class="fas fa-home"></i>
         <span>Tableau de bord</span></a>
@@ -31,25 +31,25 @@
     </div>
 
 
-
-
     <!-- Nav Item - Pages Collapse Menu -->
 
     <li class="nav-item" *ngIf="tokenStorage.getRole()==='Administrateur'">
-      <a class="nav-link collapsed" href="" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+      <a class="nav-link collapsed" href="" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true"
+         aria-controls="collapseTwo">
         <i class="fa fa-users" aria-hidden="true"></i>
         <span>Utilisateurs</span>
       </a>
 
-      <div  id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+      <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
         <div class="bg-white py-2 collapse-inner rounded">
 
           <a class="collapse-item" routerLink="/temp/List_Fournisseur" routerLinkActive="active">Fournisseurs</a>
-          <a class="collapse-item"  routerLink="/temp/List_Livreur" routerLinkActive="active">Livreurs</a>
+          <a class="collapse-item" routerLink="/temp/List_Livreur" routerLinkActive="active">Livreurs</a>
           <a class="collapse-item" routerLink="/temp/List_GestDepot" routerLinkActive="active">GestionnaireDepot</a>
         </div>
 
-      </div></li>
+      </div>
+    </li>
     <li class="nav-item" *ngIf="this.tokenStorage.getRole()==='Administrateur'">
       <a class="nav-link" routerLink="/temp/listDemandeFour">
         <i class="fas fa-user-plus"></i>
@@ -57,13 +57,13 @@
       </a>
     </li>
     <li class="nav-item" *ngIf="this.tokenStorage.getRole()==='Fournisseur'">
-      <a class="nav-link" [routerLink]="['/temp/editProfil', utilisateur.idUtilisateur]" >
+      <a class="nav-link" [routerLink]="['/temp/editProfil', utilisateur.idUtilisateur]">
         <i class="fas fa-user-circle"></i>
         <span>Mon Profil</span>
       </a>
     </li>
     <li class="nav-item" *ngIf="this.tokenStorage.getRole()==='Fournisseur'">
-      <a class="nav-link" routerLink="/temp/coli" >
+      <a class="nav-link" routerLink="/temp/coli">
         <i class="fas fa-user-circle"></i>
         <span>Nouveau Colis</span>
       </a>
@@ -74,81 +74,89 @@
     </div>
 
     <li class="nav-item" *ngIf="this.tokenStorage.getRole()==='Fournisseur'">
-      <a class="nav-link" routerLink="/temp/ListColis" >
+      <a class="nav-link" routerLink="/temp/ListColis">
         <i class="fas fa-user-circle"></i>
         <span>Mes Colis</span>
       </a>
     </li>
 
 
-    <li class="nav-item" *ngIf="tokenStorage.getRole()==='Administrateur' || tokenStorage.getRole()==='GestionnaireDepot' ">
-      <a class="nav-link collapsed" href="" data-toggle="collapse" data-target="#collapseFour" aria-expanded="true" aria-controls="collapseTwo">
+    <li class="nav-item"
+        *ngIf="tokenStorage.getRole()==='Administrateur' || tokenStorage.getRole()==='GestionnaireDepot' ">
+      <a class="nav-link collapsed" href="" data-toggle="collapse" data-target="#collapseFour" aria-expanded="true"
+         aria-controls="collapseTwo">
         <i class="fas fa-cubes"></i>
         <span>Colis</span>
       </a>
 
-      <div  id="collapseFour" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+      <div id="collapseFour" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
         <div class="bg-white py-2 collapse-inner rounded">
-          <a class="collapse-item" routerLink="/temp/newColisAdmin" routerLinkActive="active" >Nouveau Colis</a>
+          <a class="collapse-item" routerLink="/temp/newColisAdmin" routerLinkActive="active">Nouveau Colis</a>
           <a class="collapse-item" routerLink="/temp/ListColisAdmin" routerLinkActive="active">List Colis</a>
         </div>
 
-      </div></li>
+      </div>
+    </li>
 
 
-    <li class="nav-item" *ngIf="tokenStorage.getRole()==='Administrateur' || tokenStorage.getRole()==='GestionnaireDepot' ">
-      <a class="nav-link collapsed" href="" data-toggle="collapse" data-target="#collapseFeuilleRoute" aria-expanded="true" aria-controls="collapseTwo">
+    <li class="nav-item"
+        *ngIf="tokenStorage.getRole()==='Administrateur' || tokenStorage.getRole()==='GestionnaireDepot' ">
+      <a class="nav-link collapsed" href="" data-toggle="collapse" data-target="#collapseFeuilleRoute"
+         aria-expanded="true" aria-controls="collapseTwo">
         <i class="far fa-clipboard"></i>
         <span>Feuille de route</span>
       </a>
 
-      <div  id="collapseFeuilleRoute" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+      <div id="collapseFeuilleRoute" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
         <div class="bg-white py-2 collapse-inner rounded">
-          <a class="collapse-item" routerLink="/temp/FeuilleRoute" routerLinkActive="active" >Nouveau Feuille de route</a>
-          <a class="collapse-item" routerLink="/temp/ListFeuilleRoute" routerLinkActive="active">List des Feuille de route</a>
+          <a class="collapse-item" routerLink="/temp/FeuilleRoute" routerLinkActive="active">Nouveau Feuille de
+            route</a>
+          <a class="collapse-item" routerLink="/temp/ListFeuilleRoute" routerLinkActive="active">List des Feuille de
+            route</a>
         </div>
 
-      </div></li>
-    <!--ListColisAdmin-->
-    <!-- Divider -->
-   <!-- <hr class="sidebar-divider">
-    &lt;!&ndash; Heading &ndash;&gt;
-    <div class="sidebar-heading">
-      Addons
-    </div>-->
-    <!-- Nav Item - Pages Collapse Menu -->
-<!--    <li class="nav-item">
-      <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true" aria-controls="collapsePages">
-        <i class="fas fa-fw fa-folder"></i>
-        <span>Pages</span>
-      </a>
-      <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
-        <div class="bg-white py-2 collapse-inner rounded">
-          <h6 class="collapse-header">Login Screens:</h6>
-          <a class="collapse-item" href="#">Login</a>
-          <a class="collapse-item" href="#">Register</a>
-          <a class="collapse-item" href="#">Forgot Password</a>
-          <div class="collapse-divider"></div>
-          <h6 class="collapse-header">Other Pages:</h6>
-          <a class="collapse-item" href="#">404 Page</a>
-          <a class="collapse-item" href="#">Blank Page</a>
-        </div>
       </div>
     </li>
-    &lt;!&ndash; Nav Item - Charts &ndash;&gt;
-    <li class="nav-item">
-      <a class="nav-link" href="#">
-        <i class="fas fa-fw fa-chart-area"></i>
-        <span>Charts</span></a>
-    </li>
-    &lt;!&ndash; Nav Item - Tables &ndash;&gt;
-    <li class="nav-item">
-      <a class="nav-link" href="#">
-        <i class="fas fa-fw fa-table"></i>
-        <span>Tables</span></a>
-    </li>-->
+    <!--ListColisAdmin-->
     <!-- Divider -->
-<!--    <hr class="sidebar-divider d-none d-md-block">-->
+    <!-- <hr class="sidebar-divider">
+     &lt;!&ndash; Heading &ndash;&gt;
+     <div class="sidebar-heading">
+       Addons
+     </div>-->
+    <!-- Nav Item - Pages Collapse Menu -->
+    <!--    <li class="nav-item">
+          <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true" aria-controls="collapsePages">
+            <i class="fas fa-fw fa-folder"></i>
+            <span>Pages</span>
+          </a>
+          <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+              <h6 class="collapse-header">Login Screens:</h6>
+              <a class="collapse-item" href="#">Login</a>
+              <a class="collapse-item" href="#">Register</a>
+              <a class="collapse-item" href="#">Forgot Password</a>
+              <div class="collapse-divider"></div>
+              <h6 class="collapse-header">Other Pages:</h6>
+              <a class="collapse-item" href="#">404 Page</a>
+              <a class="collapse-item" href="#">Blank Page</a>
+            </div>
+          </div>
+        </li>
+        &lt;!&ndash; Nav Item - Charts &ndash;&gt;
+        <li class="nav-item">
+          <a class="nav-link" href="#">
+            <i class="fas fa-fw fa-chart-area"></i>
+            <span>Charts</span></a>
+        </li>
+        &lt;!&ndash; Nav Item - Tables &ndash;&gt;
+        <li class="nav-item">
+          <a class="nav-link" href="#">
+            <i class="fas fa-fw fa-table"></i>
+            <span>Tables</span></a>
+        </li>-->
+    <!-- Divider -->
+    <!--    <hr class="sidebar-divider d-none d-md-block">-->
     <!-- Sidebar Toggler (Sidebar) -->
     <div class="text-center d-none d-md-inline">
       <button class="rounded-circle border-0" id="sidebarToggle"></button>
@@ -165,6 +173,7 @@
         <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
           <i class="fa fa-bars"></i>
         </button>
+
         <!-- Topbar Search
         <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
           <div class="input-group">
@@ -181,124 +190,105 @@
           <!-- Nav Item - Search Dropdown (Visible Only XS) -->
 
           <!-- Nav Item - Alerts -->
-          <li class="nav-item dropdown no-arrow mx-1">
-            <a class="nav-link dropdown-toggle" routerLink="#" id="alertsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              <i class="far fa-bell" style="font-size: large" ></i>
+          <li *ngIf="tokenStorage.getRole()==='GestionnaireDepot'" class="nav-item dropdown no-arrow mx-1">
+            <a class="nav-link dropdown-toggle" routerLink="#" id="alertsDropdown" role="button" data-toggle="dropdown"
+               aria-haspopup="true" aria-expanded="false">
+              <i class="far fa-bell" style="font-size: x-large"></i>
               <!-- Counter - Alerts -->
               <span class="badge badge-danger badge-counter">3+</span>
             </a>
             <!-- Dropdown - Alerts -->
-            <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="alertsDropdown">
-              <h6 class="dropdown-header">
-                Alerts Center
-              </h6>
-              <a class="dropdown-item d-flex align-items-center" href="#">
-                <div class="mr-3">
-                  <div class="icon-circle bg-primary">
-                    <i class="fas fa-file-alt text-white"></i>
-                  </div>
-                </div>
-                <div>
-                  <div class="small text-gray-500">December 12, 2019</div>
-                  <span class="font-weight-bold">A new monthly report is ready to download!</span>
-                </div>
-              </a>
-              <a class="dropdown-item d-flex align-items-center" href="#">
-                <div class="mr-3">
-                  <div class="icon-circle bg-success">
-                    <i class="fas fa-donate text-white"></i>
-                  </div>
-                </div>
-                <div>
-                  <div class="small text-gray-500">December 7, 2019</div>
-                  $290.29 has been deposited into your account!
-                </div>
-              </a>
-              <a class="dropdown-item d-flex align-items-center" href="#">
-                <div class="mr-3">
-                  <div class="icon-circle bg-warning">
-                    <i class="fas fa-exclamation-triangle text-white"></i>
-                  </div>
-                </div>
-                <div>
-                  <div class="small text-gray-500">December 2, 2019</div>
-                  Spending Alert: We've noticed unusually high spending for your account.
-                </div>
-              </a>
+            <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in ScrollNotifHeight"
+                 aria-labelledby="alertsDropdown" >
+              <h4 class="dropdown-header">
+                Notification
+              </h4>
+              <!--| slice:0:4-->
+              <div *ngFor="let notif of listnotification  | async  " >
+                <a class="dropdown-item d-flex align-items-center ">
+                  <app-notification style="cursor: pointer" (click)="getDetailNotif(notif)" [notification]="notif"></app-notification>
+
+
+                </a>
+              </div>
+<!--
               <a class="dropdown-item text-center small text-gray-500" href="#">Show All Alerts</a>
+-->
             </div>
           </li>
           <!-- Nav Item - Messages -->
-          <li class="nav-item dropdown no-arrow mx-1">
-            <a class="nav-link dropdown-toggle" href="#" id="messagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              <i class="far fa-envelope" style="font-size: large"></i>
-              <!-- Counter - Messages -->
-              <span class="badge badge-danger badge-counter">7</span>
-            </a>
-            <!-- Dropdown - Messages -->
-            <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="messagesDropdown">
-              <h6 class="dropdown-header">
-                Message Center
-              </h6>
-              <a class="dropdown-item d-flex align-items-center" href="#">
-                <div class="dropdown-list-image mr-3">
-                  <img class="rounded-circle" src="https://source.unsplash.com/fn_BT9fwg_E/60x60" alt="">
-                  <div class="status-indicator bg-success"></div>
-                </div>
-                <div class="font-weight-bold">
-                  <div class="text-truncate">Hi there! I am wondering if you can help me with a problem I've been having.</div>
-                  <div class="small text-gray-500">Emily Fowler · 58m</div>
-                </div>
-              </a>
-              <a class="dropdown-item d-flex align-items-center" href="#">
-                <div class="dropdown-list-image mr-3">
-                  <img class="rounded-circle" src="https://source.unsplash.com/AU4VPcFN4LE/60x60" alt="">
-                  <div class="status-indicator"></div>
-                </div>
-                <div>
-                  <div class="text-truncate">I have the photos that you ordered last month, how would you like them sent to you?</div>
-                  <div class="small text-gray-500">Jae Chun · 1d</div>
-                </div>
-              </a>
-              <a class="dropdown-item d-flex align-items-center" href="#">
-                <div class="dropdown-list-image mr-3">
-                  <img class="rounded-circle" src="https://source.unsplash.com/CS2uCrpNzJY/60x60" alt="">
-                  <div class="status-indicator bg-warning"></div>
-                </div>
-                <div>
-                  <div class="text-truncate">Last month's report looks great, I am very happy with the progress so far, keep up the good work!</div>
-                  <div class="small text-gray-500">Morgan Alvarez · 2d</div>
-                </div>
-              </a>
-              <a class="dropdown-item d-flex align-items-center" href="#">
-                <div class="dropdown-list-image mr-3">
-                  <img class="rounded-circle" src="https://source.unsplash.com/Mv9hjnEUHR4/60x60" alt="">
-                  <div class="status-indicator bg-success"></div>
-                </div>
-                <div>
-                  <div class="text-truncate">Am I a good boy? The reason I ask is because someone told me that people say this to all dogs, even if they aren't good...</div>
-                  <div class="small text-gray-500">Chicken the Dog · 2w</div>
-                </div>
-              </a>
-              <a class="dropdown-item text-center small text-gray-500" href="#">Read More Messages</a>
-            </div>
-          </li>
+          <!--          <li class="nav-item dropdown no-arrow mx-1">
+                      <a class="nav-link dropdown-toggle" href="#" id="messagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="far fa-envelope" style="font-size: large"></i>
+                        &lt;!&ndash; Counter - Messages &ndash;&gt;
+                        <span class="badge badge-danger badge-counter">7</span>
+                      </a>
+                      &lt;!&ndash; Dropdown - Messages &ndash;&gt;
+                      <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated&#45;&#45;grow-in" aria-labelledby="messagesDropdown">
+                        <h6 class="dropdown-header">
+                          Message Center
+                        </h6>
+                        <a class="dropdown-item d-flex align-items-center" href="#">
+                          <div class="dropdown-list-image mr-3">
+                            <img class="rounded-circle" src="https://source.unsplash.com/fn_BT9fwg_E/60x60" alt="">
+                            <div class="status-indicator bg-success"></div>
+                          </div>
+                          <div class="font-weight-bold">
+                            <div class="text-truncate">Hi there! I am wondering if you can help me with a problem I've been having.</div>
+                            <div class="small text-gray-500">Emily Fowler · 58m</div>
+                          </div>
+                        </a>
+                        <a class="dropdown-item d-flex align-items-center" href="#">
+                          <div class="dropdown-list-image mr-3">
+                            <img class="rounded-circle" src="https://source.unsplash.com/AU4VPcFN4LE/60x60" alt="">
+                            <div class="status-indicator"></div>
+                          </div>
+                          <div>
+                            <div class="text-truncate">I have the photos that you ordered last month, how would you like them sent to you?</div>
+                            <div class="small text-gray-500">Jae Chun · 1d</div>
+                          </div>
+                        </a>
+                        <a class="dropdown-item d-flex align-items-center" href="#">
+                          <div class="dropdown-list-image mr-3">
+                            <img class="rounded-circle" src="https://source.unsplash.com/CS2uCrpNzJY/60x60" alt="">
+                            <div class="status-indicator bg-warning"></div>
+                          </div>
+                          <div>
+                            <div class="text-truncate">Last month's report looks great, I am very happy with the progress so far, keep up the good work!</div>
+                            <div class="small text-gray-500">Morgan Alvarez · 2d</div>
+                          </div>
+                        </a>
+                        <a class="dropdown-item d-flex align-items-center" href="#">
+                          <div class="dropdown-list-image mr-3">
+                            <img class="rounded-circle" src="https://source.unsplash.com/Mv9hjnEUHR4/60x60" alt="">
+                            <div class="status-indicator bg-success"></div>
+                          </div>
+                          <div>
+                            <div class="text-truncate">Am I a good boy? The reason I ask is because someone told me that people say this to all dogs, even if they aren't good...</div>
+                            <div class="small text-gray-500">Chicken the Dog · 2w</div>
+                          </div>
+                        </a>
+                        <a class="dropdown-item text-center small text-gray-500" href="#">Read More Messages</a>
+                      </div>
+                    </li>-->
           <div class="topbar-divider d-none d-sm-block"></div>
           <!-- Nav Item - User Information -->
           <li class="nav-item dropdown no-arrow">
-            <a class="nav-link dropdown-toggle"  id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <a class="nav-link dropdown-toggle" id="userDropdown" role="button" data-toggle="dropdown"
+               aria-haspopup="true" aria-expanded="false">
               <span class="mr-2 d-none d-lg-inline text-gray-700 large">Bonjour {{utilisateur.prenom}}</span>
               <img class="img-profile rounded-circle" src="assets/img/undraw_profile.svg">
             </a>
             <!-- Dropdown - User Information -->
             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
-              <a class="dropdown-item" [routerLink]="['/temp/editProfil', utilisateur.idUtilisateur]" *ngIf="this.tokenStorage.getRole()==='Fournisseur'">
+              <a class="dropdown-item" [routerLink]="['/temp/editProfil', utilisateur.idUtilisateur]"
+                 *ngIf="this.tokenStorage.getRole()==='Fournisseur'">
                 <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                 Profile
               </a>
 
               <div class="dropdown-divider"></div>
-              <a class="dropdown-item" href=""  data-toggle="modal" data-target="#logoutModal">
+              <a class="dropdown-item" href="" data-toggle="modal" data-target="#logoutModal">
                 <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                 Logout
               </a>
@@ -331,7 +321,8 @@
   </a>
 
   <!-- Logout Modal-->
-  <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+       aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">

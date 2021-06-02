@@ -11,6 +11,7 @@ export class Utilisateur {
   tel: string ;
   adresse?: Adresse;
   active: number;
+  tokenfcm?: string;
 
 
 

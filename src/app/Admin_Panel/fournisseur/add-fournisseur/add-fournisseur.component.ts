@@ -40,7 +40,7 @@ export class AddFournisseurComponent implements OnInit {
 
 
   ngOnInit(): void {
-
+    this.utilisateurService.formGroup.reset();
     this.listGouvernorat = this.gouvernoratService.getAllAGouvernorat();
 
   }
@@ -71,12 +71,13 @@ AddFournisseur() {
   console.log(this.f);
   this.fournisseurService.createFournisseur(this.f).subscribe(
     data => {
-      console.log(data);
+/*      console.log(data);
       setTimeout(
         // tslint:disable-next-line:only-arrow-functions
         function(){
           location.reload();
-        }, 500);
+        }, 500);*/
+      this.dialogRef.close();
       this.notificationService.success("Ajout effectué avec succées");
     }, error => console.log(error));
 

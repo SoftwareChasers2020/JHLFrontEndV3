@@ -85,11 +85,11 @@ export class EditFournisseurComponent implements OnInit {
            res => {
              console.log(res);
              this.dialogRef.close();
-             setTimeout(
+/*             setTimeout(
                // tslint:disable-next-line:only-arrow-functions
                function() {
                  location.reload();
-               }, 500);
+               }, 500);*/
              this.notificationService.success("Modification a effectué avec succées");
 
            }, error => console.log(error)

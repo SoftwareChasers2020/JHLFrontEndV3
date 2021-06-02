@@ -69,12 +69,13 @@ export class AddLivreurComponent implements OnInit {
     this.LService.createLivreur(this.l)
       .subscribe(data =>
       {
-        console.log(data);
+/*        console.log(data);
         setTimeout(
           // tslint:disable-next-line:only-arrow-functions
           function(){
             location.reload();
-          }, 1500);
+          }, 1500);*/
+        this.dialogRef.close();
         this.notificationService.success("Ajout effectué avec succées");
       }, error => console.log(error));
   }

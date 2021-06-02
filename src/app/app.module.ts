@@ -61,6 +61,16 @@ import { AddFeuillerouteComponent } from './FeuilleRoute/add-feuilleroute/add-fe
 import { ListFeuillerouteComponent } from './FeuilleRoute/list-feuilleroute/list-feuilleroute.component';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import { ConsulterFeuilleRouteComponent } from './FeuilleRoute/consulter-feuille-route/consulter-feuille-route.component';
+import {AngularFireDatabaseModule} from "@angular/fire/database";
+import {AngularFireAuthModule} from "@angular/fire/auth";
+import {AngularFireMessagingModule} from "@angular/fire/messaging";
+import {AngularFireModule} from "@angular/fire";
+import {environment} from "../environments/environment";
+import {MessagingFirebaseService} from "./Service/Notification/messaging-firebase.service";
+import {AsyncPipe} from "@angular/common";
+import {AngularFirestoreModule} from "@angular/fire/firestore";
+import { NotificationComponent } from './notification/notification.component';
+import { DetailNotificationComponent } from './notification/detail-notification/detail-notification.component';
 
 
 @NgModule({
@@ -106,6 +116,8 @@ import { ConsulterFeuilleRouteComponent } from './FeuilleRoute/consulter-feuille
     AddFeuillerouteComponent,
     ListFeuillerouteComponent,
     ConsulterFeuilleRouteComponent,
+    NotificationComponent,
+    DetailNotificationComponent,
 
 
 
@@ -134,12 +146,17 @@ import { ConsulterFeuilleRouteComponent } from './FeuilleRoute/consulter-feuille
     MatRadioModule,
     NgxPrintModule,
     MatCheckboxModule,
+    AngularFirestoreModule,
+    AngularFireDatabaseModule,
+    AngularFireAuthModule,
+    AngularFireMessagingModule,
+    AngularFireModule.initializeApp(environment.firebase),
     ToastrModule.forRoot(),
     NgxPrinterModule.forRoot({printOpenWindow: true})
 
   ],
 
-  providers: [authInterceptorProviders ],
+  providers: [authInterceptorProviders, MessagingFirebaseService, AsyncPipe ],
   bootstrap: [AppComponent]
 })
 

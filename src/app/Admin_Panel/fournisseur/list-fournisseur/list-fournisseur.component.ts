@@ -42,7 +42,7 @@ export class ListFournisseurComponent implements OnInit {
     this.fournisseurService.getAllFournisseur().subscribe(
       res => {
 
-        this.listfournisseur = res;
+        this.listfournisseur = res.filter(x => x.idUtilisateur > 0);
         const listFournisseurAfterFilterIdFour0 =   this.listfournisseur.filter(x => x.idUtilisateur > 0);
         this.dataSource = new MatTableDataSource(listFournisseurAfterFilterIdFour0);
         this.dataSource.filterPredicate = (data, filter: string)  => {
@@ -91,7 +91,7 @@ export class ListFournisseurComponent implements OnInit {
   reloadData() {
     this.fournisseurService.getAllFournisseur().subscribe(
       data => {
-        this.listfournisseur = data;
+        this.listfournisseur = data.filter(x => x.idUtilisateur > 0);
         this.dataSource = new MatTableDataSource(this.listfournisseur);
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
@@ -120,7 +120,11 @@ export class ListFournisseurComponent implements OnInit {
     dialogConfig.minWidth = '40%';
     dialogConfig.panelClass = "marg";
     dialogConfig.data = row;
-    this.dialog.open(EditFournisseurComponent, dialogConfig);
+    this.dialog.open(EditFournisseurComponent, dialogConfig).afterClosed().subscribe(
+      result => {
+        this.reloadData();
+      }
+    );
   }
   onCreate() {
     const dialogConfig = new MatDialogConfig();
@@ -129,7 +133,11 @@ export class ListFournisseurComponent implements OnInit {
     dialogConfig.maxWidth = '100%';
     dialogConfig.minWidth = '40%';
     dialogConfig.panelClass = 'marg';
-    this.dialog.open(AddFournisseurComponent, dialogConfig);
+    this.dialog.open(AddFournisseurComponent, dialogConfig).afterClosed().subscribe(
+      result => {
+        this.reloadData();
+      }
+    );
   }
 
 

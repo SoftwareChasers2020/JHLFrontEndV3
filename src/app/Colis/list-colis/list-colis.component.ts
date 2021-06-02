@@ -16,6 +16,9 @@ import {NgxPrinterService} from 'ngx-printer';
 import {FournisseurService} from '../../Service/fournisseur.service';
 import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
 import {DetailColisAdminComponent} from '../../Admin_Panel/Gest_Colis_Admin/detail-colis-admin/detail-colis-admin.component';
+import {MessagingFirebaseService} from "../../Service/Notification/messaging-firebase.service";
+import firebase from "firebase";
+import {Utilisateur} from "../../Model/utilisateur";
 
 @Component({
   selector: 'app-list-colis',
@@ -47,7 +50,8 @@ export class ListColisComponent implements OnInit {
               private tokenService: TokenStorageService,
               private notificationService: NotificationService,
               private printerService: NgxPrinterService,
-              private dialog: MatDialog) {
+              private dialog: MatDialog,
+              private messagingfirebase: MessagingFirebaseService) {
   }
 
   displayedColumns: string[] = ['Code', 'date_ajout', 'Nom', 'Téléphone', 'Adresse', 'Prix', 'actions'];
@@ -63,7 +67,8 @@ export class ListColisComponent implements OnInit {
   searchKey: any;
   fournisseur: Fournisseur;
   colis: Colis[];
-
+  listCodeBarre: number[];
+  //utilisateur: Utilisateur;
   @ViewChild('tab')
   private PrintTemplateTpl: TemplateRef<any>;
 
@@ -291,4 +296,20 @@ export class ListColisComponent implements OnInit {
 
   }
 
+  SendNotification() {
+    this.listCodeBarre = this.listcolis.map(x => x.codeBarre);
+    this.messagingfirebase.sendPushMessage("Pick Up !", "Nombre de colis :", this.fournisseur.nomcommercial, this.listCodeBarre);
+
+    /* firebase.firestore().collection('utilisateurs')
+       .doc(String(this.tokenService.getId())).get().then(result => {
+       this.utilisateur = result.data() as Utilisateur;
+
+       // this.messagingfirebase.sendPushMessage("Pick Up !",this.fournisseur.nomcommercial," Nombre de colis : "+listCodeBarre.length+ " " +listCodeBarre);
+
+     })
+       .catch(err => console.log(err));
+
+
+   }*/
+  }
 }
