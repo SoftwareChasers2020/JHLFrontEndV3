@@ -198,15 +198,16 @@
               <span class="badge badge-danger badge-counter">3+</span>
             </a>
             <!-- Dropdown - Alerts -->
-            <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in ScrollNotifHeight"
+            <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in "
+                  [ngClass]="{'ScrollNotifHeight' : (listnotification | async).length > 4 }"
                  aria-labelledby="alertsDropdown" >
               <h4 class="dropdown-header">
                 Notification
               </h4>
               <!--| slice:0:4-->
-              <div *ngFor="let notif of listnotification  | async  " >
-                <a class="dropdown-item d-flex align-items-center ">
-                  <app-notification style="cursor: pointer" (click)="getDetailNotif(notif)" [notification]="notif"></app-notification>
+              <div *ngFor="let notif of listnotification  | async  " style="cursor: pointer" (click)="getDetailNotif(notif)" >
+                <a class="dropdown-item d-flex align-items-center " >
+                  <app-notification   [notification]="notif"></app-notification>
 
 
                 </a>

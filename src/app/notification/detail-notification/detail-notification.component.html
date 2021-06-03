@@ -1,7 +1,7 @@
 <mat-dialog-content>
 
-  <div class="card"  color="primary" >
-    <div class="card-header bg-transparent" >
+  <div class="card" color="primary">
+    <div class="card-header bg-transparent">
       <h3 class="mb-0" style="color: #4E73DF">Notification</h3>
     </div>
     <div class="card-body">
@@ -9,24 +9,55 @@
 
         <div class="panel-body">
 
-          <div id="container" >
+          <div id="container">
             <div id="left">
 
-              <img src="assets/Logo_JHL_Notif.jpg" class="img-circle">
+              <img src="assets/LogoJHL.png" class="img-circle">
             </div>
-            <div id="center">
-              <h6 >{{row.notification.title}}</h6>
-              {{row.notification.nomcommercial}}
-              <p style="font-size: 12px">{{row.notification.body}}{{row.notification.listCodeBarre.length}}</p>
+            <table id="center" style="margin-left: 40%">
+              <tr>
+                <td><h6>{{row.notification.title}}</h6></td>
+              </tr>
+              <tr>
+                <td>{{row.notification.nomcommercial}}</td>
+              </tr>
+              <tr>
+                <td>{{row.notification.nomgov}} {{row.notification.nomville}}</td>
+              </tr>
+              <tr>
+                <td>{{row.notification.numtelFour}}</td>
+              </tr>
+              <tr>
+                <td>{{row.notification.body}}</td>
+              </tr>
+            </table>
+            <br>
+            <div class="row" >
+            <div class="form-group col-md-6 ">
+              <label for="Livreur">Livreur</label>
+              <select [formControl]="Livreur"
+                      class="form-control"
+                      id="Livreur">
+                <option></option>
+                <option *ngFor="let livreur of listLivreurs " [ngValue]="livreur.idUtilisateur">
+                  {{livreur.nom}} {{livreur.prenom}}
+                </option>
+              </select>
+
+
+            </div>
+
             </div>
 
           </div>
-
         </div>
       </div>
     </div>
   </div>
 </mat-dialog-content>
-<mat-dialog-actions  align="center">
-  <button class="mat-raised-button btn btn-danger" (click)="close()">Close</button>
+<mat-dialog-actions align="center">
+  <button class="mat-raised-button btn btn-danger" (click)="close()">Retour</button>
+  <button mat-raised-button color="primary" style="margin-left: 15px" (click)="SendNotification()" title="Envoyer Notification">
+    <i class="fas fa-print"></i> Envoyer Notification
+  </button>
 </mat-dialog-actions>

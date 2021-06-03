@@ -61,15 +61,9 @@ export class MessagingFirebaseService {
   }
 
 
-  sendPushMessage(title,message,nomcommercial,listCodeBarre: number[]) {
+  sendPushMessageToGestionnaire(title,message,nomcommercial,listCodeBarre: number[],nomgov,nomville,numtelFour) {
 
-    /*{
-  "to" : "/topics/movies",
-  "priority" : "high",
-  "notification" : {
-    "body" : "This is a Firebase Cloud Messaging Topic Message!",
-    "title" : "FCM Message",
-  }*/
+
     const data = {
 
       "notification": {
@@ -77,8 +71,11 @@ export class MessagingFirebaseService {
         "nomcommercial" : nomcommercial,
         "body": message,
         "listCodeBarre": listCodeBarre,
+        "nomgov": nomgov,
+        "nomville": nomville,
+        "numtelFour": numtelFour
 
-        "click_action": "http://localhost:4200/temp",
+    /*    "click_action": "http://localhost:4200/temp",*/
 
 /*        "sound": "default"*/
       },
@@ -106,6 +103,8 @@ export class MessagingFirebaseService {
           console.log("error" + error);
         });
   }
+
+
 
 
   SaveGestToTopic(token)

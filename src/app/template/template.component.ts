@@ -106,7 +106,7 @@ export class TemplateComponent implements OnInit {
     dialogConfig.data = notif;
     dialogConfig.maxWidth = '100%';
     dialogConfig.minWidth = '40%';
-    dialogConfig.height = '80%';
+    dialogConfig.height = '70%';
     dialogConfig.panelClass = "marg";
 
     this.dialog.open(DetailNotificationComponent, dialogConfig);

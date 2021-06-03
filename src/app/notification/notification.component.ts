@@ -11,7 +11,7 @@ import {Message} from "../Model/Notification/message";
 export class NotificationComponent implements OnInit {
   @Input() notification: Message;
 
-  constructor(private firestore: AngularFirestore) {
+  constructor() {
   }
 
   ngOnInit(): void {

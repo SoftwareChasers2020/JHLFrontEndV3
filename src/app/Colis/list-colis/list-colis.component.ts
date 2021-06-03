@@ -298,7 +298,7 @@ export class ListColisComponent implements OnInit {
 
   SendNotification() {
     this.listCodeBarre = this.listcolis.map(x => x.codeBarre);
-    this.messagingfirebase.sendPushMessage("Pick Up !", "Nombre de colis :", this.fournisseur.nomcommercial, this.listCodeBarre);
+    this.messagingfirebase.sendPushMessageToGestionnaire("Pick Up !", "Nombre de colis :" + this.listCodeBarre.length, this.fournisseur.nomcommercial, this.listCodeBarre,this.fournisseur.adresse.ville.gouvernorat.nom,this.fournisseur.adresse.ville.nom,this.fournisseur.tel);
 
     /* firebase.firestore().collection('utilisateurs')
        .doc(String(this.tokenService.getId())).get().then(result => {

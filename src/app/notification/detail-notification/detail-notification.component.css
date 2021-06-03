@@ -9,7 +9,7 @@
 
 #center {
   margin: 0 auto;
-  width: 100px;
+  width: 200px;
 }
 
 #right {
@@ -19,8 +19,8 @@
 
 .img-circle {
   border-radius: 50%;
-  height: 80px;
-  width: 80px;
-  background-color: #c7deef;
+  height: 130px;
+  width: 130px;
+  background-color: #d0e8ee;
 
 }
