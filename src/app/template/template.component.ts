@@ -95,8 +95,12 @@ export class TemplateComponent implements OnInit {
 
   getAllNotification()
   { //itemsInView = items.slice(startIndex, endIndex);
-    this.listnotification = this.firestore.collection('Notification').valueChanges();
-
+   // this.listnotification = this.firestore.collection('Notification').valueChanges();
+    this.listnotification =    this.firestore.collection('Notification',
+        ref => ref.where('to', '==','/topics/TopicGestionnaire')).valueChanges();
+   /* const data$ = this.fireStore.collection('Sales',
+      ref => ref.where('TransactionDate', '==', formatDate(new
+      Date,'yyyy/MM/dd', 'en')));*/
   }
 
   getDetailNotif(notif: any) {

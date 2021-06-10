@@ -297,19 +297,13 @@ export class ListColisComponent implements OnInit {
   }
 
   SendNotification() {
-    this.listCodeBarre = this.listcolis.map(x => x.codeBarre);
-    this.messagingfirebase.sendPushMessageToGestionnaire("Pick Up !", "Nombre de colis :" + this.listCodeBarre.length, this.fournisseur.nomcommercial, this.listCodeBarre,this.fournisseur.adresse.ville.gouvernorat.nom,this.fournisseur.adresse.ville.nom,this.fournisseur.tel);
+    if(this.listcolis.length != 0) {
+      this.listCodeBarre = this.listcolis.map(x => x.codeBarre);
+      this.messagingfirebase.sendPushMessageToGestionnaire("Pick Up !", "Nombre de colis :" + this.listCodeBarre.length, this.fournisseur.nomcommercial, this.listCodeBarre, this.fournisseur.adresse.ville.gouvernorat.nom, this.fournisseur.adresse.ville.nom, this.fournisseur.tel);
+      this.notificationService.success("Notification est envoyée avec succées");
+    }
+    else
+      this.notificationService.warn("vous remplir au moins un colis pour envoyer une notification de ramassage de colis !")
 
-    /* firebase.firestore().collection('utilisateurs')
-       .doc(String(this.tokenService.getId())).get().then(result => {
-       this.utilisateur = result.data() as Utilisateur;
-
-       // this.messagingfirebase.sendPushMessage("Pick Up !",this.fournisseur.nomcommercial," Nombre de colis : "+listCodeBarre.length+ " " +listCodeBarre);
-
-     })
-       .catch(err => console.log(err));
-
-
-   }*/
   }
 }

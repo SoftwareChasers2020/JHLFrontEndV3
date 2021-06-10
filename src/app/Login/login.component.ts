@@ -81,7 +81,6 @@ export class LoginComponent implements OnInit {
   handleResponse(data) {
     this.tokenStorage.handle(data);
     this.authService.changeAuthStatus(true);
-    console.log();
     this.utilisateurService.getUtilisateurById(this.tokenStorage.getId()).subscribe(
       obj => {
         this.utilisateur = obj as Utilisateur;
