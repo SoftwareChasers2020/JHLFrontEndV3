@@ -1,26 +1,29 @@
 <h3 style="color: #0061f2"><i class="fa fa-angle-right" style="color: #0061f2"></i> Liste des colis en attente</h3>
-<button mat-raised-button color="primary" style="float: right" (click)="SendNotification()" title="Envoyer Notification">
-  <i class="fas fa-print"></i> Envoyer Notification
-</button>
+
 <div class="example-header" fxLayout="row">
 
   <div class="search-div">
     <!--   <button mat-raised-button (click)="print()" title="Print">
           <mat-icon>add</mat-icon>Ajouter
         </button>-->
-    <mat-form-field class="search-form-field" floatLabel="never">
-      <input matInput [(ngModel)]="searchKey" placeholder="Rechercher" autocomplete="off" (keyup)="applyFilter()">
-      <button mat-button matSuffix mat-icon-button aria-label="Clear" *ngIf="searchKey" (click)="onSearchClear()">
+    <mat-form-field style="width: 40%; float: top"  >
+      <input  matInput [(ngModel)]="searchKey"   placeholder="Rechercher" autocomplete="off" (keyup)="applyFilter()">
+      <button mat-button matSuffix mat-icon-button aria-label="Clear" *ngIf="searchKey"  (click)="onSearchClear()">
         <mat-icon>close</mat-icon>
       </button>
     </mat-form-field>
-    <button mat-raised-button color="primary" (click)="printManifeste()" title="Imprimer manifeste">
+    <button mat-raised-button color="primary" style="margin-left: 10px" (click)="printManifeste()" title="Imprimer manifeste">
       <i class="fas fa-print"></i> Imprimer manifeste
     </button>
-    <button mat-raised-button color="warn" (click)="print()" title="Imprimer multiple bons de livraison">
+    <button mat-raised-button color="primary"  style="margin-left: 10px" (click)="print()" title="Imprimer multiple bons de livraison">
       <i class="fas fa-print"></i> impression multiple bons de livraison
     </button>
-
+    <button mat-raised-button  color="warn" style="margin-left: 10px" (click)="SendNotification()" title="Envoyer Notification">
+      <i class="fas fa-bell"></i> Envoyer Notification
+    </button>
+<!--    <button mat-raised-button  style="color: #be2617; background-color: #fbe6b1" (click)="SendNotification()" title="Envoyer Notification">
+      <i class="fas fa-bell"></i> Envoyer Notification
+    </button>-->
   </div>
 </div>
 <div class="example-container mat-elevation-z8">
@@ -111,7 +114,9 @@
 
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
     <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
-
+    <tr class="mat-row" *matNoDataRow>
+      <td class="mat-cell" colspan="4" style="text-align: center"><b style="color: red">Aucun colis en attente existe</b></td>
+    </tr>
     <!--  Row shown when there is no matching data.-->
     <!--   <mat-row *matNoDataRow>
          <mat-cell colspan="4">No data matching the filter </mat-cell>

@@ -49,6 +49,9 @@ export class UtilisateurService {
   get NomCommercial(){
     return this.formGroup.get('NomCommercial');
   }
+  get Active(){
+    return this.formGroup.get('Active');
+  }
   get ConfirmPassword(){
     return this.formGroup.get('ConfirmPassword');
   }
@@ -65,7 +68,8 @@ export class UtilisateurService {
     Email: ['', [Validators.email, Validators.required]],
     Tel: ['', [Validators.required, Validators.pattern('[0-9 ]{8}')]],
     Gouvernorat: new FormControl('', Validators.required),
-    Ville: new FormControl('', Validators.required)
+    Ville: new FormControl('', Validators.required),
+    Active: new FormControl(null)
   }, { validator: this.passwordMatchValidator('Password', 'ConfirmPassword')});
 
   getUtilisateurById(id: any){
@@ -117,6 +121,14 @@ export class UtilisateurService {
     );
   }
 
+  getActive(value : number): boolean {
 
+    return value === 1;
+  }
+  getStatut() {
+    if(this.Active.value)
+      return "Active";
+    return "Desactive";
+  }
 
 }

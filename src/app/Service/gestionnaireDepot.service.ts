@@ -27,7 +27,8 @@ export class GestionnaireDepotService {
     Email: ['', [Validators.email, Validators.required]],
     Tel: ['', [Validators.required, Validators.pattern('[0-9 ]{8}')]],
     Gouvernorat: new FormControl('', Validators.required),
-    Ville: new FormControl('', Validators.required)
+    Ville: new FormControl('', Validators.required),
+    Active: new FormControl(null)
   }, { validator: this.utilisateurService.passwordMatchValidator('Password', 'ConfirmPassword')});
 
 
@@ -67,8 +68,20 @@ export class GestionnaireDepotService {
   get ConfirmPassword(){
     return this.formGroup.get('ConfirmPassword');
   }
+  get Active(){
+    return this.formGroup.get('Active');
+  }
 
 
+  getActive(value : number): boolean {
+
+    return value === 1;
+  }
+  getStatut() {
+    if(this.Active.value)
+      return "Active";
+    return "Desactive";
+  }
 
   getAllGestionnaireDepots() {
 

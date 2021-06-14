@@ -101,7 +101,10 @@
               </mat-select>
               <mat-error>Selectionner une ville</mat-error>
             </mat-form-field>
-
+            <mat-slide-toggle formControlName="Active"
+                              [checked]="LService.getActive(row.active)"
+                              class="example-margin"
+                              color="primary"> {{LService.getStatut()}}</mat-slide-toggle>
 
 <!--            <mat-form-field>
               <input  [type]="hide ? 'password' : 'text'" formControlName="Password" matInput placeholder="Mot de passe">

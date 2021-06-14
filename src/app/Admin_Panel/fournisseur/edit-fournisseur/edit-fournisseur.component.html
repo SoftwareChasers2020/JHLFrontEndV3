@@ -93,6 +93,10 @@
               <mat-error>Selectionner une ville</mat-error>
             </mat-form-field>
 
+            <mat-slide-toggle formControlName="Active"
+                              [checked]="utilisateurService.getActive(row.active)"
+                              class="example-margin"
+                              color="primary"> {{utilisateurService.getStatut()}}</mat-slide-toggle>
           <!--  <mat-form-field>
               <input  [type]="hide ? 'password' : 'text'" formControlName="Password" matInput placeholder="Mot de passe">
               <button type="button" mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">

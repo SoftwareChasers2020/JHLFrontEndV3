@@ -244,9 +244,9 @@ export class AddFeuillerouteComponent implements OnInit {
             .subscribe(data => {
 
             }, error => console.log(error));
-          console.log(x);
+
           this.listLigneFeuilleRoute.push(new LigneFeuilleRoute(x));
-          console.log(this.listLigneFeuilleRoute);
+
         }
       );
 

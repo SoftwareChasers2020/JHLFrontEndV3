@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpErrorResponse, HttpParams} from '@angular/common/http';
 import {Colis} from '../../Model/GestColis/colis';
-import {Observable} from 'rxjs';
+import {Observable, throwError} from 'rxjs';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {Client} from '../../Model/GestColis/client';
 import {Ville} from 'src/app/Model/ville';
@@ -9,6 +9,8 @@ import {TokenStorageService} from '../Security/token-storage.service';
 import {Etat} from '../../Model/GestColis/etat';
 import {NotificationService} from '../notification.service';
 import {LigneFeuilleRoute} from '../../Model/GestColis/ligne-feuille-route';
+import {catchError, retry} from "rxjs/operators";
+import {Message} from "../../Model/PaginationColis/Message";
 
 @Injectable({
   providedIn: 'root'
@@ -39,7 +41,7 @@ export class ColisService {
     Commentaire : null,
     DesignationEchange: null,
     NbArticleEchange: null,
-    AdressDispo : null,
+    AdressDispo : new FormControl('', Validators.required),
     Prix : ['', Validators.required],
     select : new FormControl('', Validators.required)
 
@@ -211,5 +213,37 @@ export class ColisService {
     return this.http.put(this.urlpath + "updateAllColis/" , listColis );
   }
 
+  findByFournisseurId(id)
+  {
+    return this.http.get<Colis[]>(this.urlpath +"ColisForFournisseur/"+id)
+  }
 
+
+  getAllColisByAdminPagination(pageNumber: number,
+                               pageSize: number,){
+    let params = new HttpParams();
+
+    // Begin assigning parameters
+    params = params.append('page', pageNumber.toString());
+    params = params.append('size', pageSize.toString());
+    return this.http.get<Message>(this.urlpath + "admin/pagination", { params: params })
+      .pipe(retry(3),
+        catchError(this.handleError));
+  }
+
+  private handleError(error: HttpErrorResponse) {
+    if (error.error instanceof ErrorEvent) {
+      // A client-side or network error occurred. Handle it accordingly.
+      console.error('An error occurred:', error.error.message);
+    } else {
+      // The backend returned an unsuccessful response code.
+      // The response body may contain clues as to what went wrong,
+      console.error(
+        `Backend returned code ${error.status}, ` +
+        `body was: ${error.error}`);
+    }
+    // return an observable with a user-facing error message
+    return throwError(
+      'Something bad happened; please try again later.');
+  };
 }

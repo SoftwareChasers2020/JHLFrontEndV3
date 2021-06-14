@@ -171,12 +171,12 @@ export class ListFeuillerouteComponent implements OnInit {
                 this.printerService.printAngular(this.PrintTemplateTpl);
                 this.printerService.printOpenWindow = true;*/
 
-/*        const manifeste = document.getElementById('feuilleroute');
-        manifeste.style.visibility = 'visible';
+/*        const AjoutAnnonce = document.getElementById('feuilleroute');
+        AjoutAnnonce.style.visibility = 'visible';
         this.printerService.printOpenWindow = false;
         this.printerService.printDiv('feuilleroute');
         this.printerService.printOpenWindow = true;
-        manifeste.style.visibility = 'hidden';*/
+        AjoutAnnonce.style.visibility = 'hidden';*/
 
         setTimeout(() => this.activate(), 1000);
         this.listefeuilleRouteimp.length = 0;

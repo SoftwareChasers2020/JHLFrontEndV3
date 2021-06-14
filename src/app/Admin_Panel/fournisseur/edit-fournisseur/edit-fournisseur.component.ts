@@ -9,10 +9,11 @@ import {VilleService} from '../../../Service/ville.service';
 import {AdministrateurService} from '../../../Service/administrateur.service';
 import {UtilisateurService} from '../../../Service/utilisateur.service';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
-import { Gouvernorat } from 'src/app/Model/gouvernorat';
-import { Ville } from 'src/app/Model/ville';
+import {Gouvernorat} from 'src/app/Model/gouvernorat';
+import {Ville} from 'src/app/Model/ville';
 import {Fournisseur} from '../../../Model/fournisseur';
 import {FournisseurService} from '../../../Service/fournisseur.service';
+import {MatSlideToggleChange} from "@angular/material/slide-toggle";
 
 @Component({
   selector: 'app-edit-fournisseur',
@@ -27,7 +28,9 @@ export class EditFournisseurComponent implements OnInit {
   adr: Adresse = new Adresse();
   step = 0;
   row: Fournisseur;
-  hide =  true;
+  hide = true;
+
+  color: string = "primary";
 
   constructor(private fb: FormBuilder,
               private notificationService: NotificationService,
@@ -43,87 +46,124 @@ export class EditFournisseurComponent implements OnInit {
   }
 
 
-
-
   ngOnInit(): void {
-   this.listGouvernorat = this.gouvernoratService.getAllAGouvernorat();
-   this.listville = this.villeService.getVilleByGouvernoratNom(this.row.adresse.ville.gouvernorat.nom);
 
-   this.utilisateurService.formGroup.patchValue(
+
+    this.listGouvernorat = this.gouvernoratService.getAllAGouvernorat();
+    this.listville = this.villeService.getVilleByGouvernoratNom(this.row.adresse.ville.gouvernorat.nom);
+    this.setSlideToggleValue();
+    this.utilisateurService.formGroup.patchValue(
       {
         id: this.row.idUtilisateur,
         Login: this.row.login,
         Nom: this.row.nom,
         Prenom: this.row.prenom,
-        NomCommercial : this.row.nomcommercial,
+        NomCommercial: this.row.nomcommercial,
         Password: this.row.password,
         Email: this.row.email,
         Tel: this.row.tel,
         Gouvernorat: this.row.adresse.ville.gouvernorat.nom,
-        Ville: this.row.adresse.ville.nom
+        Ville: this.row.adresse.ville.nom,
+
+
       });
 
 
   }
 
-   onsubmit() {
+  setSlideToggleValue()
+  {
+    if(this.row.active === 2 || this.row.active === 0)
+    {
+      this.utilisateurService.formGroup.patchValue(
+        {
+          Active : false
+        }
+      )
+    }
+    else
+    {
+      this.utilisateurService.formGroup.patchValue(
+        {
+          Active : true
+        }
+      )
+    }
+  }
+
+
+  onsubmit() {
 
     this.villeService.getVilleByNom(this.utilisateurService.Ville.value).subscribe(
-       data => {
-         this.f.idUtilisateur = this.utilisateurService.id.value;
-         this.f.login = this.utilisateurService.Login.value;
-         this.f.nomcommercial = this.utilisateurService.NomCommercial.value;
-         this.f.email = this.utilisateurService.Email.value;
-         this.f.nom = this.utilisateurService.Nom.value;
-         this.f.prenom = this.utilisateurService.Prenom.value;
-         this.f.tel = this.utilisateurService.Tel.value;
-         this.f.password = this.utilisateurService.Password.value;
-         this.f.active = 1;
-         this.adr.ville = data;
-         this.f.adresse = this.adr;
-         this.fournisseurService.updateFournisseur(this.f).subscribe(
-           res => {
-             console.log(res);
-             this.dialogRef.close();
-/*             setTimeout(
-               // tslint:disable-next-line:only-arrow-functions
-               function() {
-                 location.reload();
-               }, 500);*/
-             this.notificationService.success("Modification a effectué avec succées");
+      data => {
+        this.f.idUtilisateur = this.utilisateurService.id.value;
+        this.f.login = this.utilisateurService.Login.value;
+        this.f.nomcommercial = this.utilisateurService.NomCommercial.value;
+        this.f.email = this.utilisateurService.Email.value;
+        this.f.nom = this.utilisateurService.Nom.value;
+        this.f.prenom = this.utilisateurService.Prenom.value;
+        this.f.tel = this.utilisateurService.Tel.value;
+        this.f.password = this.utilisateurService.Password.value;
 
-           }, error => console.log(error)
-         );
-           }
-         );
+        this.adr.ville = data;
+        this.f.adresse = this.adr;
+        if(this.utilisateurService.Active.value === true)
+        {
+          this.f.active = 1;
+        }
+    else {
+          this.f.active = 2;
+        }
 
+        this.fournisseurService.updateFournisseur(this.f).subscribe(
+          res => {
+            console.log(res);
+            this.dialogRef.close();
+            /*             setTimeout(
+                           // tslint:disable-next-line:only-arrow-functions
+                           function() {
+                             location.reload();
+                           }, 500);*/
+            this.notificationService.success("Modification a effectué avec succées");
 
-   }
+          }, error => console.log(error)
+        );
+      }
+    );
 
-
-   changevilleByGovNom(val: any) {
-
-     this.listville = this.villeService.getVilleByGouvernoratNom(val);
-   }
-
-
-   onClose() {
-     this.utilisateurService.formGroup.reset();
-     this.dialogRef.close();
-   }
+  }
 
 
-   setStep(index: number) {
-     this.step = index;
-   }
+  changevilleByGovNom(val: any) {
 
-   nextStep() {
-     this.step++;
-   }
+    this.listville = this.villeService.getVilleByGouvernoratNom(val);
+  }
 
 
-   onClear() {
-     this.utilisateurService.formGroup.reset();
+  onClose() {
+    this.utilisateurService.formGroup.reset();
+    this.dialogRef.close();
+  }
 
-   }
+
+  setStep(index: number) {
+    this.step = index;
+  }
+
+  nextStep() {
+    this.step++;
+  }
+
+
+  onClear() {
+    this.utilisateurService.formGroup.reset();
+
+  }
+
+
+
+
+
+
+
 }

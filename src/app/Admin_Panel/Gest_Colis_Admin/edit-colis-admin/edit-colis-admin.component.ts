@@ -110,6 +110,7 @@ export class EditColisAdminComponent implements OnInit {
 
           etat => {this.colis.etat = etat;
 
+
                    this.villeService.getVilleByNom(this.Ville.value).subscribe(
       data => {
         this.colis.codeBarre = this.CodeBarre.value;
@@ -134,6 +135,11 @@ export class EditColisAdminComponent implements OnInit {
           this.colis.nbArticleEchange = null;
           this.colis.echange = false;
         }
+        if(this.colis.etat.titre === "Livré")
+        {
+          this.colis.date_livraison = new Date();
+        }
+
         this.colisService.updateColis(this.colis).subscribe(
           res => {
             console.log(res);

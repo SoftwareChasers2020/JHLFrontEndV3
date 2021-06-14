@@ -11,7 +11,6 @@ import {Ville} from '../../Model/ville';
 import {Observable, Subscription} from 'rxjs';
 import {NotificationService} from '../../Service/notification.service';
 import {TokenStorageService} from '../../Service/Security/token-storage.service';
-import {ManifesteComponent} from '../manifeste/manifeste.component';
 import {NgxPrinterService} from 'ngx-printer';
 import {FournisseurService} from '../../Service/fournisseur.service';
 import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
@@ -234,15 +233,10 @@ export class ListColisComponent implements OnInit {
 
   printManifeste() {
 
-
-    /*  this.printerService.printOpenWindow = false;
-      this.printerService.printDiv('Manifeste');
-      this.printerService.printOpenWindow = true;*/
     const manifeste = document.getElementById('Manifeste');
     manifeste.style.visibility = 'visible';
     const printContents = document.getElementById('Manifeste').innerHTML;
-    // tslint:disable-next-line:prefer-const
-    const originalContents = document.body.innerHTML;
+
 
     document.body.innerHTML = printContents;
 
@@ -283,11 +277,11 @@ export class ListColisComponent implements OnInit {
     this.dialog.open(DetailColisAdminComponent, dialogConfig);
   }
 
-  imprimer(fournisseur) {
+  imprimer(colis) {
 
     this.colis.length = 0;
 
-    this.colis.push(fournisseur);
+    this.colis.push(colis);
     this.printerService.printOpenWindow = false;
     this.printerService.printAngular(this.PrintTemplateTpl);
     this.printerService.printOpenWindow = true;

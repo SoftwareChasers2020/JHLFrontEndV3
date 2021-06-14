@@ -39,9 +39,10 @@ export class EditLivreurComponent implements OnInit {
   ) {this.row = data; }
 
   ngOnInit(): void {
+
     this.listGouvernorat = this.gouvernoratService.getAllAGouvernorat();
     this.listville = this.villeService.getVilleByGouvernoratNom(this.row.adresse.ville.gouvernorat.nom);
-
+    this.setSlideToggleValue();
     this.LService.formGroup.patchValue(
       {
         id : this.row.idUtilisateur,
@@ -73,7 +74,11 @@ export class EditLivreurComponent implements OnInit {
         this.l.date_embauche = this.LService.dateEmbauche.value;
         this.l.email = this.LService.Email.value;
         this.l.num_urgence = this.LService.NumUrgence.value;
-        this.l.active = 1;
+        if (this.LService.Active.value === true) {
+          this.l.active = 1;
+        } else {
+          this.l.active = 2;
+        }
         this.adr.ville = data;
         this.l.adresse = this.adr;
         this.LService.updateLivreur(this.l).subscribe(
@@ -94,7 +99,25 @@ export class EditLivreurComponent implements OnInit {
       });
   }
 
-
+  setSlideToggleValue()
+  {
+    if(this.row.active === 2 || this.row.active === 0)
+    {
+      this.LService.formGroup.patchValue(
+        {
+          Active : false
+        }
+      )
+    }
+    else
+    {
+      this.LService.formGroup.patchValue(
+        {
+          Active : true
+        }
+      )
+    }
+  }
   changevilleByGovNom(val: any){
 
     this.listville = this.villeService.getVilleByGouvernoratNom(val);

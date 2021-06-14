@@ -1,11 +1,19 @@
-<h3 style="color: #0061f2"><i class="fa fa-angle-right" style="color: #0061f2"></i> Liste des colis </h3>
+
+  <!-- Account details card-->
+  <div class="card mb-4">
+    <div class="card-header">
+      <strong>Liste des colis</strong></div>
+    <div class="card-body">
+
+
+
 <div class="example-header" fxLayout="row">
   <div class="search-div">
     <!--   <button mat-raised-button (click)="print()" title="Print">
           <mat-icon>add</mat-icon>Ajouter
         </button>-->
-    <mat-form-field class="search-form-field" floatLabel="never">
-      <input matInput [(ngModel)]="searchKey" placeholder="Rechercher" autocomplete="off" (keyup)="applyFilter()">
+    <mat-form-field style="width: 50%; float: top"  >
+      <input  matInput [(ngModel)]="searchKey"   placeholder="Rechercher" autocomplete="off" (keyup)="applyFilter()">
       <button mat-button matSuffix mat-icon-button aria-label="Clear" *ngIf="searchKey"  (click)="onSearchClear()">
         <mat-icon>close</mat-icon>
       </button>
@@ -14,7 +22,7 @@
   </div>
 </div>
 <div class="example-container mat-elevation-z8">
-  <mat-table  [dataSource]="dataSource" matSort >
+  <mat-table  [dataSource]="dataSource" matSort  >
     <!-- ID Column -->
     <ng-container matColumnDef="Code">
       <mat-header-cell *matHeaderCellDef mat-sort-header> Code </mat-header-cell>
@@ -135,12 +143,22 @@
 
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
     <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    <tr class="mat-row" *matNoDataRow>
+      <td class="mat-cell" colspan="4" style="text-align: center"><b style="color: red">Aucun colis existe</b></td>
+    </tr>
 
-    <!--  Row shown when there is no matching data.-->
-    <!--   <mat-row *matNoDataRow>
-         <mat-cell colspan="4">No data matching the filter </mat-cell>
-       </mat-row>-->
   </mat-table>
+  <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" [pageSize]="10"></mat-paginator>
 
-  <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+<!-- <ul class="pagination justify-content-center">
+    <li class="page-item"><a (click)="previousClick()" class="page-link">Previous</a></li>
+    <li *ngFor='let index of pageIndexes' class="page-item" [ngClass]="active(index)">
+      <a (click)="getPaginationWithIndex(index)" class="page-link">
+        {{index + 1}}
+      </a>
+    </li>
+    <li class="page-item"><a (click)="nextClick()" class="page-link">Next</a></li>
+  </ul>-->
+
 </div>
+    </div></div>

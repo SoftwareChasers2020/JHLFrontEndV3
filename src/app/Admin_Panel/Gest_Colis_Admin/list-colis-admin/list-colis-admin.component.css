@@ -16,3 +16,7 @@
 .paddingEtat {
   padding-right: 35px;
 }
+.card-header{
+  color: #0061f2;
+  font-weight: 500;
+}

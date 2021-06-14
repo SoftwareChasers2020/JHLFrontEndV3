@@ -13,3 +13,7 @@
   overflow-y: scroll;
   height:440px;
 }
+.background-slide{
+  background-color: #1da1f5 !important;
+  background-image: linear-gradient(135deg, #1da1f5 0%, rgba(128, 57, 218, 0.8) 100%) !important;
+}

@@ -96,7 +96,10 @@
               </mat-select>
               <mat-error>Selectionner une ville</mat-error>
             </mat-form-field>
-
+            <mat-slide-toggle formControlName="Active"
+                              [checked]="GDService.getActive(row.active)"
+                              class="example-margin"
+                              color="primary"> {{GDService.getStatut()}}</mat-slide-toggle>
 
          <!--   <mat-form-field>
               <input  [type]="hide ? 'password' : 'text'" formControlName="Password" matInput placeholder="Mot de passe">

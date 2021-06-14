@@ -12,12 +12,10 @@ import {LoginComponent} from './Login/login.component';
 import {AfterAuthGuard} from './guards/after-auth.guard';
 import {AccueilFournisseurComponent} from './UserPanel/accueil-fournisseur/accueil-fournisseur.component';
 import {AccueilGestionnaireComponent} from './UserPanel/accueil-gestionnaire/accueil-gestionnaire.component';
-import {AccueilLivreurComponent} from './UserPanel/accueil-livreur/accueil-livreur.component';
 import {EditProfilComponent} from './Admin_Panel/fournisseur/edit-profil/edit-profil.component';
 import {AddColisComponent} from './Colis/add-colis/add-colis.component';
 import {AuthGuard} from './guards/auth.guard';
 import {ListColisComponent} from './Colis/list-colis/list-colis.component';
-import {ManifesteComponent} from './Colis/manifeste/manifeste.component';
 import {ListColisAdminComponent} from './Admin_Panel/Gest_Colis_Admin/list-colis-admin/list-colis-admin.component';
 import {NewColisAdminComponent} from './Admin_Panel/Gest_Colis_Admin/new-colis-admin/new-colis-admin.component';
 import {EditColisAdminComponent} from './Admin_Panel/Gest_Colis_Admin/edit-colis-admin/edit-colis-admin.component';
@@ -25,10 +23,10 @@ import {EditColisComponent} from './Colis/edit-colis/edit-colis.component';
 import {AddFeuillerouteComponent} from './FeuilleRoute/add-feuilleroute/add-feuilleroute.component';
 import {ListFeuillerouteComponent} from './FeuilleRoute/list-feuilleroute/list-feuilleroute.component';
 import {ConsulterFeuilleRouteComponent} from './FeuilleRoute/consulter-feuille-route/consulter-feuille-route.component';
+import {AddAnnonceComponent} from "./Admin_Panel/add-annonce/add-annonce.component";
 
 
 const routes: Routes = [
-  {path: '', component: ManifesteComponent},
 /*      {path: '', component: AccueilComponent},*/
       {path: 'inscriptionF', component: InscriptionFComponent},
        {path: 'login', component: LoginComponent , canActivate: [AfterAuthGuard]},
@@ -37,14 +35,13 @@ const routes: Routes = [
           {path: 'coli', component: AddColisComponent},
           {path: 'accueilFournisseur', component: AccueilFournisseurComponent},
           {path: 'accueilGestionnaire', component: AccueilGestionnaireComponent},
-          {path: 'accueilLivreur', component: AccueilLivreurComponent},
           {path: 'List_Fournisseur', component: ListFournisseurComponent},
           {path: 'List_GestDepot', component: ListGestionnaireDepotComponent},
           {path: 'List_Livreur', component: ListLivreurComponent},
           {path: 'DemandeFour/:id', component: DemandeFournisseurComponent},
           {path: 'listDemandeFour', component: ListeDemandeInscriptionComponent},
           {path: 'editProfil/:id', component: EditProfilComponent},
-
+              {path:'annonce', component: AddAnnonceComponent},
           {path: 'coli', component: AddColisComponent},
           {path: 'ListColis', component: ListColisComponent},
           {path: 'ListColisAdmin', component: ListColisAdminComponent},
@@ -56,7 +53,7 @@ const routes: Routes = [
               {path: 'ListFeuilleRoute', component: ListFeuillerouteComponent},
               {path: 'Consulterfeuille/:idFeuilleRoute', component: ConsulterFeuilleRouteComponent},
           {path: '', component: DashbordComponent},
-    ], canActivate: [AuthGuard]},
+    ], canActivate: [AuthGuard],},
 
 
 

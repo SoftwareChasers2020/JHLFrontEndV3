@@ -29,5 +29,7 @@ export class Colis {
   date_ajout: Date;
   client: Client;
   etat: Etat;
+  remarque: string;
+  modepaiement: number;
   ligneFeuilleRouteColis: LigneFeuilleRoute[];
 }

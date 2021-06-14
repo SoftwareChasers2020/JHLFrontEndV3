@@ -4,10 +4,10 @@ import {Observable} from 'rxjs';
 import {FormBuilder, FormControl, Validators} from '@angular/forms';
 
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
-import { Ville } from 'src/app/Model/ville';
+import {Ville} from 'src/app/Model/ville';
 import {GestionnaireDepot} from '../../../Model/GestionnaireDepot';
 import {Adresse} from '../../../Model/adresse';
-import { Gouvernorat } from 'src/app/Model/gouvernorat';
+import {Gouvernorat} from 'src/app/Model/gouvernorat';
 import {NotificationService} from '../../../Service/notification.service';
 import {GouvernoratService} from '../../../Service/gouvernorat.service';
 import {VilleService} from '../../../Service/ville.service';
@@ -38,23 +38,23 @@ export class EditGestionnaireDepotComponent implements OnInit {
               public GDService: GestionnaireDepotService,
               public dialogRef: MatDialogRef<EditGestionnaireDepotComponent>,
               @Inject(MAT_DIALOG_DATA) public data: any
-  ) {this.row = data;
-     console.log(this.row); }
-
-
-
+  ) {
+    this.row = data;
+    console.log(this.row);
+  }
 
 
   ngOnInit(): void {
+
     this.listGouvernorat = this.gouvernoratService.getAllAGouvernorat();
     this.listville = this.villeService.getVilleByGouvernoratNom(this.row.adresse.ville.gouvernorat.nom);
-
+    this.setSlideToggleValue();
     this.GDService.formGroup.patchValue(
       {
-        id : this.row.idUtilisateur,
-        Login : this.row.login,
-        Nom : this.row.nom,
-        Prenom : this.row.prenom,
+        id: this.row.idUtilisateur,
+        Login: this.row.login,
+        Nom: this.row.nom,
+        Prenom: this.row.prenom,
         Password: this.row.password,
         Email: this.row.email,
         Tel: this.row.tel,
@@ -66,6 +66,22 @@ export class EditGestionnaireDepotComponent implements OnInit {
 
   }
 
+  setSlideToggleValue() {
+    if (this.row.active === 2 || this.row.active === 0) {
+      this.GDService.formGroup.patchValue(
+        {
+          Active: false
+        }
+      );
+    } else {
+      this.GDService.formGroup.patchValue(
+        {
+          Active: true
+        }
+      );
+    }
+  }
+
   onsubmit() {
 
     this.villeService.getVilleByNom(this.GDService.Ville.value).subscribe(
@@ -75,22 +91,25 @@ export class EditGestionnaireDepotComponent implements OnInit {
         this.gd.prenom = this.GDService.formGroup.get('Prenom').value;
         this.gd.nom = this.GDService.formGroup.get('Nom').value;
         this.gd.password = this.GDService.formGroup.get('Password').value;
-        this.gd.tel =  this.GDService.formGroup.get('Tel').value;
+        this.gd.tel = this.GDService.formGroup.get('Tel').value;
         this.gd.email = this.GDService.formGroup.get('Email').value;
         this.gd.date_embauche = this.GDService.formGroup.get('dateEmbauche').value;
         this.adr.ville = data;
         this.gd.adresse = this.adr;
-        this.gd.active = 1;
+        if (this.GDService.Active.value === true) {
+          this.gd.active = 1;
+        } else {
+          this.gd.active = 2;
+        }
         this.GDService.updateGestionnaireDepot(this.gd).subscribe(
-          res =>
-          {
+          res => {
             console.log(res);
             this.dialogRef.close();
-/*            setTimeout(
-              // tslint:disable-next-line:only-arrow-functions
-              function(){
-                location.reload();
-              }, 500);*/
+            /*            setTimeout(
+                          // tslint:disable-next-line:only-arrow-functions
+                          function(){
+                            location.reload();
+                          }, 500);*/
             this.notificationService.success("Modification a effectué avec succées");
 
           }, error => console.log(error)
@@ -100,18 +119,16 @@ export class EditGestionnaireDepotComponent implements OnInit {
   }
 
 
-  changevilleByGovNom(val: any){
+  changevilleByGovNom(val: any) {
 
     this.listville = this.villeService.getVilleByGouvernoratNom(val);
   }
 
 
-  onClose()
-  {
+  onClose() {
     this.GDService.formGroup.reset();
     this.dialogRef.close();
   }
-
 
 
   setStep(index: number) {

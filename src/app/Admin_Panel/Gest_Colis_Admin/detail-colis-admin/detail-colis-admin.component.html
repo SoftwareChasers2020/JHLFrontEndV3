@@ -51,15 +51,15 @@
               <th>
                 Date d'ajout
               </th>
-              <td> {{row.date_ajout | date:'dd/MM/yyyy HH:mm'}} </td>
+              <td> {{row.date_ajout | date:'yyyy-MM-dd HH:mm'}} </td>
             </tr>
             <tr>
               <th> Date de ramassage </th>
-              <td> {{row.date_ramassage}} </td>
+              <td> {{row.date_ramassage| date:'yyyy-MM-dd HH:mm'}} </td>
             </tr>
             <tr>
               <th> Date de Livraison </th>
-              <td> {{row.date_livraison}} </td>
+              <td> {{row.date_livraison | date:'yyyy-MM-dd HH:mm'}} </td>
             </tr>
 
             <tr *ngIf="tokenStorage.getRole() === 'Administrateur'">
@@ -70,6 +70,16 @@
               <td *ngIf="row.idFournisseur != 0">
                 {{row.nomfournisseur }}
               </td>
+            </tr>
+            <tr>
+              <th> Mode de paiement </th>
+              <td *ngIf="row.modepaiement === 1"> Espéce </td>
+              <td *ngIf="row.modepaiement === 2"> Chèque </td>
+              <td *ngIf="row.modepaiement === 3"> chèque + espéce</td>
+            </tr>
+            <tr>
+              <th> Remarque Livreur </th>
+              <td> {{row.remarque}} </td>
             </tr>
 
           </table>

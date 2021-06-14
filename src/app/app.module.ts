@@ -41,14 +41,12 @@ import {LoginComponent} from './Login/login.component';
 import {DashbordComponent} from './Dashbord/dashbord.component';
 import { AccueilFournisseurComponent } from './UserPanel/accueil-fournisseur/accueil-fournisseur.component';
 import { AccueilGestionnaireComponent } from './UserPanel/accueil-gestionnaire/accueil-gestionnaire.component';
-import { AccueilLivreurComponent } from './UserPanel/accueil-livreur/accueil-livreur.component';
 import { authInterceptorProviders } from './Service/Security/Helpers/auth-interceptor';
 import { ToastrModule } from 'ngx-toastr';
 import { EditProfilComponent } from './Admin_Panel/fournisseur/edit-profil/edit-profil.component';
 import { AddColisComponent } from './Colis/add-colis/add-colis.component';
 import { ListColisComponent } from './Colis/list-colis/list-colis.component';
 import {MatRadioModule} from '@angular/material/radio';
-import { ManifesteComponent } from './Colis/manifeste/manifeste.component';
 import {NgxPrinterModule} from 'ngx-printer';
 import {NgxPrintModule} from 'ngx-print';
 import { ListColisAdminComponent } from './Admin_Panel/Gest_Colis_Admin/list-colis-admin/list-colis-admin.component';
@@ -71,6 +69,9 @@ import {AsyncPipe} from "@angular/common";
 import {AngularFirestoreModule} from "@angular/fire/firestore";
 import { NotificationComponent } from './notification/notification.component';
 import { DetailNotificationComponent } from './notification/detail-notification/detail-notification.component';
+import {MatSlideToggleModule} from "@angular/material/slide-toggle";
+import { AddAnnonceComponent } from './Admin_Panel/add-annonce/add-annonce.component';
+import { AccueilAdministrateurComponent } from './UserPanel/accueil-administrateur/accueil-administrateur.component';
 
 
 @NgModule({
@@ -102,11 +103,9 @@ import { DetailNotificationComponent } from './notification/detail-notification/
     DashbordComponent,
     AccueilFournisseurComponent,
     AccueilGestionnaireComponent,
-    AccueilLivreurComponent,
     EditProfilComponent,
     AddColisComponent,
     ListColisComponent,
-    ManifesteComponent,
     ListColisAdminComponent,
     NewColisAdminComponent,
     EditColisAdminComponent,
@@ -118,6 +117,9 @@ import { DetailNotificationComponent } from './notification/detail-notification/
     ConsulterFeuilleRouteComponent,
     NotificationComponent,
     DetailNotificationComponent,
+    AddAnnonceComponent,
+    AccueilAdministrateurComponent,
+
 
 
 
@@ -152,7 +154,8 @@ import { DetailNotificationComponent } from './notification/detail-notification/
     AngularFireMessagingModule,
     AngularFireModule.initializeApp(environment.firebase),
     ToastrModule.forRoot(),
-    NgxPrinterModule.forRoot({printOpenWindow: true})
+    NgxPrinterModule.forRoot({printOpenWindow: true}),
+    MatSlideToggleModule
 
   ],
 
