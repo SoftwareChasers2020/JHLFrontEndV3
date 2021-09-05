@@ -219,18 +219,34 @@ export class ColisService {
   }
 
 
-  getAllColisByAdminPagination(pageNumber: number,
-                               pageSize: number,){
+
+    getAllColisByAdminPagination(pageNumber: number,
+                               pageSize: number){
     let params = new HttpParams();
 
     // Begin assigning parameters
     params = params.append('page', pageNumber.toString());
     params = params.append('size', pageSize.toString());
+
     return this.http.get<Message>(this.urlpath + "admin/pagination", { params: params })
       .pipe(retry(3),
         catchError(this.handleError));
   }
 
+  //find by searchKey
+  getAllColisByAdminPaginationAndSearchkey(searchkey :String,pageNumber: number,
+                               pageSize: number){
+    let params = new HttpParams();
+
+    // Begin assigning parameters
+    params = params.append('searchkey', searchkey.toString());
+    params = params.append('page', pageNumber.toString());
+    params = params.append('size', pageSize.toString());
+
+    return this.http.get<Message>(this.urlpath + "/admin/findByAnyThink", { params: params })
+      .pipe(retry(3),
+        catchError(this.handleError));
+  }
   private handleError(error: HttpErrorResponse) {
     if (error.error instanceof ErrorEvent) {
       // A client-side or network error occurred. Handle it accordingly.
@@ -246,4 +262,10 @@ export class ColisService {
     return throwError(
       'Something bad happened; please try again later.');
   };
+
+    getColiPaginationAdminSouhaila (params :any):Observable<any>{
+      return this.http.get<Message>(this.urlpath + "admin/pagination", { params: params })
+        .pipe(retry(3),
+          catchError(this.handleError));
+    }
 }

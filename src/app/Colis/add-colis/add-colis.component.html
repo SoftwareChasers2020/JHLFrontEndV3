@@ -24,7 +24,7 @@
                      [ngClass]="{'is-invalid':colisService.Nom&&colisService.Nom.errors && colisService.Nom.touched}">
               <div *ngIf="colisService.Nom&&colisService.Nom.hasError('required')"
                    class="invalid-feedback">
-                Nom est Obligatoire
+                Nom est Obligatoire*
               </div>
             </div>
             <!-- Form Group (last name)-->
@@ -38,7 +38,7 @@
 
               <div *ngIf="colisService.Prenom&&colisService.Prenom.hasError('required')"
                    class="invalid-feedback">
-                Prenom est Obligatoire
+                Prenom est Obligatoire*
               </div>
             </div>
           </div>
@@ -57,7 +57,7 @@
               </select>
               <div *ngIf="colisService.Gouvernorat&&colisService.Gouvernorat.hasError('required')"
                    class="invalid-feedback">
-                Gouvernorat est Obligatoire
+                Gouvernorat est Obligatoire*
               </div>
             </div>
 
@@ -74,7 +74,7 @@
               </select>
               <div *ngIf="colisService.Ville&&colisService.Ville.hasError('required')"
                    class="invalid-feedback">
-                Ville est Obligatoire
+                Ville est Obligatoire*
               </div>
             </div>
           </div>
@@ -86,7 +86,7 @@
                      [ngClass]="{'is-invalid':colisService.Tel1&&colisService.Tel1.errors && colisService.Tel1.touched}">
               <div *ngIf="colisService.Tel1&&colisService.Tel1.hasError('required')"
                    class="invalid-feedback">
-                Veillez choisir au moins un numéro de téléphone
+                Veillez choisir au moins un numéro de téléphone*
               </div>
             </div>
             <div class="form-group col-md-6">
@@ -103,7 +103,7 @@
                      [ngClass]="{'is-invalid':colisService.Designation&&colisService.Designation.errors && colisService.Designation.touched}">
               <div *ngIf="colisService.Designation&&colisService.Designation.hasError('required')"
                    class="invalid-feedback">
-                Designation est Obligatoire
+                Designation est Obligatoire*
               </div>
             </div>
             <div class="form-group col-md-6">
@@ -115,7 +115,7 @@
                      [ngClass]="{'is-invalid':colisService.NbArticle&&colisService.NbArticle.errors && colisService.NbArticle.touched}">
               <div *ngIf="colisService.NbArticle&&colisService.NbArticle.hasError('required')"
                    class="invalid-feedback">
-                Nombre d'article est Obligatoire
+                Nombre d'article est Obligatoire*
               </div>
             </div>
           </div>
@@ -127,7 +127,7 @@
                      [ngClass]="{'is-invalid':colisService.Prix&&colisService.Prix.errors && colisService.Prix.touched}">
               <div *ngIf="colisService.Prix&&colisService.Prix.hasError('required')"
                    class="invalid-feedback">
-                Prix est Obligatoire
+                Prix est Obligatoire*
               </div>
             </div>
 
@@ -152,7 +152,7 @@
                        [ngClass]="{'is-invalid':colisService.DesignationEchange&&colisService.DesignationEchange.errors && colisService.DesignationEchange.touched}">
                 <div *ngIf="colisService.DesignationEchange&&colisService.DesignationEchange.hasError('required')"
                      class="invalid-feedback">
-                  DesignationEchange est Obligatoire
+                  DesignationEchange est Obligatoire*
                 </div>
               </div>
             </div>
@@ -172,7 +172,7 @@
                         [ngClass]="{'is-invalid':colisService.AdressDispo&&colisService.AdressDispo.errors && colisService.AdressDispo.touched}"></textarea>
               <div *ngIf="colisService.AdressDispo&&colisService.AdressDispo.hasError('required')"
                    class="invalid-feedback">
-                Veuillez saisir l'adresse de disponibilité de client
+                Veuillez saisir l'adresse de disponibilité de client*
               </div>
 
             </div>

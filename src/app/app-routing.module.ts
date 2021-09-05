@@ -24,10 +24,11 @@ import {AddFeuillerouteComponent} from './FeuilleRoute/add-feuilleroute/add-feui
 import {ListFeuillerouteComponent} from './FeuilleRoute/list-feuilleroute/list-feuilleroute.component';
 import {ConsulterFeuilleRouteComponent} from './FeuilleRoute/consulter-feuille-route/consulter-feuille-route.component';
 import {AddAnnonceComponent} from "./Admin_Panel/add-annonce/add-annonce.component";
+import {SiteWebComponent} from "./site-web/site-web.component";
 
 
 const routes: Routes = [
-/*      {path: '', component: AccueilComponent},*/
+      {path: '', component: SiteWebComponent},
       {path: 'inscriptionF', component: InscriptionFComponent},
        {path: 'login', component: LoginComponent , canActivate: [AfterAuthGuard]},
 

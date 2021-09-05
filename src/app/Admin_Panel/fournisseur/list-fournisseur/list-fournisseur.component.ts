@@ -63,7 +63,7 @@ export class ListFournisseurComponent implements OnInit {
         };
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
-        console.log(this.listfournisseur);
+        //console.log(this.listfournisseur);
       },
       error => console.log(error)
 

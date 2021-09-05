@@ -40,7 +40,7 @@ export class ListLivreurComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.pipe = new DatePipe('en');
+  //  this.pipe = new DatePipe('en');
     this.Lservice.getAllLivreurs().subscribe(
       res => {
 

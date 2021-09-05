@@ -94,13 +94,10 @@ export class TemplateComponent implements OnInit {
   }
 
   getAllNotification()
-  { //itemsInView = items.slice(startIndex, endIndex);
-   // this.listnotification = this.firestore.collection('Notification').valueChanges();
+  {
     this.listnotification =    this.firestore.collection('Notification',
-        ref => ref.where('to', '==','/topics/TopicGestionnaire')).valueChanges();
-   /* const data$ = this.fireStore.collection('Sales',
-      ref => ref.where('TransactionDate', '==', formatDate(new
-      Date,'yyyy/MM/dd', 'en')));*/
+        ref => ref.where('to', '==','/topics/TopicGestionnaire')).valueChanges({idField: 'id'});
+
   }
 
   getDetailNotif(notif: any) {
@@ -113,6 +110,16 @@ export class TemplateComponent implements OnInit {
     dialogConfig.height = '70%';
     dialogConfig.panelClass = "marg";
 
-    this.dialog.open(DetailNotificationComponent, dialogConfig);
+    this.dialog.open(DetailNotificationComponent, dialogConfig).afterClosed().subscribe(
+      result => {
+        this.firestore.collection('Notification').doc(notif.id).update({
+          dateVu: new Date()
+        }).then(result => {
+          console.log(result);
+
+        })
+          .catch(err => console.log(err))
+      }
+    );
   }
 }

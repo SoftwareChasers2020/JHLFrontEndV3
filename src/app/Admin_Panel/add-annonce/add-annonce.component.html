@@ -1,0 +1,13 @@
+<div class="card">
+  <div class="card-header">
+    <strong class="card-title" style="color: red;"><h5 style="text-align: center">Annonce</h5> </strong>
+
+
+  </div>
+  <div class="card-body">
+    <p id="annonce" style="color: #0061f2; text-align: center" ></p>
+    <textarea id="Commentaire" class="form-control" [(ngModel)]="x" *ngIf="tokenStorage.getRole()==='Administrateur'"></textarea>
+    <button mat-raised-button color="primary" style="margin-left: 50%; margin-right: 50%" (click)="addannonce()" *ngIf="tokenStorage.getRole()==='Administrateur'">Ajouter</button>
+
+  </div>
+</div>

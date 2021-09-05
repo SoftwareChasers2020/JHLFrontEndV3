@@ -22,10 +22,15 @@
               <td> {{row.client.nom}} {{row.client.prenom}} </td>
             </tr>
 
-            <tr>
+           <!-- <tr>
               <th> Téléphone </th>
               <td *ngIf="row.client.tel2.length != 0"> {{row.client.tel1}} / {{row.client.tel2}} </td>
               <td *ngIf="row.client.tel2.length == 0"> {{row.client.tel1}}</td>
+            </tr>-->
+            <tr>
+              <th> Téléphone </th>
+              <td *ngIf="(row.client.tel2 != null)"> {{row.client.tel1}} / {{row.client.tel2}} </td>
+              <td *ngIf="(row.client.tel2 == null)"> {{row.client.tel1}}</td>
             </tr>
             <tr>
               <th> Gouvernorat </th>

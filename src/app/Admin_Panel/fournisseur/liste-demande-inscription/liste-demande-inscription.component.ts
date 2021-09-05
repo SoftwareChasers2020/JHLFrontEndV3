@@ -28,7 +28,7 @@ export class ListeDemandeInscriptionComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.fournisseurService.getFournisseurNoActive().subscribe(
+    this.fournisseurService.findAllByOrderByActiveAsc().subscribe(
       res => {
         this.listFournisseurs = res as Fournisseur[];
         const listFournisseurAfterFilterIdFour0 =   this.listFournisseurs.filter(x => x.idUtilisateur > 0);

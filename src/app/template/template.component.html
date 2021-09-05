@@ -10,9 +10,14 @@
       </div>
       <div class="sidebar-brand-text mx-3">JHL Delivery</div>
     </a>-->
-    <img src="assets/bbbbb.png" height="95px"/>
+<!--
+    <img src="assets/img/LogoJHLV2.gif"  />
+-->
+    <img src="assets/img/LogoJHLV3.png" style="width: 200px; height: 60px;margin-top: 5px"  />
+
     <!-- Divider -->
     <hr class="sidebar-divider my-0">
+    <br>
     <!-- Nav Item - Dashboard -->
     <li class="nav-item active" *ngIf="this.tokenStorage.getRole()==='Administrateur'">
       <a class="nav-link" routerLink="/temp">
@@ -33,7 +38,10 @@
 
 
     <!-- Nav Item - Pages Collapse Menu -->
-
+    <hr class="sidebar-divider" *ngIf="this.tokenStorage.getRole()==='Administrateur'">
+    <div class="sidebar-heading" *ngIf="this.tokenStorage.getRole()==='Administrateur'">
+      Utilisateurs
+    </div>
     <li class="nav-item" *ngIf="tokenStorage.getRole()==='Administrateur'">
       <a class="nav-link collapsed" href="" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true"
          aria-controls="collapseTwo">
@@ -54,37 +62,47 @@
     <li class="nav-item" *ngIf="this.tokenStorage.getRole()==='Administrateur'">
       <a class="nav-link" routerLink="/temp/listDemandeFour">
         <i class="fas fa-user-plus"></i>
-        <span>Demande de fournisseurs </span>
+        <span>Demande des fournisseurs </span>
       </a>
     </li>
+    <hr class="sidebar-divider" *ngIf="this.tokenStorage.getRole()==='Fournisseur'">
+    <div class="sidebar-heading" *ngIf="this.tokenStorage.getRole()==='Fournisseur'">
+      Profil
+    </div>
     <li class="nav-item" *ngIf="this.tokenStorage.getRole()==='Fournisseur'">
       <a class="nav-link" [routerLink]="['/temp/editProfil', utilisateur.idUtilisateur]">
         <i class="fas fa-user-circle"></i>
         <span>Mon Profil</span>
       </a>
     </li>
-    <li class="nav-item" *ngIf="this.tokenStorage.getRole()==='Fournisseur'">
-      <a class="nav-link" routerLink="/temp/coli">
-        <i class="fas fa-user-circle"></i>
-        <span>Nouveau Colis</span>
+
+    <hr class="sidebar-divider" *ngIf="this.tokenStorage.getRole()==='Administrateur'">
+    <div class="sidebar-heading" *ngIf="this.tokenStorage.getRole()==='Administrateur'">
+      Annonce
+    </div>
+    <li class="nav-item" *ngIf="this.tokenStorage.getRole()==='Administrateur'">
+      <a class="nav-link" routerLink="/temp/annonce">
+        <i class="fas fa-plus-circle"></i>
+        <span>Annonce</span>
       </a>
     </li>
     <hr class="sidebar-divider">
     <div class="sidebar-heading">
       Colis
     </div>
+    <hr class="sidebar-divider" *ngIf="tokenStorage.getRole()==='GestionnaireDepot'" >
+    <li class="nav-item" *ngIf="this.tokenStorage.getRole()==='Fournisseur'">
+      <a class="nav-link" routerLink="/temp/coli">
+        <i class="fas fa-user-circle"></i>
+        <span>Nouveau Colis</span>
+      </a>
+    </li>
+
 
     <li class="nav-item" *ngIf="this.tokenStorage.getRole()==='Fournisseur'">
       <a class="nav-link" routerLink="/temp/ListColis">
         <i class="fas fa-user-circle"></i>
         <span>Mes Colis</span>
-      </a>
-    </li>
-
-    <li class="nav-item" *ngIf="this.tokenStorage.getRole()==='Administrateur'">
-      <a class="nav-link" routerLink="/temp/annonce">
-        <i class="fas fa-plus-circle"></i>
-        <span>Annonce</span>
       </a>
     </li>
 
@@ -99,7 +117,7 @@
       <div id="collapseFour" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
         <div class="bg-white py-2 collapse-inner rounded">
           <a class="collapse-item" routerLink="/temp/newColisAdmin" routerLinkActive="active">Nouveau Colis</a>
-          <a class="collapse-item" routerLink="/temp/ListColisAdmin" routerLinkActive="active">List Colis</a>
+          <a class="collapse-item" routerLink="/temp/ListColisAdmin" routerLinkActive="active">Liste Colis</a>
         </div>
 
       </div>
@@ -118,7 +136,7 @@
         <div class="bg-white py-2 collapse-inner rounded">
           <a class="collapse-item" routerLink="/temp/FeuilleRoute" routerLinkActive="active">Nouveau Feuille de
             route</a>
-          <a class="collapse-item" routerLink="/temp/ListFeuilleRoute" routerLinkActive="active">List des Feuille de
+          <a class="collapse-item" routerLink="/temp/ListFeuilleRoute" routerLinkActive="active">Liste des Feuille de
             route</a>
         </div>
 
@@ -298,7 +316,7 @@
               <div class="dropdown-divider"></div>
               <a class="dropdown-item" href="" data-toggle="modal" data-target="#logoutModal">
                 <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                Logout
+                Déconnexion
               </a>
             </div>
           </li>

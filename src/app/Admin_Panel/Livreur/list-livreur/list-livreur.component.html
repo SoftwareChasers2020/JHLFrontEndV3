@@ -62,7 +62,7 @@
 
     <ng-container matColumnDef="date_embauche">
       <mat-header-cell *matHeaderCellDef mat-sort-header> Date D'embauche </mat-header-cell>
-      <mat-cell *matCellDef="let row" data-label="Date d'embauche"> {{row.date_embauche  | date :'dd/MM/yyyy'}} </mat-cell>
+      <mat-cell *matCellDef="let row" data-label="Date d'embauche"> {{row.date_embauche  | date:'yyyy-MM-dd'}} </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="num_urgence">

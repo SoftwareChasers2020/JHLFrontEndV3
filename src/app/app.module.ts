@@ -72,6 +72,8 @@ import { DetailNotificationComponent } from './notification/detail-notification/
 import {MatSlideToggleModule} from "@angular/material/slide-toggle";
 import { AddAnnonceComponent } from './Admin_Panel/add-annonce/add-annonce.component';
 import { AccueilAdministrateurComponent } from './UserPanel/accueil-administrateur/accueil-administrateur.component';
+import { SiteWebComponent } from './site-web/site-web.component';
+import {NgxPaginationModule} from "ngx-pagination";
 
 
 @NgModule({
@@ -119,45 +121,47 @@ import { AccueilAdministrateurComponent } from './UserPanel/accueil-administrate
     DetailNotificationComponent,
     AddAnnonceComponent,
     AccueilAdministrateurComponent,
+    SiteWebComponent,
 
 
 
 
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    BrowserAnimationsModule,
-    HttpClientModule,
-    FormsModule,
-    ReactiveFormsModule,
-    MatPaginatorModule,
-    MatTableModule,
-    MatSortModule,
-    MatFormFieldModule,
-    MatButtonModule,
-    MatInputModule,
-    MatIconModule,
-    MatSnackBarModule,
-    MatExpansionModule,
-    MatToolbarModule,
-    MatDialogModule,
-    MatSelectModule,
-    MatDatepickerModule,
-    MatNativeDateModule,
-    MatRadioModule,
-    NgxPrintModule,
-    MatCheckboxModule,
-    AngularFirestoreModule,
-    AngularFireDatabaseModule,
-    AngularFireAuthModule,
-    AngularFireMessagingModule,
-    AngularFireModule.initializeApp(environment.firebase),
-    ToastrModule.forRoot(),
-    NgxPrinterModule.forRoot({printOpenWindow: true}),
-    MatSlideToggleModule
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        BrowserAnimationsModule,
+        HttpClientModule,
+        FormsModule,
+        ReactiveFormsModule,
+        MatPaginatorModule,
+        MatTableModule,
+        MatSortModule,
+        MatFormFieldModule,
+        MatButtonModule,
+        MatInputModule,
+        MatIconModule,
+        MatSnackBarModule,
+        MatExpansionModule,
+        MatToolbarModule,
+        MatDialogModule,
+        MatSelectModule,
+        MatDatepickerModule,
+        MatNativeDateModule,
+        MatRadioModule,
+        NgxPrintModule,
+        MatCheckboxModule,
+        AngularFirestoreModule,
+        AngularFireDatabaseModule,
+        AngularFireAuthModule,
+        AngularFireMessagingModule,
+        AngularFireModule.initializeApp(environment.firebase),
+        ToastrModule.forRoot(),
+        NgxPrinterModule.forRoot({printOpenWindow: true}),
+        MatSlideToggleModule,
+        NgxPaginationModule
 
-  ],
+    ],
 
   providers: [authInterceptorProviders, MessagingFirebaseService, AsyncPipe ],
   bootstrap: [AppComponent]

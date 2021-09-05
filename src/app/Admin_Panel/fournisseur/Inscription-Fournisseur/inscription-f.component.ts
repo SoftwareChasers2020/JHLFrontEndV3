@@ -44,12 +44,14 @@ export class InscriptionFComponent implements OnInit {
   });
 
   ngOnInit(): void {
+    this.formGroup.reset();
     this.listGouvernorat = this.gouvernoratService.getAllAGouvernorat();
   }
 
   onSubmit(): void {
    if (this.formGroup.valid) {
       this.AddFournisseur();
+      this.formGroup.reset();
     } else {
       this.validateAllFormFields(this.formGroup);
 

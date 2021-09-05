@@ -27,6 +27,7 @@ export class NewColisAdminComponent implements OnInit {
               public colisService: ColisService) { }
 
   ngOnInit(): void {
+    this.colisService.formGroup.reset();
     this.listGouvernorat = this.gouvernoratService.getAllAGouvernorat();
     this.colisService.formGroup.patchValue(
       {

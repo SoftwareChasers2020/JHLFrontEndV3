@@ -12,8 +12,9 @@
     <!--   <button mat-raised-button (click)="print()" title="Print">
           <mat-icon>add</mat-icon>Ajouter
         </button>-->
+
     <mat-form-field style="width: 50%; float: top"  >
-      <input  matInput [(ngModel)]="searchKey"   placeholder="Rechercher" autocomplete="off" (keyup)="applyFilter()">
+      <input  matInput [(ngModel)]="searchKey"   placeholder="Rechercher" autocomplete="off" (keyup)="getPageBySearchKey(currentSelectedPage)">
       <button mat-button matSuffix mat-icon-button aria-label="Clear" *ngIf="searchKey"  (click)="onSearchClear()">
         <mat-icon>close</mat-icon>
       </button>
@@ -148,17 +149,19 @@
     </tr>
 
   </mat-table>
-  <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" [pageSize]="10"></mat-paginator>
-
-<!-- <ul class="pagination justify-content-center">
-    <li class="page-item"><a (click)="previousClick()" class="page-link">Previous</a></li>
+<!--  <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" [pageSize]="10"></mat-paginator>-->
+  <nav aria-label="Pagination">
+ <ul class="pagination justify-content-center">
+    <li class="page-item"><a (click)="previousClick()" class="page-link">Précédente</a></li>
     <li *ngFor='let index of pageIndexes' class="page-item" [ngClass]="active(index)">
       <a (click)="getPaginationWithIndex(index)" class="page-link">
         {{index + 1}}
       </a>
     </li>
-    <li class="page-item"><a (click)="nextClick()" class="page-link">Next</a></li>
-  </ul>-->
-
+   <li class="ellipsis" aria-hidden="true"></li>
+   <li class="page-item"><a (click)="nextClick()" class="page-link">Prochaine</a></li>
+  </ul>
+  </nav>
 </div>
-    </div></div>
+    </div>
+  </div>

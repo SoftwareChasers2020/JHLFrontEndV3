@@ -8,7 +8,7 @@
   <div class="md-tabs md-card-tabs">
     <!--image Logo-->
     <div class="text-center">
-      <img src="../../../../assets/img/img.png" class="image" alt="logo Image">
+      <img src="../../../../assets/img/back_inscription.jpg"  alt="logo Image">
     </div>
     <!--form-->
     <form (ngSubmit)="onSubmit()" [formGroup]="formGroup" class="form-material">
@@ -34,26 +34,26 @@
 
               <mat-form-field>
                 <input formControlName="Nom" matInput placeholder="Saisir votre nom">
-                <mat-error>ce champ est obligatoire</mat-error>
+                <mat-error>ce champ est obligatoire*</mat-error>
               </mat-form-field>
               <mat-form-field>
                 <input formControlName="Prenom" matInput placeholder="Saisir votre prénom" >
-                <mat-error>ce champ est obligatoire</mat-error>
+                <mat-error>ce champ est obligatoire*</mat-error>
               </mat-form-field>  <br>
               <mat-form-field>
                 <input formControlName="NomCommercial" matInput placeholder="Saisir votre NomCommercial" >
-                <mat-error>ce champ est obligatoire</mat-error>
+                <mat-error>ce champ est obligatoire*</mat-error>
               </mat-form-field>  <br>
               <mat-form-field>
                 <input formControlName="Tel" matInput placeholder="Téléphone">
-                <mat-error *ngIf="Tel.hasError('pattern')">Numéro Téléphone est incorrecte</mat-error>
-                <mat-error *ngIf="Tel.hasError('required')">ce champ est obligatoire</mat-error>
+                <mat-error *ngIf="Tel.hasError('pattern')">Numéro Téléphone est incorrecte*</mat-error>
+                <mat-error *ngIf="Tel.hasError('required')">ce champ est obligatoire*</mat-error>
 
               </mat-form-field>
 
               <mat-form-field>
                 <input formControlName="Email" matInput placeholder="Saisir votre adresse email" >
-                <mat-error>Verifier votre adresse email</mat-error>
+                <mat-error>Verifier votre adresse email*</mat-error>
               </mat-form-field>
               <!-- Ligne 3 colone 6 saisir gov ............... -->
               <div class="form-row">
@@ -65,7 +65,7 @@
                         <mat-option value="{{gov.nom}}" >{{gov.nom}}</mat-option>
                       </ng-container>
                     </mat-select>
-                    <mat-error>Selectionner une gouvernorat</mat-error>
+                    <mat-error>Selectionner une gouvernorat*</mat-error>
                   </mat-form-field>
                 </div>
 
@@ -79,7 +79,7 @@
                       <mat-option value="{{ville.nom}}" [value]="ville">{{ville.nom}}</mat-option>
                     </ng-container>
                   </mat-select>
-                  <mat-error>Selectionner une ville</mat-error>
+                  <mat-error>Selectionner une ville*</mat-error>
                   </mat-form-field>
                 </div>
 

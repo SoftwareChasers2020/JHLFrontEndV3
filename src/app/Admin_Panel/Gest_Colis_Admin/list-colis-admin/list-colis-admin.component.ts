@@ -13,7 +13,7 @@ import {EtatService} from '../../../Service/GestColisService/etat.service';
 import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
 import {DetailColisAdminComponent} from '../detail-colis-admin/detail-colis-admin.component';
 import {Message} from "../../../Model/PaginationColis/Message";
-//const pageSize:number = 7;
+const pageSize:number = 10;
 @Component({
   selector: 'app-list-colis-admin',
   templateUrl: './list-colis-admin.component.html',
@@ -21,18 +21,17 @@ import {Message} from "../../../Model/PaginationColis/Message";
 })
 export class ListColisAdminComponent implements OnInit {
 
- /* currentSelectedPage:number = 0;
+ currentSelectedPage:number = 0;
   totalPages: number = 0;
   listColiss: Array<Colis> = [];
-  pageIndexes: Array<number> = [];*/
-
+  pageIndexes: Array<number> = [];
 
 
 
   displayedColumns: string[] = ['Code', 'date_ajout', 'Nom', 'Téléphone', 'Adresse', 'Prix', 'Etat', 'Fournisseur', 'actions'];
   dataSource: MatTableDataSource<any>;
   listcolis: Colis[];
-  searchKey: any;
+  searchKey: any = null;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
@@ -46,12 +45,14 @@ export class ListColisAdminComponent implements OnInit {
   }
 
   ngOnInit(): void {
- this.getAllColisForAdminAndGestionnaire();
-   // this.getPage(0)
+    console.log(this.searchKey)
+ //this.getAllColisForAdminAndGestionnaire();
+   this.getPage(0)
+   // this.getPageBySearchKey(23792121,0);
   }
 
 
-  /*getPage(page: number){
+  getPage(page: number){
 
     this.colisService.getAllColisByAdminPagination(page, pageSize)
       .subscribe(
@@ -146,7 +147,10 @@ export class ListColisAdminComponent implements OnInit {
 
 
   getPaginationWithIndex(index: number) {
+  if(this.searchKey == null)
     this.getPage(index);
+  else
+    this.getPageBySearchKey(index)
   }
 
   active(index: number) {
@@ -159,17 +163,31 @@ export class ListColisAdminComponent implements OnInit {
 
   nextClick(){
     if(this.currentSelectedPage < this.totalPages-1){
-      this.getPage(++this.currentSelectedPage);
+      if(this.searchKey == null)
+      {
+        this.getPage(++this.currentSelectedPage);
+      }else
+      {
+        this.getPageBySearchKey(++this.currentSelectedPage)
+      }
+
+
     }
   }
 
   previousClick(){
     if(this.currentSelectedPage > 0){
-      this.getPage(--this.currentSelectedPage);
+      if(this.searchKey == null)
+      {
+        this.getPage(--this.currentSelectedPage);
+      }else
+      {
+        this.getPageBySearchKey(--this.currentSelectedPage)
+      }
     }
-  }*/
+  }
 //hedhiii il s7y7yaaa
-  getAllColisForAdminAndGestionnaire()
+/* getAllColisForAdminAndGestionnaire()
   {
     this.colisService.getAllColisByEtatIds().subscribe(
       res => {
@@ -244,9 +262,7 @@ export class ListColisAdminComponent implements OnInit {
       },
       error => console.log(error)
     );
-  }
-
-
+  }*/
 
   nestedFilterCheck(search, data, key): any {
     if (typeof data[key] === "object") {
@@ -271,6 +287,7 @@ export class ListColisAdminComponent implements OnInit {
 
   onSearchClear() {
     this.searchKey = '';
+    this.getPage(0);
     this.applyFilter();
   }
 
@@ -285,9 +302,6 @@ export class ListColisAdminComponent implements OnInit {
     }
   }
 
-
-
-
   getDetails(row) {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true;
@@ -300,4 +314,92 @@ export class ListColisAdminComponent implements OnInit {
 
     this.dialog.open(DetailColisAdminComponent, dialogConfig);
   }
+
+  getPageBySearchKey(page: number){
+
+    this.colisService.getAllColisByAdminPaginationAndSearchkey(this.searchKey,page,pageSize)
+      .subscribe(
+        (response ) => {
+          console.log(response);
+          //this.listColiss = response.listColis;
+          this.listcolis = response.listColis as Colis[];
+
+          this.dataSource = new MatTableDataSource(this.listcolis);
+          this.totalPages = response.totalPages;
+          this.pageIndexes = Array(this.totalPages).fill(0).map((x,i)=>i);
+          this.currentSelectedPage = response.pageNumber;
+
+
+          this.dataSource.data.map(val => {
+            this.etatService.getEtatById(val.etat.idEtat)
+              .subscribe(
+                data => val.idEtat = data.titre,
+
+                error => console.log(error)
+              );
+
+          });
+
+          this.dataSource.data.map(val => {
+            this.fournisseurService.getFournisseurById(val.idFournisseur)
+              .subscribe(
+                data => val.nomfournisseur = data.nomcommercial,
+
+                error => console.log(error)
+              );
+
+          });
+          this.dataSource.data.map(value => this.villeService.getvilleById(value.idVille).subscribe(
+            value1 => {
+              value.idVille = value1.nom;
+              value.nomville = value1.nom;
+              value.nomgouvernorat = value1.gouvernorat.nom;
+
+            }
+          ));
+          this.dataSource.filterPredicate = (data, filter: string) => {
+            const accumulator = (currentTerm, key) => {
+              return this.nestedFilterCheck(currentTerm, data, key);
+            };
+            const dataStr = Object.keys(data).reduce(accumulator, '').toLowerCase();
+            // Transform the filter by converting it to lowercase and removing whitespace.
+            const transformedFilter = filter.trim().toLowerCase();
+            return dataStr.indexOf(transformedFilter) !== -1;
+          };
+
+          this.dataSource.sortingDataAccessor = (item, property) => {
+            switch (property) {
+              case 'Nom':
+                return item.client.nom;
+              case 'Téléphone' :
+                return item.client.tel1;
+              case 'Code' :
+                return item.codeBarre;
+              case 'Prix':
+                return item.prix;
+              case 'Adresse' :
+                return item.nomgouvernorat;
+              case 'Fournisseur' :
+                return item.idFournisseur;
+              case 'Etat' :
+                return item.etat.titre;
+
+              default:
+                return item[property];
+            }
+          };
+
+
+          this.dataSource.paginator = this.paginator;
+          this.dataSource.sort = this.sort;
+          console.log(this.listcolis);
+        },
+
+        (error) => {
+          console.log(error);
+        });
+
+
+  }
+
 }

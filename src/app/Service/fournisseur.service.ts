@@ -99,7 +99,7 @@ export class FournisseurService {
     return this.http.post(this.urlpath + '/createFournisseur', f);
   }
 
-  getFournisseurNoActive()
+  findAllByOrderByActiveAsc()
   {
     return this.http.get(this.urlpath + '/FournisseursEnAttente');
   }
