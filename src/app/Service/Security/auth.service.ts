@@ -3,8 +3,9 @@ import {HttpClient} from "@angular/common/http";
 import {BehaviorSubject, Observable} from "rxjs";
 import {Login} from "../../Model/login";
 import {TokenStorageService} from "./token-storage.service";
-
-const AUTH_API = 'http://localhost:8080';
+import {environment} from "../../../environments/environment.prod";
+const  AUTH_API = environment.apiurlgest;
+/*const AUTH_API = 'http://localhost:8080';*/
 @Injectable({
   providedIn: 'root'
 })

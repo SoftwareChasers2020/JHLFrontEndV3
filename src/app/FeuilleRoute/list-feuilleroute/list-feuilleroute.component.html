@@ -93,7 +93,7 @@
       <tbody *ngFor="let ligne of feuilleroute.ligneFeuilleRoute ; let i = index">
       <tr>
 
-        <td><img src="http://localhost:8081/genrateQRCode/{{ligne.colis.codeBarre}}"
+        <td><img src="https://jhldelivery.tn/api/genrateQRCode/{{ligne.colis.codeBarre}}"
                  width="100px">{{ligne.colis.codeBarre}}</td>
         <td>
           {{ligne.colis.client.nom}} {{ligne.colis.client.prenom}}

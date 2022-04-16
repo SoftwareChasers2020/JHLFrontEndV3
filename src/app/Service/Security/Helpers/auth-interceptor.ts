@@ -19,11 +19,16 @@ export class AuthInterceptor implements HttpInterceptor {
     if (token != null && ((authReq.url.indexOf('https://fcm.googleapis.com/fcm/send') === 0) || (authReq.url.indexOf('https://iid.googleapis.com/iid/v1/') === 0) || (authReq.url.indexOf('https://iid.googleapis.com/iid/info/') === 0))) {
       authReq = req.clone({
         headers: req.headers.set(TOKEN_HEADER_KEY, 'key=AAAAb6QT_jM:APA91bGE4DLL0QIuvuroyYES7nDv4RPPmWrw_zyThVXNEQKYavIFEvym4g7z3ZpFhi8Ld2DmViCj5Ix4pwJxau7MfPlMjThPxU_9dzwQbLXR4ltCDGB0nLKbCzVIxz7DKR6KUSZbeOye')});
+      return next.handle(authReq);
+    }else if (token == null && ((authReq.url.indexOf('https://jhldelivery.tn/apigest/Gouvernorat') === 0) || (authReq.url.indexOf('https://jhldelivery.tn/apigest/Ville') === 0) || (authReq.url.indexOf('https://jhldelivery.tn/apigest/Fournisseur/createFournisseur') === 0) ))
+    {
+      delete req.headers['Authorization'];
+      return next.handle(req);
     } else {
       authReq = req.clone({headers: req.headers.set(TOKEN_HEADER_KEY, 'Bearer ' + token)});
-
+      return next.handle(authReq);
     }
-    return next.handle(authReq);
+
   }
 }
 

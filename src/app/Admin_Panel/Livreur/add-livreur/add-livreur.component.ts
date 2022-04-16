@@ -65,7 +65,7 @@ export class AddLivreurComponent implements OnInit {
 
     this.adr.ville = this.selectedValue;
     this.l.adresse = this.adr;
-    console.log(this.l);
+   // console.log(this.l);
     this.LService.createLivreur(this.l)
       .subscribe(data =>
       {

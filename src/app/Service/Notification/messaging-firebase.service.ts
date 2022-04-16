@@ -6,6 +6,7 @@ import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {TokenStorageService} from "../Security/token-storage.service";
 import {NotificationService} from "../notification.service";
 
+
 @Injectable()
 export class MessagingFirebaseService {
   currentMessage = new BehaviorSubject(null);
@@ -31,7 +32,7 @@ export class MessagingFirebaseService {
 
     this.angularFireMessaging.requestToken.subscribe(
       (token) => {
-        console.log(token);
+    //    console.log(token);
 
         this.firestore.collection('utilisateurs').doc(String(id)).update({fcmtoken: token}).then(
           result => console.log("successfully updated Utilisateur " + id)
@@ -41,7 +42,7 @@ export class MessagingFirebaseService {
 
         if (this.tokenStorage.getRole() === "GestionnaireDepot") {
           this.SaveGestToTopic(token);
-          console.log("Save Gestionnaire to Topic successfully");
+         // console.log("Save Gestionnaire to Topic successfully");
         }
 
       },
@@ -55,7 +56,7 @@ export class MessagingFirebaseService {
   receiveMessage() {
     this.angularFireMessaging.messages.subscribe(
       (payload) => {
-        console.log("new message received. ", payload);
+       // console.log("new message received. ", payload);
         this.currentMessage.next(payload);
       });
   }
@@ -79,12 +80,12 @@ export class MessagingFirebaseService {
 
         /*        "sound": "default"*/
       },
-      "dateSend": new Date(),
+      "dateSend": new Date().toISOString().split('T')[0],
       "dateVu": null,
       "priority": "high",
       "to": "/topics/TopicGestionnaire"
     };
-    this.sendNotif(data);
+   this.sendNotif(data);
 
   }
 
@@ -131,10 +132,10 @@ export class MessagingFirebaseService {
         .set('Content-Type', 'application/json'),
     })
       .subscribe((response: Response) => {
-          console.log(response);
+          //console.log(response);
         },
         (error: Response) => {
-          console.log(error);
+        //  console.log(error);
           console.log("error" + error);
           this.notificationService.warn('erreur servenue de serveur, Verifier votre connexion')
         });
@@ -153,7 +154,7 @@ export class MessagingFirebaseService {
         .set('Content-Type', 'application/json'),
     })
       .subscribe((response: Response) => {
-          console.log(response);
+         // console.log(response);
         },
         (error: Response) => {
           console.log(error);

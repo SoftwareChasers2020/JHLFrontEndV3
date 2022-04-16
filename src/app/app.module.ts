@@ -63,7 +63,6 @@ import {AngularFireDatabaseModule} from "@angular/fire/database";
 import {AngularFireAuthModule} from "@angular/fire/auth";
 import {AngularFireMessagingModule} from "@angular/fire/messaging";
 import {AngularFireModule} from "@angular/fire";
-import {environment} from "../environments/environment";
 import {MessagingFirebaseService} from "./Service/Notification/messaging-firebase.service";
 import {AsyncPipe} from "@angular/common";
 import {AngularFirestoreModule} from "@angular/fire/firestore";
@@ -74,6 +73,8 @@ import { AddAnnonceComponent } from './Admin_Panel/add-annonce/add-annonce.compo
 import { AccueilAdministrateurComponent } from './UserPanel/accueil-administrateur/accueil-administrateur.component';
 import { SiteWebComponent } from './site-web/site-web.component';
 import {NgxPaginationModule} from "ngx-pagination";
+import {environment} from "../environments/environment.prod";
+
 
 
 @NgModule({
@@ -155,12 +156,12 @@ import {NgxPaginationModule} from "ngx-pagination";
         AngularFireDatabaseModule,
         AngularFireAuthModule,
         AngularFireMessagingModule,
-        AngularFireModule.initializeApp(environment.firebase),
+
         ToastrModule.forRoot(),
         NgxPrinterModule.forRoot({printOpenWindow: true}),
         MatSlideToggleModule,
-        NgxPaginationModule
-
+        NgxPaginationModule,
+      AngularFireModule.initializeApp(environment.firebase),
     ],
 
   providers: [authInterceptorProviders, MessagingFirebaseService, AsyncPipe ],

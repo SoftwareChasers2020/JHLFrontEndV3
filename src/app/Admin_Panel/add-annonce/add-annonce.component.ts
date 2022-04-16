@@ -31,7 +31,7 @@ export class AddAnnonceComponent implements OnInit {
 
       this.x = (val.data().texteannonce) ;
       document.getElementById('annonce').innerHTML = this.x;
-      console.log(this.x)
+    //  console.log(this.x)
     });
    /*  firebase.firestore().collection('annonce')
        .doc("VvU1yRDyucE1jhXiv8lG").get().then(res => {

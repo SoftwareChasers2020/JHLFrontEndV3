@@ -85,12 +85,13 @@ export class InscriptionFComponent implements OnInit {
     this.f.nomcommercial = this.NomCommercial.value;
     this.adr.ville = this.selectedValue;
     this.f.adresse = this.adr;
-    console.log(this.f);
+   // console.log(this.f);
     this.fournisseurService.createFournisseurFromInscription(this.f)
       .subscribe(data => {
-        console.log(data);
-        this.formGroup.reset();
+      //  console.log(data);
+
         this.notificationService.success('Demande envoyer avec succée! ');
+        setTimeout(() => this.onClose(), 1500);
       }, error => console.log(error));
   }
 

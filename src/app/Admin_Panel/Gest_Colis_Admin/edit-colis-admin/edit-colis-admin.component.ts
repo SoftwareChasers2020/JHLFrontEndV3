@@ -142,7 +142,7 @@ export class EditColisAdminComponent implements OnInit {
 
         this.colisService.updateColis(this.colis).subscribe(
           res => {
-            console.log(res);
+          //  console.log(res);
             this.formGroup.reset();
             this.router.navigateByUrl("temp/ListColisAdmin");
 

@@ -37,7 +37,7 @@ export class AddFeuillerouteComponent implements OnInit {
   listLivreurs: Array<Livreur> = [];
   listLigneFeuilleRoute: Array<LigneFeuilleRoute> = [];
   listGouvernorat: Gouvernorat[];
-  displayedColumns: string[] = ['Code', 'date_ajout', 'Nom', 'Téléphone', 'Adresse', 'Prix', 'Etat', 'Fournisseur', 'select'];
+  displayedColumns: string[] = ['Code', 'date_ajout', 'Nom', 'Téléphone', 'Gouvernorat', 'Ville', 'Prix', 'Etat', 'Fournisseur', 'select'];
   dataSource: MatTableDataSource<any>;
   listcolis: Array<Colis> = [];
   listcolisAfterFilterGouv: Array<Colis> = [];
@@ -93,7 +93,7 @@ export class AddFeuillerouteComponent implements OnInit {
   }
 
   GetColisByGouvernorat(value: any) {
-    console.log(value);
+  //  console.log(value);
     this.listcolisAfterFilterGouv.length = 0;
     if (value !== '') {
       this.listcolis.forEach(x => {
@@ -179,8 +179,10 @@ export class AddFeuillerouteComponent implements OnInit {
               return item.codeBarre;
             case 'Prix':
               return item.prix;
-            case 'Adresse' :
+            case 'Gouvernorat' :
               return item.nomgouvernorat;
+            case 'Ville' :
+              return item.nomville;
             case 'Fournisseur' :
               return item.idFournisseur;
             case 'Etat' :
@@ -229,7 +231,7 @@ export class AddFeuillerouteComponent implements OnInit {
 
 
   AddFeuilledeRoute() {
-    console.log(this.selection.hasValue());
+  //  console.log(this.selection.hasValue());
     if (this.Livreur.valid) {
       this.selection.selected.forEach(x => {
 
@@ -261,9 +263,10 @@ export class AddFeuillerouteComponent implements OnInit {
       this.feuilleroute.ligneFeuilleRoute = this.listLigneFeuilleRoute;
       this.feuilleroute.idLivreur = this.Livreur.value;
       this.feuilleroute.dateSortie = this.DateSortie.value;
+      this.feuilleroute.date = this.DateSortie.value;
       this.feuillerouteService.createFeuilleroute(this.feuilleroute).subscribe(
         res => {
-          console.log(res);
+  //        console.log(res);
           this.getColisForFeuilleRoute();
           this.selection.clear();
           setTimeout(() => window.location.reload(), 500);

@@ -3,6 +3,7 @@ import {HttpClient} from '@angular/common/http';
 import {Livreur} from '../../Model/livreur';
 import {FeuilleDeRoute} from '../../Model/GestColis/feuille-de-route';
 import {LigneFeuilleRoute} from '../../Model/GestColis/ligne-feuille-route';
+import {environment} from "../../../environments/environment.prod";
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +14,8 @@ export class LignefeuillerouteService {
 
   constructor(private http: HttpClient)
   {
-    this.urlpath = 'http://localhost:8081/LigneFeuilleRoutes';
+    this.urlpath = environment.apiurl+"/LigneFeuilleRoutes";
+    //this.urlpath = 'http://localhost:8081/LigneFeuilleRoutes';
   }
 
   getAllLignefeuilleroutes() {

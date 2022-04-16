@@ -124,7 +124,7 @@ export class ListColisComponent implements OnInit {
 
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
-        console.log(this.listcolis);
+     //   console.log(this.listcolis);
       },
       error => console.log(error)
     );
@@ -179,15 +179,15 @@ export class ListColisComponent implements OnInit {
 
   onDelete(codeBarre: any) {
 
-    console.log(codeBarre);
+  //  console.log(codeBarre);
     if (confirm('Confirmez-vous la suppression ?')) {
       this.colisService.deleteColis(codeBarre).subscribe(
         () => {
-          this.reloadData();
+          window.location.reload();
         }
       );
       this.notificationService.warn(' supprimé avec succées !');
-      console.log(codeBarre);
+    //  console.log(codeBarre);
     }
   }
 
@@ -258,7 +258,7 @@ export class ListColisComponent implements OnInit {
 
   showModal(c) {
     this.mdlSampleIsOpen = true;
-    console.log(c);
+   // console.log(c);
     /*      const DeleteModal = document.getElementById("DeleteModal");
           DeleteModal.style.visibility = 'visible';*/
   }

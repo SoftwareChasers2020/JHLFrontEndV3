@@ -117,7 +117,7 @@ export class EditFournisseurComponent implements OnInit {
 
         this.fournisseurService.updateFournisseur(this.f).subscribe(
           res => {
-            console.log(res);
+      //      console.log(res);
             this.dialogRef.close();
             /*             setTimeout(
                            // tslint:disable-next-line:only-arrow-functions

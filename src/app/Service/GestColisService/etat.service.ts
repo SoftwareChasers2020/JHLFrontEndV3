@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Etat} from '../../Model/GestColis/etat';
 import {Colis} from '../../Model/GestColis/colis';
+import {environment} from "../../../environments/environment.prod";
 
 @Injectable({
   providedIn: 'root'
@@ -9,8 +10,8 @@ import {Colis} from '../../Model/GestColis/colis';
 export class EtatService {
   urlpath: string;
   constructor(private http: HttpClient) {
-
-    this.urlpath = 'http://localhost:8081/etats/';
+    this.urlpath = environment.apiurl+"/etats/";
+   // this.urlpath = 'http://localhost:8081/etats/';
   }
 
   getEtatById(id){

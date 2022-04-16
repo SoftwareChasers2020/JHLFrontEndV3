@@ -3,6 +3,7 @@ import {HttpClient} from '@angular/common/http';
 import {Livreur} from '../Model/livreur';
 import {FormBuilder, FormControl, Validators} from '@angular/forms';
 import {UtilisateurService} from './utilisateur.service';
+import {environment} from "../../environments/environment.prod";
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +12,8 @@ export class LivreurService {
   urlpath: string;
 
   constructor(private http: HttpClient, private utilisateurService: UtilisateurService, private fb: FormBuilder) {
-    this.urlpath = 'http://localhost:8080/Livreur';
+    this.urlpath = environment.apiurlgest+'/Livreur';
+    //this.urlpath = 'http://localhost:8080/Livreur';
   }
 
   formGroup = this.fb.group({

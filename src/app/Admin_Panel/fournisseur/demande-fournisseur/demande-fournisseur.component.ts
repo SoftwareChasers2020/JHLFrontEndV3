@@ -24,7 +24,7 @@ export class DemandeFournisseurComponent implements OnInit {
 
   ngOnInit(): void {
     this.id = this.route.snapshot.params.id;
-    console.log(this.id);
+   // console.log(this.id);
     this.fournisseurService.getFournisseurById(this.id).subscribe(
       data => {
         this.f = data as Fournisseur;

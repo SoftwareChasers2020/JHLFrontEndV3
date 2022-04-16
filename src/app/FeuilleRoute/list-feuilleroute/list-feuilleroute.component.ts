@@ -127,7 +127,7 @@ export class ListFeuillerouteComponent implements OnInit {
   onDelete(row: FeuilleDeRoute) {
     if (confirm('Confirmez-vous la suppression ?')) {
       row.ligneFeuilleRoute.forEach(x => {
-        console.log(x.colis.codeBarre);
+      //  console.log(x.colis.codeBarre);
         x.colis.etat = new Etat(2, 'En Dépot');
         this.listcolis.push(x.colis);
 
@@ -149,7 +149,7 @@ export class ListFeuillerouteComponent implements OnInit {
 
 
   imprimer(row) {
-    console.log(row);
+   // console.log(row);
 
     this.feuillerouteService.getFeuillerouteById(row).subscribe(
       data => {
@@ -167,6 +167,7 @@ export class ListFeuillerouteComponent implements OnInit {
           res => this.livreur = res as Livreur,
           error => console.log(error)
         );
+
         /*        this.printerService.printOpenWindow = false;
                 this.printerService.printAngular(this.PrintTemplateTpl);
                 this.printerService.printOpenWindow = true;*/
@@ -178,7 +179,7 @@ export class ListFeuillerouteComponent implements OnInit {
         this.printerService.printOpenWindow = true;
         AjoutAnnonce.style.visibility = 'hidden';*/
 
-        setTimeout(() => this.activate(), 1000);
+        setTimeout(() => this.activate(), 2500);
         this.listefeuilleRouteimp.length = 0;
       },
       error => console.log(error)

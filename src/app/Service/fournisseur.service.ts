@@ -1,9 +1,11 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+
 import {Administrateur} from '../Model/administrateur';
 import {Fournisseur} from '../Model/fournisseur';
 import {FormBuilder, FormControl, Validators} from '@angular/forms';
 import {UtilisateurService} from './utilisateur.service';
+import {environment} from "../../environments/environment.prod";
+import {HttpClient} from "@angular/common/http";
 
 
 @Injectable({
@@ -12,8 +14,8 @@ import {UtilisateurService} from './utilisateur.service';
 export class FournisseurService {
   urlpath: string;
   constructor(private http: HttpClient, private fb: FormBuilder, private utilisateurService: UtilisateurService)
-  {
-    this.urlpath = 'http://localhost:8080/Fournisseur';
+  { this.urlpath = environment.apiurlgest+'/Fournisseur';
+   // this.urlpath = 'http://localhost:8080/Fournisseur';
   }
 
 

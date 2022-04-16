@@ -41,7 +41,7 @@ export class NewColisAdminComponent implements OnInit {
     if (this.colisService.formGroup.valid) {
       this.colisService.addColisFromService();
     } else {
-      console.log("test");
+   //   console.log("test");
       this.colisService.validateAllFormFields(this.colisService.formGroup);
     }
 

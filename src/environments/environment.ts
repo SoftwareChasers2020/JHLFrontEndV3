@@ -4,6 +4,8 @@
 
 export const environment = {
   production: false,
+  apiurl: "https://jhldelivery.tn/api",
+  apiurlgest:"https://jhldelivery.tn/apigest",
   firebase: {
     apiKey: "AIzaSyCJvJ6LU_oC45-3R7YDYtfH7tcl_M7_q3s",
     authDomain: "jhldb-a430b.firebaseapp.com",

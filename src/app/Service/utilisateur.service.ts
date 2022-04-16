@@ -4,6 +4,7 @@ import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {map} from "rxjs/operators";
 import {Utilisateur} from '../Model/utilisateur';
+import {environment} from "../../environments/environment.prod";
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +12,8 @@ import {Utilisateur} from '../Model/utilisateur';
 export class UtilisateurService {
   constructor(private fb: FormBuilder,
               private http: HttpClient) {
-    this.urlpath = 'http://localhost:8080/Utilisateur';
+    this.urlpath = environment.apiurlgest+'/Utilisateur';
+   // this.urlpath = 'http://localhost:8080/Utilisateur';
   }
 
 
@@ -112,7 +114,7 @@ export class UtilisateurService {
   checkNomCommercialNotTaken(nomcommercial: string): Observable<boolean> {
 
 
-    return  this.http.get('http://localhost:8080/Fournisseur').pipe(
+    return  this.http.get('https://jhldelivery.tn/apigest/Fournisseur').pipe(
       map((res: any) => {
           return res.filter((user: { nomcommercial: string; }) => user.nomcommercial === nomcommercial);
         }

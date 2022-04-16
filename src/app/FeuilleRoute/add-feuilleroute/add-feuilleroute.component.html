@@ -103,10 +103,15 @@
             </ng-container>
 
 
-            <ng-container matColumnDef="Adresse">
-              <mat-header-cell *matHeaderCellDef mat-sort-header> Adresse </mat-header-cell>
+            <ng-container matColumnDef="Gouvernorat">
+              <mat-header-cell *matHeaderCellDef mat-sort-header> Gouvernorat </mat-header-cell>
               <!-- <mat-cell *matCellDef="let row" data-label="Adresse" > {{getvillebyId(row.idVille) | json}} </mat-cell>-->
-              <mat-cell *matCellDef="let row" data-label="Adresse" > {{row.nomgouvernorat}} </mat-cell>
+              <mat-cell *matCellDef="let row" data-label="Gouvernorat" > {{row.nomgouvernorat}} </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="Ville">
+              <mat-header-cell *matHeaderCellDef mat-sort-header> Ville </mat-header-cell>
+              <!-- <mat-cell *matCellDef="let row" data-label="Adresse" > {{getvillebyId(row.idVille) | json}} </mat-cell>-->
+              <mat-cell *matCellDef="let row" data-label="Ville" > {{row.nomville}} </mat-cell>
             </ng-container>
 
 

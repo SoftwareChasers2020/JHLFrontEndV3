@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
+import {environment} from "../../environments/environment.prod";
 
 @Injectable({
   providedIn: 'root'
@@ -8,7 +9,8 @@ export class MailService {
 
   urlpath: string;
   constructor(private http: HttpClient) {
-    this.urlpath = 'http://localhost:8080/Mail';
+    this.urlpath = environment.apiurlgest+'/Mail';
+   // this.urlpath = 'http://localhost:8080/Mail';
   }
 
 

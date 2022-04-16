@@ -3,6 +3,7 @@ import {HttpClient} from '@angular/common/http';
 import {GestionnaireDepot} from '../Model/gestionnaireDepot';
 import {FormBuilder, FormControl, Validators} from '@angular/forms';
 import {UtilisateurService} from './utilisateur.service';
+import {environment} from "../../environments/environment.prod";
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +12,8 @@ export class GestionnaireDepotService {
   urlpath: string;
   constructor(private http: HttpClient, private utilisateurService: UtilisateurService, private fb: FormBuilder)
   {
-    this.urlpath = 'http://localhost:8080/GestionnaireDepot';
+    this.urlpath = environment.apiurlgest+'/GestionnaireDepot';
+    //this.urlpath = 'http://localhost:8080/GestionnaireDepot';
   }
 
 

@@ -3,6 +3,7 @@ import {HttpClient} from '@angular/common/http';
 import {Ville} from '../Model/ville';
 import {map} from 'rxjs/operators';
 import {Observable} from 'rxjs';
+import {environment} from "../../environments/environment.prod";
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +12,8 @@ export class VilleService {
 
   urlpath: string;
   constructor(private http: HttpClient) {
-    this.urlpath = 'http://localhost:8080/Ville';
+    this.urlpath = environment.apiurlgest+'/Ville';
+   // this.urlpath = 'http://localhost:8080/Ville';
   }
 
   getVilleByGouvernoratNom(nomGouvernora: string){

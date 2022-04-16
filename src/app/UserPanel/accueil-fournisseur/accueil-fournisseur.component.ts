@@ -23,7 +23,7 @@ export class AccueilFournisseurComponent implements OnInit {
   retour: number = 0;
   enCours: number = 0;
   enAttente: number= 0;
-  displayedColumns: string[] = ['Code', 'date_ajout','date_livraison', 'Nom', 'Téléphone', 'Adresse', 'Prix', 'Etat'];
+  displayedColumns: string[] = ['Code', 'date_ajout','date_livraison', 'Nom', 'Téléphone', 'Gouvernorat', 'Ville', 'Prix', 'Etat'];
   dataSource: MatTableDataSource<any>;
   listcolis: Colis[];
   searchKey: any;
@@ -87,8 +87,10 @@ export class AccueilFournisseurComponent implements OnInit {
               return item.codeBarre;
             case 'Prix':
               return item.prix;
-            case 'Adresse' :
+            case 'Gouvernorat' :
               return item.nomgouvernorat;
+              case 'Ville' :
+              return item.nomville;
             case 'Etat' :
               return item.etat.titre;
 
@@ -100,7 +102,7 @@ export class AccueilFournisseurComponent implements OnInit {
 
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
-        console.log(this.listcolis);
+     //   console.log(this.listcolis);
       },
       error => console.log(error)
     );

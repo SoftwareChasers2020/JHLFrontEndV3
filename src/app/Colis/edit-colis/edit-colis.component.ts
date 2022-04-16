@@ -110,6 +110,7 @@ export class EditColisComponent implements OnInit {
 
 EditColis()
 {
+
   this.villeService.getVilleByNom(this.Ville.value).subscribe(
     data => {
       this.colis.codeBarre = this.CodeBarre.value;
@@ -135,9 +136,10 @@ EditColis()
         this.colis.nbArticleEchange = 0;
         this.colis.echange = false;
       }
+
       this.colisService.updateColis(this.colis).subscribe(
         res => {
-          console.log(res);
+      //    console.log(res);
 
           this.formGroup.reset();
           this.router.navigateByUrl("temp/ListColis");

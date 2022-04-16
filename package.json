@@ -1,10 +1,10 @@
 {
-  "name": "jhlfront-v3",
+  "name": "jhldelivery",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
-    "build": "ng build",
+    "start": "ng serve --base-href /jhldelivery/",
+    "build": "ng build --prod --base-href /jhldelivery/",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"

@@ -11,6 +11,7 @@ import {NotificationService} from '../notification.service';
 import {LigneFeuilleRoute} from '../../Model/GestColis/ligne-feuille-route';
 import {catchError, retry} from "rxjs/operators";
 import {Message} from "../../Model/PaginationColis/Message";
+import {environment} from "../../../environments/environment.prod";
 
 @Injectable({
   providedIn: 'root'
@@ -25,8 +26,8 @@ export class ColisService {
               private fb: FormBuilder,
               private tokenService: TokenStorageService,
               private notificationService: NotificationService) {
-
-    this.urlpath = 'http://localhost:8081/colis/';
+    this.urlpath = environment.apiurl+"/colis/";
+    //this.urlpath = 'http://localhost:8081/colis/';
   }
   formGroup = this.fb.group({
     CodeBarre : null,
@@ -116,8 +117,6 @@ export class ColisService {
 
   addColisFromService()
   {
-    console.log("temchii");
-
     this.ville = this.Ville.value;
     this.colis.codeBarre = this.CodeBarre.value;
     this.colis.adressDispo = this.AdressDispo.value;
@@ -156,7 +155,7 @@ export class ColisService {
 
     this.createColis(this.colis).subscribe(
       data => {
-        console.log(data);
+     //   console.log(data);
         this.formGroup.reset();
         this.notificationService.success("Ajout a effectué avec succées");
       },

@@ -84,7 +84,7 @@ export class EditLivreurComponent implements OnInit {
         this.LService.updateLivreur(this.l).subscribe(
           res =>
           {
-            console.log(res);
+        //    console.log(res);
             this.dialogRef.close();
 /*            setTimeout(
               // tslint:disable-next-line:only-arrow-functions

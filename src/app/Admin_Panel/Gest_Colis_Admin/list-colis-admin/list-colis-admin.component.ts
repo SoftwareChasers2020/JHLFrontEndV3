@@ -28,7 +28,7 @@ export class ListColisAdminComponent implements OnInit {
 
 
 
-  displayedColumns: string[] = ['Code', 'date_ajout', 'Nom', 'Téléphone', 'Adresse', 'Prix', 'Etat', 'Fournisseur', 'actions'];
+  displayedColumns: string[] = ['Code', 'date_ajout', 'Nom', 'Téléphone', 'Gouvernorat', 'Ville', 'Prix', 'Etat', 'Fournisseur', 'actions'];
   dataSource: MatTableDataSource<any>;
   listcolis: Colis[];
   searchKey: any = null;
@@ -45,7 +45,6 @@ export class ListColisAdminComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log(this.searchKey)
  //this.getAllColisForAdminAndGestionnaire();
    this.getPage(0)
    // this.getPageBySearchKey(23792121,0);
@@ -57,7 +56,7 @@ export class ListColisAdminComponent implements OnInit {
     this.colisService.getAllColisByAdminPagination(page, pageSize)
       .subscribe(
         (response ) => {
-          console.log(response);
+        //  console.log(response);
           //this.listColiss = response.listColis;
           this.listcolis = response.listColis as Colis[];
 
@@ -120,8 +119,10 @@ export class ListColisAdminComponent implements OnInit {
                 return item.codeBarre;
               case 'Prix':
                 return item.prix;
-              case 'Adresse' :
+              case 'Gouvernorat' :
                 return item.nomgouvernorat;
+              case 'Ville' :
+                return item.nomville;
               case 'Fournisseur' :
                 return item.idFournisseur;
               case 'Etat' :
@@ -135,7 +136,7 @@ export class ListColisAdminComponent implements OnInit {
 
           this.dataSource.paginator = this.paginator;
           this.dataSource.sort = this.sort;
-          console.log(this.listcolis);
+        //  console.log(this.listcolis);
         },
 
         (error) => {
@@ -392,7 +393,7 @@ export class ListColisAdminComponent implements OnInit {
 
           this.dataSource.paginator = this.paginator;
           this.dataSource.sort = this.sort;
-          console.log(this.listcolis);
+          //console.log(this.listcolis);
         },
 
         (error) => {

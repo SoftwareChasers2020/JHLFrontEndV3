@@ -68,7 +68,7 @@ AddFournisseur() {
   this.f.tel = this.utilisateurService.Tel.value;
   this.adr.ville = this.selectedValue;
   this.f.adresse = this.adr;
-  console.log(this.f);
+ // console.log(this.f);
   this.fournisseurService.createFournisseur(this.f).subscribe(
     data => {
 /*      console.log(data);

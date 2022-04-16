@@ -96,7 +96,7 @@ export class TemplateComponent implements OnInit {
   getAllNotification()
   {
     this.listnotification =    this.firestore.collection('Notification',
-        ref => ref.where('to', '==','/topics/TopicGestionnaire')).valueChanges({idField: 'id'});
+        ref => ref.where('to', '==','/topics/TopicGestionnaire').where('dateSend',"==",new Date().toISOString().split('T')[0])).valueChanges({idField: 'id'});
 
   }
 
