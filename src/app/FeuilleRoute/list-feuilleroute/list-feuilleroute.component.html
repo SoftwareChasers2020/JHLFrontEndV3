@@ -82,6 +82,7 @@
            style="width: auto; margin-left: 9%; margin-top: 3% ; height: auto; text-align: center; font-size: 20px; ">
       <thead>
       <tr>
+        <th>Fournisseur</th>
         <th>CodeBarre</th>
         <th>Nom et Prenom</th>
         <th>Num Tel</th>
@@ -92,7 +93,7 @@
       </thead>
       <tbody *ngFor="let ligne of feuilleroute.ligneFeuilleRoute ; let i = index">
       <tr>
-
+        <td>{{ligne.colis.nomfournisseur}}</td>
         <td><img src="https://jhldelivery.tn/api/genrateQRCode/{{ligne.colis.codeBarre}}"
                  width="100px">{{ligne.colis.codeBarre}}</td>
         <td>

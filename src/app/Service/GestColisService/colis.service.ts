@@ -47,24 +47,7 @@ export class ColisService {
     select : new FormControl('', Validators.required)
 
   });
-/*  formGroup = this.fb.group({
-    CodeBarre : ['', Validators.required],
-    Nom: ['', Validators.required],
-    Prenom: ['', Validators.required],
-    Tel1: ['', [Validators.required, Validators.pattern('[0-9]{8}')]],
-    Tel2: ['', [Validators.required, Validators.pattern('[0-9]{8}')]],
-    Gouvernorat: new FormControl('', Validators.required),
-    Ville: new FormControl('', Validators.required),
-    Designation: ['', Validators.required],
-    NbArticle: ['', Validators.required],
-    Commentaire : ['', Validators.required],
-    DesignationEchange: ['', Validators.required],
-    NbArticleEchange: ['', Validators.required],
-    AdressDispo : ['', Validators.required],
-    Prix : ['', Validators.required],
-    select : new FormControl('', Validators.required)
 
-  });*/
 
   get CodeBarre() {
     return this.formGroup.get('CodeBarre');
@@ -156,7 +139,16 @@ export class ColisService {
     this.createColis(this.colis).subscribe(
       data => {
      //   console.log(data);
-        this.formGroup.reset();
+        this.formGroup.reset({
+          select : "non"
+        });
+      // window.location.reload();
+      /* this.formGroup.patchValue(
+          {
+            select : true
+          }
+        );*/
+
         this.notificationService.success("Ajout a effectué avec succées");
       },
       error => console.log(error)

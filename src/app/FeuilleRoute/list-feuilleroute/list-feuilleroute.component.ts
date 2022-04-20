@@ -12,6 +12,7 @@ import {NgxPrinterService} from 'ngx-printer';
 import {NotificationService} from '../../Service/notification.service';
 import {ColisService} from '../../Service/GestColisService/colis.service';
 import {Etat} from '../../Model/GestColis/etat';
+import {FournisseurService} from "../../Service/fournisseur.service";
 
 @Component({
   selector: 'app-list-feuilleroute',
@@ -35,7 +36,8 @@ export class ListFeuillerouteComponent implements OnInit {
               private villeService: VilleService,
               private printerService: NgxPrinterService,
               private notificationService: NotificationService,
-              private colisService: ColisService
+              private colisService: ColisService,
+              private fourniseurservice: FournisseurService
   ) {
   }
 
@@ -59,9 +61,10 @@ export class ListFeuillerouteComponent implements OnInit {
         this.dataSource = new MatTableDataSource(this.listefeuilleRoute);
 
         this.dataSource.data.map(value => this.livreurService.getLivreurById(value.idLivreur).subscribe(
-          data => value.idLivreur = data.nom + ' ' + data.prenom,
-          error => console.log(error)
-        ));
+          data => {
+            value.idLivreur = data.nom + ' ' + data.prenom
+            },
+        ) , error => console.log(error));
 
         this.dataSource.filterPredicate = (data, filter: string) => {
           const accumulator = (currentTerm, key) => {
@@ -161,6 +164,9 @@ export class ListFeuillerouteComponent implements OnInit {
           value1 => {
             value.colis.nomville = value1.nom;
             value.colis.nomgouvernorat = value1.gouvernorat.nom;
+            this.fourniseurservice.getFournisseurById(value.colis.idFournisseur).subscribe(
+              data => value.colis.nomfournisseur = data.login
+            )
           }
         ));
         this.livreurService.getLivreurById(this.feuilleroute.idLivreur).subscribe(

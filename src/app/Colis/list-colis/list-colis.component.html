@@ -180,14 +180,14 @@
     <tr>
       <th class="th">CODE</th>
       <th class="th">PRIX</th>
-      <th class="th">GOUVERNORAT</th>
+      <th class="th">GOUVERNORAT / Ville</th>
       <th class="th">COORDONNES CLIENT</th>
       <th class="th">DESIGNATION</th>
     </tr>
     <tr *ngFor="let item of colis ">
-      <td>{{item.codeBarre}}</td>
+      <td><img src="https://jhldelivery.tn/api/genrateQRCode/{{item.codeBarre}}" width="100px">{{item.codeBarre}}</td>
       <td>{{item.prix}}</td>
-      <td>{{item.idVille}} </td>
+      <td>{{item.idVille}} / {{item.nomville}}  </td>
       <td *ngIf="item.client.tel2 !== '' ">{{item.client.nom}} {{item.client.prenom}} <br> {{item.client.tel1}} / {{item.client.tel2}}</td>
       <td *ngIf="item.client.tel2 == '' ">{{item.client.nom}} {{item.client.prenom}} <br> {{item.client.tel1}} </td>
       <td>{{item.designation}}</td>
@@ -230,7 +230,7 @@
 
             <td style="font-size: 17px;text-align: left;">
 
-              <div><b>NOM DE L'EXPEDITEUR:</b> {{fournisseur.nomcommercial}}</div>
+              <div><b>EXP:</b> {{fournisseur.nomcommercial}}</div>
               <div><b>ADRESSE:</b> {{fournisseur.adresse.ville.nom}} {{fournisseur.adresse.ville.gouvernorat.nom}}
               </div>
               <div><b>TELEPHONE:</b> {{fournisseur.tel}}</div>
@@ -286,6 +286,10 @@
         <td style="padding: 10px">{{item.designation}}<br>
 
           <br><br><br><br><br><br><br><br><br><br><br><br>
+          <table border="1" *ngIf="item.commentaire != null">
+            <tr> <th>Commentaire</th></tr>
+            <tr><td> {{item.commentaire}}</td></tr>
+          </table>
         </td>
         <td style="padding: 10px; text-align: center">{{item.nbArticle}}<br>
           <br><br><br><br><br><br><br><br><br><br><br><br></td>
@@ -345,6 +349,10 @@
         <td style="padding: 10px">{{item.designation}} <br> <b>ECHANGE ( {{item.nbArticleEchange}} articles)</b>
 
           <br><br><br><br><br><br><br><br><br><br><br><br>
+          <table border="1" *ngIf="item.commentaire != null">
+            <tr> <th>Commentaire</th></tr>
+            <tr><td> {{item.commentaire}}</td></tr>
+          </table>
         </td>
         <td style="padding: 10px; text-align: center">{{item.nbArticleEchange}}<br>
           <br><br><br><br><br><br><br><br><br><br><br><br></td>
@@ -414,7 +422,7 @@
 
               <td style="font-size: 17px;text-align: left;">
 
-                <div><b>NOM DE L'EXPEDITEUR:</b> {{fournisseur.nomcommercial}}</div>
+                <div><b>EXP:</b> {{fournisseur.nomcommercial}}</div>
                 <div><b>ADRESSE:</b> {{fournisseur.adresse.ville.nom}} {{fournisseur.adresse.ville.gouvernorat.nom}}
                 </div>
                 <div><b>TELEPHONE:</b> {{fournisseur.tel}}</div>
@@ -470,6 +478,10 @@
           <td style="padding: 10px">{{item.designation}}<br>
 
             <br><br><br><br><br><br><br><br><br><br><br><br>
+            <table border="1" *ngIf="item.commentaire != null">
+              <tr> <th>Commentaire</th></tr>
+              <tr><td> {{item.commentaire}}</td></tr>
+            </table>
           </td>
           <td style="padding: 10px; text-align: center">{{item.nbArticle}}<br>
             <br><br><br><br><br><br><br><br><br><br><br><br></td>
@@ -529,6 +541,10 @@
           <td style="padding: 10px">{{item.designation}} <br> <b>ECHANGE ( {{item.nbArticleEchange}} articles)</b>
 
             <br><br><br><br><br><br><br><br><br><br><br><br>
+            <table border="1" *ngIf="item.commentaire != null">
+              <tr> <th>Commentaire</th></tr>
+              <tr><td> {{item.commentaire}}</td></tr>
+            </table>
           </td>
           <td style="padding: 10px; text-align: center">{{item.nbArticleEchange}}<br>
             <br><br><br><br><br><br><br><br><br><br><br><br></td>

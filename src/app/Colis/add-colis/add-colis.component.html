@@ -136,7 +136,7 @@
               <div class="form-group" style="margin-top: 25px; margin-left: 10px">
                 <label  class="control-label mb-1">Echange</label>
                 <mat-radio-group  formControlName="select"   >
-                  <mat-radio-button  value="non"  [checked]="true"  >Non</mat-radio-button>
+                  <mat-radio-button  value="non"  [checked]=" this.colisService.select.value === 'non' " >Non</mat-radio-button>
                   <mat-radio-button  value="oui"  style="margin-left: 10px" >Oui</mat-radio-button>
 
                 </mat-radio-group>
@@ -186,7 +186,7 @@
           </div>
 
           <div style="margin-top: 30px">
-            <button id="payment-button" type="submit" class="btn btn-lg btn-info btn-block">
+            <button id="payment-button" type="submit" [disabled]="!(colisService.formGroup.valid)" class="btn btn-lg btn-info btn-block">
               <i class="fa fa-lock fa-lg"></i>&nbsp;
               <span id="payment-button-amount">Ajouter</span>
 

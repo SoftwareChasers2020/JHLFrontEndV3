@@ -37,7 +37,7 @@ export class AddColisComponent implements OnInit {
     this.listGouvernorat = this.gouvernoratService.getAllAGouvernorat();
     this.colisService.formGroup.patchValue(
       {
-        select : false
+        select : "non"
       }
     );
   }

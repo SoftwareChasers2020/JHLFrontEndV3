@@ -233,15 +233,20 @@ export class ListColisComponent implements OnInit {
 
   printManifeste() {
 
+
+
+
+    setTimeout(() => this.test(), 2000);
+
+  }
+  test() {
     const manifeste = document.getElementById('Manifeste');
     manifeste.style.visibility = 'visible';
     const printContents = document.getElementById('Manifeste').innerHTML;
 
 
     document.body.innerHTML = printContents;
-
     window.print();
-
     window.location.reload();
   }
 
