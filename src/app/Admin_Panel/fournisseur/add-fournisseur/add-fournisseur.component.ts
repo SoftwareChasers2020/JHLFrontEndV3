@@ -68,15 +68,10 @@ AddFournisseur() {
   this.f.tel = this.utilisateurService.Tel.value;
   this.adr.ville = this.selectedValue;
   this.f.adresse = this.adr;
- // console.log(this.f);
+
   this.fournisseurService.createFournisseur(this.f).subscribe(
     data => {
-/*      console.log(data);
-      setTimeout(
-        // tslint:disable-next-line:only-arrow-functions
-        function(){
-          location.reload();
-        }, 500);*/
+
       this.dialogRef.close();
       this.notificationService.success("Ajout effectué avec succées");
     }, error => console.log(error));

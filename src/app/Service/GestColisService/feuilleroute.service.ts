@@ -9,6 +9,7 @@ import {environment} from "../../../environments/environment.prod";
 })
 export class FeuillerouteService {
   urlpath: string;
+  codebarre: ImageBitmap;
   constructor(private http: HttpClient)
   {
     this.urlpath = environment.apiurl+"/FeuilleRoutes";
@@ -38,6 +39,9 @@ export class FeuillerouteService {
   deleteFeuilleroute(id: number){
     return this.http.delete(this.urlpath + '/' + id);
 
+  }
+  getcodebarre(codebarre){
+    return this.http.get('https://jhldelivery.tn/api/genrateQRCode/'+codebarre);
   }
 
 }

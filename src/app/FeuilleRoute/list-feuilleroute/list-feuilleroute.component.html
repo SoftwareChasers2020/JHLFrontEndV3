@@ -58,16 +58,23 @@
 
   <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
 </div>
-
+<ngx-spinner
+  bdColor="rgba(51,51,51,0.8)"
+  size="medium"
+  color="#2596be"
+  type="ball-scale-multiple"
+>
+  <p style="font-size: 20px; color: white">Loading...</p>
+</ngx-spinner>
 
 <div id="feuilleroute" style="display: none">
 
 
-  <div>
+  <div id="test">
 
     <table style="width: 90%; margin-left:11%;margin-top: 5%;font-size: 20px;">
       <thead>
-      <tr>
+      <tr >
 
         <th>Date: {{feuilleroute.date | date:'dd/MM/y' }}</th>
         <th>Feuille de Route</th>
@@ -94,8 +101,9 @@
       <tbody *ngFor="let ligne of feuilleroute.ligneFeuilleRoute ; let i = index">
       <tr>
         <td>{{ligne.colis.nomfournisseur}}</td>
-        <td><img src="https://jhldelivery.tn/api/genrateQRCode/{{ligne.colis.codeBarre}}"
-                 width="100px">{{ligne.colis.codeBarre}}</td>
+        <td ><img class="axx"  src="https://jhldelivery.tn/api/genrateQRCode/{{ligne.colis.codeBarre}}"
+                 width="100px" >{{ligne.colis.codeBarre}}</td>
+
         <td>
           {{ligne.colis.client.nom}} {{ligne.colis.client.prenom}}
         </td>

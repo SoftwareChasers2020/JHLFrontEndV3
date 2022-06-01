@@ -75,8 +75,8 @@ import { SiteWebComponent } from './site-web/site-web.component';
 import {NgxPaginationModule} from "ngx-pagination";
 import {environment} from "../environments/environment.prod";
 
-
-
+import { NgxSpinnerModule } from "ngx-spinner";
+import {NgbPaginationModule} from '@ng-bootstrap/ng-bootstrap';
 @NgModule({
   declarations: [
     AppComponent,
@@ -129,6 +129,7 @@ import {environment} from "../environments/environment.prod";
 
   ],
     imports: [
+      NgbPaginationModule,
         BrowserModule,
         AppRoutingModule,
         BrowserAnimationsModule,
@@ -161,6 +162,7 @@ import {environment} from "../environments/environment.prod";
         NgxPrinterModule.forRoot({printOpenWindow: true}),
         MatSlideToggleModule,
         NgxPaginationModule,
+      NgxSpinnerModule,
       AngularFireModule.initializeApp(environment.firebase),
     ],
 

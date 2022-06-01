@@ -18,6 +18,7 @@ import {DetailColisAdminComponent} from '../../Admin_Panel/Gest_Colis_Admin/deta
 import {MessagingFirebaseService} from "../../Service/Notification/messaging-firebase.service";
 import firebase from "firebase";
 import {Utilisateur} from "../../Model/utilisateur";
+import {NgxSpinnerService} from "ngx-spinner";
 
 @Component({
   selector: 'app-list-colis',
@@ -50,7 +51,8 @@ export class ListColisComponent implements OnInit {
               private notificationService: NotificationService,
               private printerService: NgxPrinterService,
               private dialog: MatDialog,
-              private messagingfirebase: MessagingFirebaseService) {
+              private messagingfirebase: MessagingFirebaseService,
+              private spinner: NgxSpinnerService) {
   }
 
   displayedColumns: string[] = ['Code', 'date_ajout', 'Nom', 'Téléphone', 'Adresse', 'Prix', 'actions'];
@@ -203,6 +205,7 @@ export class ListColisComponent implements OnInit {
 
 
   print(): void {
+    this.spinner.show();
     // tslint:disable-next-line:prefer-const
     let divsToPrint = document.getElementsByClassName('x');
     let printContents = '';
@@ -210,12 +213,12 @@ export class ListColisComponent implements OnInit {
     for (let n = 0; n < divsToPrint.length; n++) {
       printContents += divsToPrint[n].innerHTML + '<br>';
     }
+    setTimeout(() => this.allbons(printContents), 2500);
     // tslint:disable-next-line:prefer-const
-    let originalContents = document.body.innerHTML;
-    document.body.innerHTML = printContents;
-    window.print();
-    document.body.innerHTML = originalContents;
-    window.location.reload();
+  //  let originalContents = document.body.innerHTML;
+
+   // document.body.innerHTML = originalContents;
+
     // tslint:disable-next-line:one-variable-per-declaration prefer-const
     /* let divsToPrint = document.getElementsByClassName('x'), n;
      for (n = 0; n < divsToPrint.length; n++) {
@@ -231,21 +234,29 @@ export class ListColisComponent implements OnInit {
 
   }
 
+  allbons (printContents) {
+    document.body.innerHTML = printContents;
+    window.print();
+    window.location.reload();
+  }
+
+
   printManifeste() {
 
-
-
-
-    setTimeout(() => this.test(), 2000);
-
-  }
-  test() {
+    this.spinner.show();
     const manifeste = document.getElementById('Manifeste');
     manifeste.style.visibility = 'visible';
+
+    setTimeout(() => this.manifest(), 2500);
+
+  }
+  manifest() {
+
     const printContents = document.getElementById('Manifeste').innerHTML;
 
 
     document.body.innerHTML = printContents;
+    this.spinner.hide();
     window.print();
     window.location.reload();
   }
@@ -283,18 +294,21 @@ export class ListColisComponent implements OnInit {
   }
 
   imprimer(colis) {
-
+    this.spinner.show();
     this.colis.length = 0;
 
     this.colis.push(colis);
-    this.printerService.printOpenWindow = false;
-    this.printerService.printAngular(this.PrintTemplateTpl);
-    this.printerService.printOpenWindow = true;
-    this.getColisManifeste();
-
+    setTimeout(() => this.bon(), 1500);
 
   }
+  bon(){
 
+  this.printerService.printOpenWindow = false;
+  this.printerService.printAngular(this.PrintTemplateTpl);
+  this.printerService.printOpenWindow = true;
+  this.getColisManifeste();
+  this.spinner.hide()
+  }
   SendNotification() {
     if(this.listcolis.length != 0) {
       this.listCodeBarre = this.listcolis.map(x => x.codeBarre);

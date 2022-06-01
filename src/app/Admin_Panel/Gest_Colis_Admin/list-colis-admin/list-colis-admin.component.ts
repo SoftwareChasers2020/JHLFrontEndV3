@@ -20,7 +20,7 @@ const pageSize:number = 10;
   styleUrls: ['./list-colis-admin.component.css']
 })
 export class ListColisAdminComponent implements OnInit {
-
+page =1;
  currentSelectedPage:number = 0;
   totalPages: number = 0;
   listColiss: Array<Colis> = [];
@@ -149,9 +149,9 @@ export class ListColisAdminComponent implements OnInit {
 
   getPaginationWithIndex(index: number) {
   if(this.searchKey == null)
-    this.getPage(index);
+    this.getPage(index-1);
   else
-    this.getPageBySearchKey(index)
+    this.getPageBySearchKey(index-1)
   }
 
   active(index: number) {
