@@ -2,7 +2,8 @@ import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Administrateur} from '../Model/administrateur';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {environment} from "../../environments/environment.prod";
+import {environment} from "../../environments/environment";
+
 
 @Injectable({
   providedIn: 'root'

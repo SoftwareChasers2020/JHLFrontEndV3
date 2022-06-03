@@ -3,7 +3,8 @@ import {HttpClient} from '@angular/common/http';
 import {Livreur} from '../../Model/livreur';
 import {FeuilleDeRoute} from '../../Model/GestColis/feuille-de-route';
 import {LigneFeuilleRoute} from '../../Model/GestColis/ligne-feuille-route';
-import {environment} from "../../../environments/environment.prod";
+import {environment} from "../../../environments/environment";
+
 
 @Injectable({
   providedIn: 'root'

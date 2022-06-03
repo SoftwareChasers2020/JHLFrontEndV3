@@ -2,7 +2,8 @@ import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Etat} from '../../Model/GestColis/etat';
 import {Colis} from '../../Model/GestColis/colis';
-import {environment} from "../../../environments/environment.prod";
+import {environment} from "../../../environments/environment";
+
 
 @Injectable({
   providedIn: 'root'

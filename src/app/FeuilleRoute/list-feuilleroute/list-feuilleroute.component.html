@@ -101,7 +101,7 @@
       <tbody *ngFor="let ligne of feuilleroute.ligneFeuilleRoute ; let i = index">
       <tr>
         <td>{{ligne.colis.nomfournisseur}}</td>
-        <td ><img class="axx"  src="https://jhldelivery.tn/api/genrateQRCode/{{ligne.colis.codeBarre}}"
+        <td ><img class="axx"  src="http://localhost:8081/api/genrateQRCode/{{ligne.colis.codeBarre}}"
                  width="100px" >{{ligne.colis.codeBarre}}</td>
 
         <td>
@@ -110,7 +110,8 @@
         <td *ngIf="ligne.colis.client.tel2 !== ''">{{ligne.colis.client.tel1}} / {{ligne.colis.client.tel2}}</td>
         <td *ngIf="ligne.colis.client.tel2 == ''">{{ligne.colis.client.tel1}}</td>
         <td>{{ligne.colis.adressDispo}} {{ligne.colis.nomville}} {{ligne.colis.nomgouvernorat}}</td>
-        <td>{{ligne.colis.prix}}</td>
+        <td *ngIf="ligne.colis.nbArticleEchange === 0">{{ligne.colis.prix}}</td>
+        <td *ngIf="ligne.colis.nbArticleEchange != 0"><b>ECHANGE </b> <br>{{ligne.colis.prix}}</td>
         <!--
                   <td>{{ligne.colis.etat.titre}}</td>
         -->

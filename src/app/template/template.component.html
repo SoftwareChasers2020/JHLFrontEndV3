@@ -220,11 +220,11 @@
                aria-haspopup="true" aria-expanded="false">
               <i class="far fa-bell" style="font-size: x-large"></i>
               <!-- Counter - Alerts -->
-              <span class="badge badge-danger badge-counter">{{(listnotification | async).length}}</span>
+              <span class="badge badge-danger badge-counter">{{(listnotification | async)?.length}}</span>
             </a>
             <!-- Dropdown - Alerts -->
             <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in "
-                  [ngClass]="{'ScrollNotifHeight' : (listnotification | async).length > 4 }"
+                  [ngClass]="{'ScrollNotifHeight' : (listnotification | async)?.length > 4 }"
                  aria-labelledby="alertsDropdown" >
               <h4 class="dropdown-header">
                 Notification

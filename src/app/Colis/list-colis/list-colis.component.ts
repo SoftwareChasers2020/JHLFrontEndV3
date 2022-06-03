@@ -86,7 +86,7 @@ export class ListColisComponent implements OnInit {
 
         this.listcolis = res as Colis[];
 
-        this.dataSource = new MatTableDataSource(this.listcolis);
+        this.dataSource = new MatTableDataSource(this.listcolis.sort((a,b)=>b.codeBarre - a.codeBarre));
         this.dataSource.data.map(value => this.villeService.getvilleById(value.idVille).subscribe(
           value1 => {
             value.idVille = value1.nom;

@@ -58,7 +58,7 @@ export class ListFeuillerouteComponent implements OnInit {
 
         this.listefeuilleRoute = res as FeuilleDeRoute[];
 
-        this.dataSource = new MatTableDataSource(this.listefeuilleRoute);
+        this.dataSource = new MatTableDataSource(this.listefeuilleRoute.sort((a,b)=>b.idFeuilleRoute - a.idFeuilleRoute));
 
         this.dataSource.data.map(value => this.livreurService.getLivreurById(value.idLivreur).subscribe(
           data => {

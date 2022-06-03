@@ -3,7 +3,8 @@ import {HttpClient} from '@angular/common/http';
 import {Ville} from '../Model/ville';
 import {map} from 'rxjs/operators';
 import {Observable} from 'rxjs';
-import {environment} from "../../environments/environment.prod";
+import {environment} from "../../environments/environment";
+
 
 @Injectable({
   providedIn: 'root'

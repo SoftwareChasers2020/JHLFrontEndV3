@@ -91,7 +91,7 @@
           <mat-icon>add</mat-icon>Ajouter
         </button>-->
     <mat-form-field style="width: 50%; float: top"  >
-      <input  matInput [(ngModel)]="searchKey"   placeholder="Rechercher" autocomplete="off" (keyup)="applyFilter()">
+      <input  matInput [(ngModel)]="searchKey"   placeholder="Rechercher" autocomplete="off" (keyup)="getPageBySearchKey(currentSelectedPage)">
       <button mat-button matSuffix mat-icon-button aria-label="Clear" *ngIf="searchKey"  (click)="onSearchClear()">
         <mat-icon>close</mat-icon>
       </button>
@@ -177,7 +177,9 @@
 
 
   </mat-table>
-
-  <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+  <div class="col-12 justify-content-center">
+  <ngb-pagination class="test" [collectionSize]=totalPages*10 [maxSize]="5" [(page)]=page (pageChange)="getPaginationWithIndex(page)"  ></ngb-pagination>
+  <!--<mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>-->
+</div>
 </div>
 

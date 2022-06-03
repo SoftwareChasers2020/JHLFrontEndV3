@@ -4,8 +4,9 @@ import {Administrateur} from '../Model/administrateur';
 import {Fournisseur} from '../Model/fournisseur';
 import {FormBuilder, FormControl, Validators} from '@angular/forms';
 import {UtilisateurService} from './utilisateur.service';
-import {environment} from "../../environments/environment.prod";
+
 import {HttpClient} from "@angular/common/http";
+import {environment} from "../../environments/environment";
 
 
 @Injectable({

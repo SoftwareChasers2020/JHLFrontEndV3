@@ -20,7 +20,7 @@ export class AuthInterceptor implements HttpInterceptor {
       authReq = req.clone({
         headers: req.headers.set(TOKEN_HEADER_KEY, 'key=AAAAb6QT_jM:APA91bGE4DLL0QIuvuroyYES7nDv4RPPmWrw_zyThVXNEQKYavIFEvym4g7z3ZpFhi8Ld2DmViCj5Ix4pwJxau7MfPlMjThPxU_9dzwQbLXR4ltCDGB0nLKbCzVIxz7DKR6KUSZbeOye')});
       return next.handle(authReq);
-    }else if (token == null && ((authReq.url.indexOf('https://jhldelivery.tn/apigest/Gouvernorat') === 0) || (authReq.url.indexOf('https://jhldelivery.tn/apigest/Ville') === 0) || (authReq.url.indexOf('https://jhldelivery.tn/apigest/Fournisseur/createFournisseur') === 0) ))
+    }else if (token == null && ((authReq.url.indexOf('http://localhost:8080/apigest/Gouvernorat') === 0) || (authReq.url.indexOf('http://localhost:8080/apigest/Ville') === 0) || (authReq.url.indexOf('http://localhost:8080/apigest/Fournisseur/createFournisseur') === 0) ))
     {
       delete req.headers['Authorization'];
       return next.handle(req);

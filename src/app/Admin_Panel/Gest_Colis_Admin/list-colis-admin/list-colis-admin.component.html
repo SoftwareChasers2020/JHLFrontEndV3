@@ -154,8 +154,9 @@
     </tr>
 
   </mat-table>
-    <ngb-pagination style="justify-content: center;" [collectionSize]=totalPages*10 [maxSize]="5" [(page)]=page (pageChange)="getPaginationWithIndex(page)"  ></ngb-pagination>
-
+  <div class="col-12 justify-content-center">
+    <ngb-pagination class="test" [collectionSize]=totalPages*10 [maxSize]="5" [(page)]=page (pageChange)="getPaginationWithIndex(page)"  ></ngb-pagination>
+  </div>
   <!-- <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" [pageSize]="10"></mat-paginator>-->
 <!--<nav aria-label="Pagination">
  <ul class="pagination justify-content-center">

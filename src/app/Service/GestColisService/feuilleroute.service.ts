@@ -2,7 +2,8 @@ import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Livreur} from '../../Model/livreur';
 import {FeuilleDeRoute} from '../../Model/GestColis/feuille-de-route';
-import {environment} from "../../../environments/environment.prod";
+import {environment} from "../../../environments/environment";
+
 
 @Injectable({
   providedIn: 'root'
@@ -41,7 +42,7 @@ export class FeuillerouteService {
 
   }
   getcodebarre(codebarre){
-    return this.http.get('https://jhldelivery.tn/api/genrateQRCode/'+codebarre);
+    return this.http.get('http://localhost:8081/api/genrateQRCode/'+codebarre);
   }
 
 }
