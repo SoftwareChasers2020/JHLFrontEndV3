@@ -86,7 +86,7 @@ export class ListColisComponent implements OnInit {
 
         this.listcolis = res as Colis[];
 
-        this.dataSource = new MatTableDataSource(this.listcolis);
+        this.dataSource = new MatTableDataSource(this.listcolis.sort((a,b)=>b.codeBarre - a.codeBarre));
         this.dataSource.data.map(value => this.villeService.getvilleById(value.idVille).subscribe(
           value1 => {
             value.idVille = value1.nom;
@@ -126,7 +126,7 @@ export class ListColisComponent implements OnInit {
 
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
-     //   console.log(this.listcolis);
+        //   console.log(this.listcolis);
       },
       error => console.log(error)
     );
@@ -181,7 +181,7 @@ export class ListColisComponent implements OnInit {
 
   onDelete(codeBarre: any) {
 
-  //  console.log(codeBarre);
+    //  console.log(codeBarre);
     if (confirm('Confirmez-vous la suppression ?')) {
       this.colisService.deleteColis(codeBarre).subscribe(
         () => {
@@ -189,7 +189,7 @@ export class ListColisComponent implements OnInit {
         }
       );
       this.notificationService.warn(' supprimé avec succées !');
-    //  console.log(codeBarre);
+      //  console.log(codeBarre);
     }
   }
 
@@ -215,9 +215,9 @@ export class ListColisComponent implements OnInit {
     }
     setTimeout(() => this.allbons(printContents), 2500);
     // tslint:disable-next-line:prefer-const
-  //  let originalContents = document.body.innerHTML;
+    //  let originalContents = document.body.innerHTML;
 
-   // document.body.innerHTML = originalContents;
+    // document.body.innerHTML = originalContents;
 
     // tslint:disable-next-line:one-variable-per-declaration prefer-const
     /* let divsToPrint = document.getElementsByClassName('x'), n;
@@ -274,7 +274,7 @@ export class ListColisComponent implements OnInit {
 
   showModal(c) {
     this.mdlSampleIsOpen = true;
-   // console.log(c);
+    // console.log(c);
     /*      const DeleteModal = document.getElementById("DeleteModal");
           DeleteModal.style.visibility = 'visible';*/
   }
@@ -303,11 +303,11 @@ export class ListColisComponent implements OnInit {
   }
   bon(){
 
-  this.printerService.printOpenWindow = false;
-  this.printerService.printAngular(this.PrintTemplateTpl);
-  this.printerService.printOpenWindow = true;
-  this.getColisManifeste();
-  this.spinner.hide()
+    this.printerService.printOpenWindow = false;
+    this.printerService.printAngular(this.PrintTemplateTpl);
+    this.printerService.printOpenWindow = true;
+    this.getColisManifeste();
+    this.spinner.hide()
   }
   SendNotification() {
     if(this.listcolis.length != 0) {

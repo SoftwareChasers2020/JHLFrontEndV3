@@ -21,9 +21,9 @@
     <button mat-raised-button  color="warn" style="margin-left: 10px" (click)="SendNotification()" title="Envoyer Notification">
       <i class="fas fa-bell"></i> Envoyer Notification
     </button>
-<!--    <button mat-raised-button  style="color: #be2617; background-color: #fbe6b1" (click)="SendNotification()" title="Envoyer Notification">
-      <i class="fas fa-bell"></i> Envoyer Notification
-    </button>-->
+    <!--    <button mat-raised-button  style="color: #be2617; background-color: #fbe6b1" (click)="SendNotification()" title="Envoyer Notification">
+          <i class="fas fa-bell"></i> Envoyer Notification
+        </button>-->
   </div>
 </div>
 <div class="example-container mat-elevation-z8">
@@ -185,7 +185,7 @@
       <th class="th">DESIGNATION</th>
     </tr>
     <tr *ngFor="let item of colis ">
-      <td><img src="https://jhldelivery.tn/api/genrateQRCode/{{item.codeBarre}}" width="100px">{{item.codeBarre}}</td>
+      <td><img src="http://localhost:8081/api/genrateQRCode/{{item.codeBarre}}" width="100px">{{item.codeBarre}}</td>
       <td>{{item.prix}}</td>
       <td>{{item.idVille}} / {{item.nomville}}  </td>
       <td *ngIf="item.client.tel2 !== '' ">{{item.client.nom}} {{item.client.prenom}} <br> {{item.client.tel1}} / {{item.client.tel2}}</td>
@@ -225,7 +225,7 @@
   <table class="pagebreak">
     <tbody>
     <tr>
-      <td style="width: 20%;"><img src="https://jhldelivery.tn/api/genrateQRCode/{{item.codeBarre}}" width="150px">
+      <td style="width: 20%;"><img src="http://localhost:8081/api/genrateQRCode/{{item.codeBarre}}" width="150px">
       <td style="width: 20%;"><img src="assets/LogoJHL.png" width="200px" alt="">
         <!--  <td ><div><img src="http://localhost:8081/genrateQRCode/{{item.codeBarre}}" width="150px"  ></div>-->
       </td>
@@ -417,7 +417,7 @@
     <table class="pagebreak">
       <tbody>
       <tr>
-        <td style="width: 20%;"><img src="https://jhldelivery.tn/api/genrateQRCode/{{item.codeBarre}}" width="150px">
+        <td style="width: 20%;"><img src="http://localhost:8081/api/genrateQRCode/{{item.codeBarre}}" width="150px">
         <td style="width: 20%;"><img src="assets/LogoJHL.png" width="200px" alt="">
           <!--  <td ><div><img src="http://localhost:8081/genrateQRCode/{{item.codeBarre}}" width="150px"  ></div>-->
         </td>
@@ -601,4 +601,3 @@
     </div>
   </div>
 </ng-template>
-

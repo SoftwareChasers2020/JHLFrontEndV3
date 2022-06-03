@@ -20,3 +20,11 @@
   color: #0061f2;
   font-weight: 500;
 }
+
+.test > .pagination {
+  justify-content: center !important;
+}
+.justify-content-center {
+  display: flex !important;
+  justify-content: center !important;
+}

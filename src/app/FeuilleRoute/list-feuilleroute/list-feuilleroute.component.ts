@@ -58,7 +58,7 @@ export class ListFeuillerouteComponent implements OnInit {
 
         this.listefeuilleRoute = res as FeuilleDeRoute[];
 
-        this.dataSource = new MatTableDataSource(this.listefeuilleRoute);
+        this.dataSource = new MatTableDataSource(this.listefeuilleRoute.sort((a,b)=>b.idFeuilleRoute - a.idFeuilleRoute));
 
         this.dataSource.data.map(value => this.livreurService.getLivreurById(value.idLivreur).subscribe(
           data => {
@@ -177,7 +177,7 @@ export class ListFeuillerouteComponent implements OnInit {
           error => console.log(error)
         );
         var container = document.getElementById("test");
-       // this.onImagesLoaded()
+        // this.onImagesLoaded()
 
         setTimeout(() => {
           this.onImagesLoaded();

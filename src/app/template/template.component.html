@@ -4,15 +4,15 @@
   <!-- Sidebar -->
   <ul class="navbar-nav background-slide sidebar sidebar-dark accordion" id="accordionSidebar">
     <!-- Sidebar - Brand -->
-   <!-- <a class="sidebar-brand d-flex align-items-center justify-content-center" >
-      <div class="sidebar-brand-icon rotate-n-15">
-        <i class="fas fa-laugh-wink"></i>
-      </div>
-      <div class="sidebar-brand-text mx-3">JHL Delivery</div>
-    </a>-->
-<!--
-    <img src="assets/img/LogoJHLV2.gif"  />
--->
+    <!-- <a class="sidebar-brand d-flex align-items-center justify-content-center" >
+       <div class="sidebar-brand-icon rotate-n-15">
+         <i class="fas fa-laugh-wink"></i>
+       </div>
+       <div class="sidebar-brand-text mx-3">JHL Delivery</div>
+     </a>-->
+    <!--
+        <img src="assets/img/LogoJHLV2.gif"  />
+    -->
     <img src="assets/img/LogoJHLV3.png" style="width: 200px; height: 60px;margin-top: 5px"  />
 
     <!-- Divider -->
@@ -30,11 +30,11 @@
         <span>Tableau de bord</span></a>
     </li>
     <!-- Divider -->
-<!--    <hr class="sidebar-divider">-->
+    <!--    <hr class="sidebar-divider">-->
     <!-- Heading -->
-<!--    <div class="sidebar-heading">
-      Affichage
-    </div>-->
+    <!--    <div class="sidebar-heading">
+          Affichage
+        </div>-->
 
 
     <!-- Nav Item - Pages Collapse Menu -->
@@ -220,11 +220,11 @@
                aria-haspopup="true" aria-expanded="false">
               <i class="far fa-bell" style="font-size: x-large"></i>
               <!-- Counter - Alerts -->
-              <span class="badge badge-danger badge-counter">{{(listnotification | async).length}}</span>
+              <span class="badge badge-danger badge-counter">{{(listnotification | async)?.length}}</span>
             </a>
             <!-- Dropdown - Alerts -->
             <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in "
-                  [ngClass]="{'ScrollNotifHeight' : (listnotification | async).length > 4 }"
+                 [ngClass]="{'ScrollNotifHeight' : (listnotification | async)?.length > 4 }"
                  aria-labelledby="alertsDropdown" >
               <h4 class="dropdown-header">
                 Notification
@@ -237,9 +237,9 @@
 
                 </a>
               </div>
-<!--
-              <a class="dropdown-item text-center small text-gray-500" href="#">Show All Alerts</a>
--->
+              <!--
+                            <a class="dropdown-item text-center small text-gray-500" href="#">Show All Alerts</a>
+              -->
             </div>
           </li>
           <!-- Nav Item - Messages -->
